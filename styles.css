@@ -39,10 +39,10 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(253, 253, 253, 0.9);
-  backdrop-filter: blur(10px);
+  background: rgba(253, 253, 253, 0.2);
+  backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
 }
 
 .top-bar {
