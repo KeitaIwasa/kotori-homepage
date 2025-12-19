@@ -10,6 +10,13 @@
     return "en";
   }
 
+  const langPaths = {
+    ja: "/",
+    en: "/en/",
+    "zh-TW": "/zh-tw/",
+    th: "/th/",
+  };
+
   const params = new URLSearchParams(window.location.search);
   const paramLang = normalizeLang(
     params.get("lang") || params.get("language") || params.get("locale")
@@ -27,6 +34,6 @@
 
   const backHome = document.querySelector(".back-home");
   if (backHome) {
-    backHome.href = `../index.html?lang=${encodeURIComponent(currentLang)}`;
+    backHome.href = langPaths[currentLang] || "/";
   }
 })();
