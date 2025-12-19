@@ -10,7 +10,6 @@
     content="KOTORI is a multilingual LINE bot you can use just by inviting it to your group. Keep conversations flowing with natural, context-aware translations."
   />
   <meta name="robots" content="index, follow" />
-  <meta name="google-site-verification" content="REPLACE_WITH_GOOGLE_SEARCH_CONSOLE_CODE" />
   <link rel="canonical" href="https://kotori-ai.com/en/" />
   <link rel="alternate" hreflang="ja" href="https://kotori-ai.com/" />
   <link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/" />
@@ -28,7 +27,7 @@
   <meta id="metaOgUrl" property="og:url" content="https://kotori-ai.com/en/" />
   <meta property="og:image" content="https://kotori-ai.com/assets/ogp.png" />
   <meta id="metaOgLocale" property="og:locale" content="en_US" />
-  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="ja_JP" />
   <meta property="og:locale:alternate" content="zh_TW" />
   <meta property="og:locale:alternate" content="th_TH" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -42,19 +41,41 @@
   <script id="structuredData" type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "KOTORI",
-      "url": "https://kotori-ai.com/en/",
-      "description": "KOTORI is a multilingual LINE bot you can use just by inviting it to your group. Keep conversations flowing with natural, context-aware translations.",
-      "inLanguage": "en",
-      "publisher": {
-        "@type": "Organization",
-        "name": "KOTORI",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://kotori-ai.com/assets/KOTORIロゴ中.jpg"
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://kotori-ai.com/en/#website",
+          "name": "KOTORI",
+          "url": "https://kotori-ai.com/en/",
+          "description": "KOTORI is a multilingual LINE bot you can use just by inviting it to your group. Keep conversations flowing with natural, context-aware translations.",
+          "inLanguage": "en",
+          "publisher": {
+            "@id": "https://kotori-ai.com/#organization"
+          }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://kotori-ai.com/#organization",
+          "name": "KOTORI",
+          "url": "https://kotori-ai.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://kotori-ai.com/assets/KOTORIロゴ中.jpg"
+          }
+        },
+        {
+          "@type": "Product",
+          "@id": "https://kotori-ai.com/en/#product",
+          "name": "KOTORI",
+          "description": "KOTORI is a multilingual LINE bot you can use just by inviting it to your group. Keep conversations flowing with natural, context-aware translations.",
+          "brand": {
+            "@id": "https://kotori-ai.com/#organization"
+          },
+          "image": "https://kotori-ai.com/assets/ogp.png",
+          "url": "https://kotori-ai.com/en/",
+          "inLanguage": "en"
         }
-      }
+      ]
     }
   </script>
   <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -67,7 +88,7 @@
   <div class="top-bar-wrap">
     <nav class="top-bar" aria-label="Primary">
       <div class="brand">
-        <div class="brand-name">KOTORI</div>
+        <a class="brand-name" href="/en/">KOTORI</a>
       </div>
       <div class="lang-picker" aria-label="Language selector">
         <select id="langSelect" class="lang-select">

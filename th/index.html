@@ -10,7 +10,6 @@
     content="KOTORI คือบอต LINE หลายภาษาที่ใช้งานได้ทันที แค่เชิญเข้าไปในกลุ่ม พร้อมแปลอย่างเป็นธรรมชาติให้คุยกันต่อเนื่องได้"
   />
   <meta name="robots" content="index, follow" />
-  <meta name="google-site-verification" content="REPLACE_WITH_GOOGLE_SEARCH_CONSOLE_CODE" />
   <link rel="canonical" href="https://kotori-ai.com/th/" />
   <link rel="alternate" hreflang="ja" href="https://kotori-ai.com/" />
   <link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/" />
@@ -30,7 +29,7 @@
   <meta id="metaOgLocale" property="og:locale" content="th_TH" />
   <meta property="og:locale:alternate" content="en_US" />
   <meta property="og:locale:alternate" content="zh_TW" />
-  <meta property="og:locale:alternate" content="th_TH" />
+  <meta property="og:locale:alternate" content="ja_JP" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta id="metaTwitterTitle" name="twitter:title" content="KOTORI | บอตแปลกลุ่ม LINE หลายภาษา" />
   <meta
@@ -42,19 +41,41 @@
   <script id="structuredData" type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "KOTORI",
-      "url": "https://kotori-ai.com/th/",
-      "description": "KOTORI คือบอต LINE หลายภาษาที่ใช้งานได้ทันที แค่เชิญเข้าไปในกลุ่ม พร้อมแปลอย่างเป็นธรรมชาติให้คุยกันต่อเนื่องได้",
-      "inLanguage": "th",
-      "publisher": {
-        "@type": "Organization",
-        "name": "KOTORI",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://kotori-ai.com/assets/KOTORIロゴ中.jpg"
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://kotori-ai.com/th/#website",
+          "name": "KOTORI",
+          "url": "https://kotori-ai.com/th/",
+          "description": "KOTORI คือบอต LINE หลายภาษาที่ใช้งานได้ทันที แค่เชิญเข้าไปในกลุ่ม พร้อมแปลอย่างเป็นธรรมชาติให้คุยกันต่อเนื่องได้",
+          "inLanguage": "th",
+          "publisher": {
+            "@id": "https://kotori-ai.com/#organization"
+          }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://kotori-ai.com/#organization",
+          "name": "KOTORI",
+          "url": "https://kotori-ai.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://kotori-ai.com/assets/KOTORIロゴ中.jpg"
+          }
+        },
+        {
+          "@type": "Product",
+          "@id": "https://kotori-ai.com/th/#product",
+          "name": "KOTORI",
+          "description": "KOTORI คือบอต LINE หลายภาษาที่ใช้งานได้ทันที แค่เชิญเข้าไปในกลุ่ม พร้อมแปลอย่างเป็นธรรมชาติให้คุยกันต่อเนื่องได้",
+          "brand": {
+            "@id": "https://kotori-ai.com/#organization"
+          },
+          "image": "https://kotori-ai.com/assets/ogp.png",
+          "url": "https://kotori-ai.com/th/",
+          "inLanguage": "th"
         }
-      }
+      ]
     }
   </script>
   <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -67,7 +88,7 @@
   <div class="top-bar-wrap">
     <nav class="top-bar" aria-label="Primary">
       <div class="brand">
-        <div class="brand-name">KOTORI</div>
+        <a class="brand-name" href="/th/">KOTORI</a>
       </div>
       <div class="lang-picker" aria-label="Language selector">
         <select id="langSelect" class="lang-select">

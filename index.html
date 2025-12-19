@@ -10,7 +10,6 @@
     content="KOTORIはLINEグループに招待するだけで使える多言語翻訳ボット。会話の流れを保ったまま自然に翻訳します。"
   />
   <meta name="robots" content="index, follow" />
-  <meta name="google-site-verification" content="REPLACE_WITH_GOOGLE_SEARCH_CONSOLE_CODE" />
   <link rel="canonical" href="https://kotori-ai.com/" />
   <link rel="alternate" hreflang="ja" href="https://kotori-ai.com/" />
   <link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/" />
@@ -42,19 +41,41 @@
   <script id="structuredData" type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "KOTORI",
-      "url": "https://kotori-ai.com/",
-      "description": "KOTORIはLINEグループに招待するだけで使える多言語翻訳ボット。会話の流れを保ったまま自然に翻訳します。",
-      "inLanguage": "ja",
-      "publisher": {
-        "@type": "Organization",
-        "name": "KOTORI",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://kotori-ai.com/assets/KOTORIロゴ中.jpg"
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://kotori-ai.com/#website",
+          "name": "KOTORI",
+          "url": "https://kotori-ai.com/",
+          "description": "KOTORIはLINEグループに招待するだけで使える多言語翻訳ボット。会話の流れを保ったまま自然に翻訳します。",
+          "inLanguage": "ja",
+          "publisher": {
+            "@id": "https://kotori-ai.com/#organization"
+          }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://kotori-ai.com/#organization",
+          "name": "KOTORI",
+          "url": "https://kotori-ai.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://kotori-ai.com/assets/KOTORIロゴ中.jpg"
+          }
+        },
+        {
+          "@type": "Product",
+          "@id": "https://kotori-ai.com/#product",
+          "name": "KOTORI",
+          "description": "KOTORIはLINEグループに招待するだけで使える多言語翻訳ボット。会話の流れを保ったまま自然に翻訳します。",
+          "brand": {
+            "@id": "https://kotori-ai.com/#organization"
+          },
+          "image": "https://kotori-ai.com/assets/ogp.png",
+          "url": "https://kotori-ai.com/",
+          "inLanguage": "ja"
         }
-      }
+      ]
     }
   </script>
   <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -67,7 +88,7 @@
   <div class="top-bar-wrap">
     <nav class="top-bar" aria-label="Primary">
       <div class="brand">
-        <div class="brand-name">KOTORI</div>
+        <a class="brand-name" href="/">KOTORI</a>
       </div>
       <div class="lang-picker" aria-label="Language selector">
         <select id="langSelect" class="lang-select">
