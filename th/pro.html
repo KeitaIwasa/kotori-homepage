@@ -39,79 +39,114 @@
         <div class="hero-brand">
           <img
             src="/assets/KOTORIロゴ中.jpg"
-            alt="KOTORIロゴ"
+            alt="โลโก้ KOTORI"
             class="hero-logo"
             loading="lazy"
           />
           <p class="hero-wordmark">KOTORI</p>
-          <p class="hero-subtitle" data-i18n="heroTagline">多言語翻訳LINEボット</p>
+          <p class="hero-subtitle" data-i18n="heroTagline">บอต LINE แปลหลายภาษา</p>
         </div>
-        <h1 class="hero-title" data-i18n="heroTitle">多言語のLINEグループ運営を、Proプランでストレスゼロに。</h1>
+        <h1 class="hero-title" data-i18n="heroTitle">ดูแลงานแปลในกลุ่ม LINE หลายภาษาง่าย ๆ ด้วย KOTORI Pro Plan</h1>
         <p class="hero-lead" data-i18n="heroLead">
-          「翻訳AIボット Proプラン」は、LINEグループ内のメッセージを文脈を考慮して自動翻訳する有料プランです。
-          無料プランの制限を気にせず、ビジネスでもプライベートでも安心してご利用いただけます。
+          KOTORI Pro Plan คือแพ็กเกจเสียเงินของบอต LINE ที่แปลข้อความในกลุ่มแบบเข้าใจบริบท ใช้งานได้ทั้งธุรกิจและส่วนตัวโดยไม่ต้องกังวลข้อจำกัดของฟรีแพ็กเกจ
         </p>
 
         <div class="price-card">
           <p class="price" data-i18n="price">
-            料金：月額
+            ราคา:
             <span class="price-amount">
-              <span class="price-currency">¥</span>
+              <span class="price-currency">JPY</span>
               <span class="price-number">380</span>
             </span>
-            (税込) / 1グループ
+            ต่อเดือน (รวมภาษี) ต่อ 1 กลุ่ม
           </p>
-          <p class="audience" data-i18n="audience">対象：多国籍チームのビジネスチャット、留学生・友人グループ、国際交流コミュニティ など</p>
+          <p class="audience" data-i18n="audience">เหมาะสำหรับ: ทีมธุรกิจหลายชาติ กลุ่มเพื่อน/นักศึกษาต่างชาติ และคอมมูนิตี้นานาชาติ</p>
         </div>
 
         <div class="cta" id="cta">
-          <a id="ctaButton" class="primary-btn" href="#" data-i18n="ctaLabel" rel="noopener">Proプランを購入</a>
+          <a id="ctaButton" class="primary-btn" href="#" data-i18n="ctaLabel" rel="noopener">ซื้อ Pro Plan</a>
           <p class="terms" id="ctaTerms" data-i18n-html="ctaTerms">
-            上のボタンよりご購入いただくことで、以下の規約に同意したものとみなされます。<br />
-            ・<a href="/docs/terms-ja.html">利用規約</a><br />
-            ・<a href="/docs/privacy-ja.html">プライバシーポリシー</a>
+            เมื่อกดปุ่มด้านล่างถือว่ายอมรับเงื่อนไขต่อไปนี้แล้ว<br />
+            ・<a href="/docs/terms-th.html?from=pro&lang=th">ข้อตกลงการใช้บริการ</a><br />
+            ・<a href="/docs/privacy-th.html?from=pro&lang=th">นโยบายความเป็นส่วนตัว</a>
           </p>
         </div>
       </section>
 
       <section class="card">
-        <h2 data-i18n="featuresTitle">Proプランでできること</h2>
-        <ul class="list" id="featuresList"></ul>
+        <h2 data-i18n="featuresTitle">สิ่งที่ได้ใน Pro Plan</h2>
+        <ul class="list" id="featuresList">
+          <li>แปลข้อความในกลุ่มเป็นภาษาที่ตั้งไว้ได้ทันที สูงสุด 5 ภาษา</li>
+          <li>พิจารณาบริบทจากประวัติการสนทนาเพื่อการแปลที่เป็นธรรมชาติ</li>
+          <li>ขีดจำกัดสูงกว่า Free ใช้งานได้แทบไม่อั้น</li>
+          <li>รองรับภาษาหลากหลายตามที่ LLM ให้บริการ</li>
+          <li>ใช้ได้ทั้งทีมธุรกิจนานาชาติและกลุ่มเพื่อนต่างชาติ</li>
+        </ul>
       </section>
 
       <section class="card">
-        <h2 data-i18n="compareTitle">Freeプランとの違い</h2>
+        <h2 data-i18n="compareTitle">เปรียบเทียบ Free vs Pro</h2>
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
-                <th data-i18n="compareItem">項目</th>
-                <th data-i18n="compareFree">Freeプラン</th>
-                <th data-i18n="comparePro">Proプラン</th>
+                <th data-i18n="compareItem">รายการ</th>
+                <th data-i18n="compareFree">Free</th>
+                <th data-i18n="comparePro">Pro</th>
               </tr>
             </thead>
-            <tbody id="compareBody"></tbody>
+            <tbody id="compareBody">
+              <tr>
+                <td>ราคา</td>
+                <td>ฟรี</td>
+                <td>JPY 380 ต่อเดือน/กลุ่ม (รวมภาษี)</td>
+              </tr>
+              <tr>
+                <td>ปริมาณการแปล</td>
+                <td>50 ข้อความ/เดือน</td>
+                <td>8,000 ข้อความ/เดือน</td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </section>
 
       <section class="card">
-        <h2 data-i18n="pricingTitle">料金・課金条件</h2>
-        <ul class="list" id="pricingList"></ul>
+        <h2 data-i18n="pricingTitle">ราคาและเงื่อนไขการเรียกเก็บเงิน</h2>
+        <ul class="list" id="pricingList">
+          <li>ชื่อแพ็กเกจ: KOTORI - AI Translation/การแปล Pro Plan</li>
+          <li>ราคา: JPY 380 ต่อเดือน (รวมภาษี) ต่อ 1 กลุ่ม</li>
+          <li>การชำระเงิน: ผู้แทน 1 คนชำระออนไลน์ด้วยบัตรเครดิต (ต่ออายุอัตโนมัติ)</li>
+          <li>รอบบิล: ชำระเดือนแรกตอนซื้อ จากนั้นตัดบัตรอัตโนมัติทุกเดือน</li>
+          <li>ยกเลิก: แท็กบอตในกลุ่มแล้วส่งคำสั่งยกเลิกได้ตลอด ใช้ Pro ต่อได้จนจบรอบที่ชำระแล้ว</li>
+        </ul>
       </section>
 
       <section class="card">
-        <h2 data-i18n="flowTitle">ご利用開始までの流れ</h2>
-        <ol class="steps" id="flowList"></ol>
+        <h2 data-i18n="flowTitle">วิธีเริ่มต้นใช้งาน</h2>
+        <ol class="steps" id="flowList">
+          <li>เชิญบอต LINE อย่างเป็นทางการของ KOTORI เข้ากลุ่มที่ต้องการ</li>
+          <li>ทดลองพฤติกรรมการแปลใน Free Plan</li>
+          <li>กดปุ่ม “ซื้อ Pro Plan” บนหน้านี้เพื่อไปยังหน้าชำระเงินและจ่ายด้วยบัตรเครดิต</li>
+          <li>หลังชำระเงิน แผน Pro ของกลุ่มจะเปิดภายในไม่กี่นาทีและใช้งานได้ตลอดรอบบิล</li>
+          <li>หากต้องการยกเลิก ให้แท็กบอตแล้วส่งคำสั่งยกเลิก ใช้ Pro ต่อได้จนจบรอบที่จ่ายแล้ว</li>
+        </ol>
       </section>
 
       <section class="card">
-        <h2 data-i18n="notesTitle">注意事項・利用規約について</h2>
-        <ul class="list" id="notesList"></ul>
+        <h2 data-i18n="notesTitle">ข้อควรทราบและเงื่อนไข</h2>
+        <ul class="list" id="notesList">
+          <li>Pro เป็นการสมัครแบบต่อ 1 กลุ่ม LINE หากมีหลายกลุ่มต้องสมัครแยกกัน</li>
+          <li>ถ้าบอตถูกนำออกจากกลุ่ม Pro ของกลุ่มนั้นจะถูกยกเลิกอัตโนมัติ และไม่คืนเงินส่วนที่เหลือ</li>
+          <li>การยกเลิกโดยผู้ใช้ก็ไม่คืนเงิน สามารถใช้ Pro ต่อได้จนจบรอบที่ชำระแล้ว</li>
+          <li>รายละเอียดบริการ ราคา และภาษาที่รองรับอาจเปลี่ยนได้โดยไม่แจ้งล่วงหน้า</li>
+          <li>อาจเกิดการหยุดให้บริการชั่วคราวจากปัญหาเครือข่ายหรือบริการภายนอก (LINE, LLM, Stripe)</li>
+          <li>เพื่อปรับปรุงคุณภาพการแปลและเข้าใจบริบท ระบบจะบันทึกข้อความในกลุ่มและส่งบางส่วนของประวัติสนทนาไปยังโมเดล AI ภายนอก (Gemini)</li>
+        </ul>
         <p class="terms" id="notesTerms" data-i18n-html="notesTerms">
-          詳細な条件については、以下のページをご確認ください。<br />
-          ・<a href="/docs/terms-ja.html">利用規約</a><br />
-          ・<a href="/docs/privacy-ja.html">プライバシーポリシー</a>
+          ดูรายละเอียดเพิ่มเติมได้ที่ลิงก์ด้านล่าง<br />
+          ・<a href="/docs/terms-th.html?from=pro&lang=th">ข้อตกลงการใช้บริการ</a><br />
+          ・<a href="/docs/privacy-th.html?from=pro&lang=th">นโยบายความเป็นส่วนตัว</a>
         </p>
       </section>
 
@@ -123,13 +158,13 @@
             href="#"
             data-i18n="ctaLabel"
             rel="noopener"
-            >Proプランを購入</a
+            >ซื้อ Pro Plan</a
           >
         </div>
       </div>
 
       <div class="legal-links">
-        <a id="consumerLink" data-i18n="consumerLink" href="/docs/consumer-ja.html" target="_blank" rel="noopener">Consumer Information</a>
+        <a id="consumerLink" data-i18n="consumerLink" href="/docs/consumer-th.html?from=pro&lang=th" target="_blank" rel="noopener">กฎหมายการค้าขายของญี่ปุ่น</a>
       </div>
     </main>
   </div>

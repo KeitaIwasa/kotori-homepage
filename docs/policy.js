@@ -16,6 +16,12 @@
     "zh-TW": "/zh-tw/",
     th: "/th/",
   };
+  const proPaths = {
+    ja: "/pro.html",
+    en: "/en/pro.html",
+    "zh-TW": "/zh-tw/pro.html",
+    th: "/th/pro.html",
+  };
 
   const params = new URLSearchParams(window.location.search);
   const paramLang = normalizeLang(
@@ -23,6 +29,7 @@
   );
   const htmlLang = normalizeLang(document.documentElement.lang);
   const currentLang = paramLang || htmlLang;
+  const fromParam = (params.get("from") || params.get("source") || "").toLowerCase();
 
   if (!currentLang) return;
 
@@ -34,6 +41,22 @@
 
   const backHome = document.querySelector(".back-home");
   if (backHome) {
-    backHome.href = langPaths[currentLang] || "/";
+    let fromPro = fromParam === "pro" || fromParam === "pro-plan";
+
+    if (!fromPro && document.referrer) {
+      try {
+        const referrerUrl = new URL(document.referrer);
+        const path = referrerUrl.pathname || "";
+        fromPro =
+          path === "/pro.html" ||
+          path === "/en/pro.html" ||
+          path === "/th/pro.html" ||
+          path === "/zh-tw/pro.html";
+      } catch (err) {
+        // リファラーがURLとして解釈できない場合は無視
+      }
+    }
+
+    backHome.href = (fromPro ? proPaths[currentLang] : langPaths[currentLang]) || "/";
   }
 })();

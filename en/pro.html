@@ -39,79 +39,115 @@
         <div class="hero-brand">
           <img
             src="/assets/KOTORIロゴ中.jpg"
-            alt="KOTORIロゴ"
+            alt="KOTORI logo"
             class="hero-logo"
             loading="lazy"
           />
           <p class="hero-wordmark">KOTORI</p>
-          <p class="hero-subtitle" data-i18n="heroTagline">多言語翻訳LINEボット</p>
+          <p class="hero-subtitle" data-i18n="heroTagline">Multilingual translation LINE bot</p>
         </div>
-        <h1 class="hero-title" data-i18n="heroTitle">多言語のLINEグループ運営を、Proプランでストレスゼロに。</h1>
+        <h1 class="hero-title" data-i18n="heroTitle">Run multilingual LINE groups stress-free with the KOTORI Pro plan.</h1>
         <p class="hero-lead" data-i18n="heroLead">
-          「翻訳AIボット Proプラン」は、LINEグループ内のメッセージを文脈を考慮して自動翻訳する有料プランです。
-          無料プランの制限を気にせず、ビジネスでもプライベートでも安心してご利用いただけます。
+          The KOTORI Pro Plan is the paid plan for our LINE bot that auto-translates group messages with contextual awareness.
+          Use it confidently for work or personal chats without worrying about free-tier limits.
         </p>
 
         <div class="price-card">
           <p class="price" data-i18n="price">
-            料金：月額
+            Price:
             <span class="price-amount">
-              <span class="price-currency">¥</span>
+              <span class="price-currency">JPY</span>
               <span class="price-number">380</span>
             </span>
-            (税込) / 1グループ
+            / month (tax included) per group
           </p>
-          <p class="audience" data-i18n="audience">対象：多国籍チームのビジネスチャット、留学生・友人グループ、国際交流コミュニティ など</p>
+          <p class="audience" data-i18n="audience">Best for: business chats in multinational teams, international student or friend groups, and cross-cultural communities</p>
         </div>
 
         <div class="cta" id="cta">
-          <a id="ctaButton" class="primary-btn" href="#" data-i18n="ctaLabel" rel="noopener">Proプランを購入</a>
+          <a id="ctaButton" class="primary-btn" href="#" data-i18n="ctaLabel" rel="noopener">Purchase Pro Plan</a>
           <p class="terms" id="ctaTerms" data-i18n-html="ctaTerms">
-            上のボタンよりご購入いただくことで、以下の規約に同意したものとみなされます。<br />
-            ・<a href="/docs/terms-ja.html">利用規約</a><br />
-            ・<a href="/docs/privacy-ja.html">プライバシーポリシー</a>
+            By purchasing via the button below, you agree to the following terms.<br />
+            ・<a href="/docs/terms-en.html?from=pro&lang=en">Terms of Service</a><br />
+            ・<a href="/docs/privacy-en.html?from=pro&lang=en">Privacy Policy</a>
           </p>
         </div>
       </section>
 
       <section class="card">
-        <h2 data-i18n="featuresTitle">Proプランでできること</h2>
-        <ul class="list" id="featuresList"></ul>
+        <h2 data-i18n="featuresTitle">What you get with Pro</h2>
+        <ul class="list" id="featuresList">
+          <li>Instantly translate group messages into up to five registered languages</li>
+          <li>Context-aware, natural translations using recent conversation history</li>
+          <li>Higher rate limits than Free for virtually unlimited everyday use</li>
+          <li>Access to the wide language coverage provided by the underlying LLM</li>
+          <li>Works for global business teams and casual international groups alike</li>
+        </ul>
       </section>
 
       <section class="card">
-        <h2 data-i18n="compareTitle">Freeプランとの違い</h2>
+        <h2 data-i18n="compareTitle">Free vs. Pro</h2>
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
-                <th data-i18n="compareItem">項目</th>
-                <th data-i18n="compareFree">Freeプラン</th>
-                <th data-i18n="comparePro">Proプラン</th>
+                <th data-i18n="compareItem">Item</th>
+                <th data-i18n="compareFree">Free Plan</th>
+                <th data-i18n="comparePro">Pro Plan</th>
               </tr>
             </thead>
-            <tbody id="compareBody"></tbody>
+            <tbody id="compareBody">
+              <tr>
+                <td>Price</td>
+                <td>Free</td>
+                <td>JPY 380 / month (tax included) per group</td>
+              </tr>
+              <tr>
+                <td>Translation volume</td>
+                <td>50 messages / month</td>
+                <td>8,000 messages / month</td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </section>
 
       <section class="card">
-        <h2 data-i18n="pricingTitle">料金・課金条件</h2>
-        <ul class="list" id="pricingList"></ul>
+        <h2 data-i18n="pricingTitle">Pricing &amp; billing conditions</h2>
+        <ul class="list" id="pricingList">
+          <li>Plan name: KOTORI - AI Translation/การแปล Pro Plan</li>
+          <li>Price: JPY 380 / month (tax included) per group</li>
+          <li>Billing: paid online by one representative (auto-renew)</li>
+          <li>Charge timing: pay one month at checkout; auto-renews monthly thereafter</li>
+          <li>Cancellation: mention the bot in your group and send the cancel command anytime; Pro stays active until the paid period ends</li>
+        </ul>
       </section>
 
       <section class="card">
-        <h2 data-i18n="flowTitle">ご利用開始までの流れ</h2>
-        <ol class="steps" id="flowList"></ol>
+        <h2 data-i18n="flowTitle">How to get started</h2>
+        <ol class="steps" id="flowList">
+          <li>Invite the official KOTORI LINE bot to your target group.</li>
+          <li>Try translation behavior on the Free plan.</li>
+          <li>Click the “Purchase Pro Plan” button on this page to go to checkout and pay by credit card.</li>
+          <li>After payment, the group’s Pro Plan activates within a few minutes and remains active for the billing period.</li>
+          <li>To cancel, mention the bot in the group and send the cancel command; you can keep using Pro until the paid period ends.</li>
+        </ol>
       </section>
 
       <section class="card">
-        <h2 data-i18n="notesTitle">注意事項・利用規約について</h2>
-        <ul class="list" id="notesList"></ul>
+        <h2 data-i18n="notesTitle">Notes and terms</h2>
+        <ul class="list" id="notesList">
+          <li>Pro is contracted per LINE group. Each group requires its own subscription.</li>
+          <li>If the bot is removed from a group, that group’s Pro plan is auto-canceled; no refunds for the remaining period.</li>
+          <li>No refunds when you cancel; Pro remains available until the end of the paid period.</li>
+          <li>Service details, pricing, and supported languages may change without notice.</li>
+          <li>Temporary outages may occur due to network issues or external services (LINE, LLM, Stripe).</li>
+          <li>For translation quality and context, recent group messages are stored and a portion may be sent to external AI models (Gemini).</li>
+        </ul>
         <p class="terms" id="notesTerms" data-i18n-html="notesTerms">
-          詳細な条件については、以下のページをご確認ください。<br />
-          ・<a href="/docs/terms-ja.html">利用規約</a><br />
-          ・<a href="/docs/privacy-ja.html">プライバシーポリシー</a>
+          See the full details below.<br />
+          ・<a href="/docs/terms-en.html?from=pro&lang=en">Terms of Service</a><br />
+          ・<a href="/docs/privacy-en.html?from=pro&lang=en">Privacy Policy</a>
         </p>
       </section>
 
@@ -123,13 +159,13 @@
             href="#"
             data-i18n="ctaLabel"
             rel="noopener"
-            >Proプランを購入</a
+            >Purchase Pro Plan</a
           >
         </div>
       </div>
 
       <div class="legal-links">
-        <a id="consumerLink" data-i18n="consumerLink" href="/docs/consumer-ja.html" target="_blank" rel="noopener">Consumer Information</a>
+        <a id="consumerLink" data-i18n="consumerLink" href="/docs/consumer-en.html?from=pro&lang=en" target="_blank" rel="noopener">Consumer Information</a>
       </div>
     </main>
   </div>
