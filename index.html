@@ -3,6 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      var p = window.location.pathname;
+      if (/\/index\.html$/i.test(p)) {
+        var target = p.replace(/index\.html$/i, "");
+        if (!target.endsWith("/")) target += "/";
+        window.location.replace(target + window.location.search + window.location.hash);
+      }
+    })();
+  </script>
   <title>KOTORI | LINEグループ翻訳ボット</title>
   <meta
     id="metaDescription"
