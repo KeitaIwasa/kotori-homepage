@@ -1,83 +1,187 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://kotori-ai.com/</loc>
-    <lastmod>2025-12-19</lastmod>
+    <lastmod>2026-02-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/" />
   </url>
   <url>
     <loc>https://kotori-ai.com/en/</loc>
-    <lastmod>2025-12-19</lastmod>
+    <lastmod>2026-02-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/" />
   </url>
   <url>
     <loc>https://kotori-ai.com/zh-tw/</loc>
-    <lastmod>2025-12-19</lastmod>
+    <lastmod>2026-02-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/" />
   </url>
   <url>
     <loc>https://kotori-ai.com/th/</loc>
-    <lastmod>2025-12-19</lastmod>
+    <lastmod>2026-02-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/" />
   </url>
-  <url>
-    <loc>https://kotori-ai.com/docs/consumer-en.html</loc>
-    <lastmod>2025-12-19</lastmod>
-  </url>
-  <url>
-    <loc>https://kotori-ai.com/docs/consumer-ja.html</loc>
-    <lastmod>2025-12-19</lastmod>
-  </url>
-  <url>
-    <loc>https://kotori-ai.com/docs/consumer-th.html</loc>
-    <lastmod>2025-12-19</lastmod>
-  </url>
-  <url>
-    <loc>https://kotori-ai.com/docs/consumer-zh-tw.html</loc>
-    <lastmod>2025-12-19</lastmod>
-  </url>
-  <url>
-    <loc>https://kotori-ai.com/docs/privacy-en.html</loc>
-    <lastmod>2025-12-19</lastmod>
-  </url>
-  <url>
-    <loc>https://kotori-ai.com/docs/privacy-ja.html</loc>
-    <lastmod>2025-12-19</lastmod>
-  </url>
-  <url>
-    <loc>https://kotori-ai.com/docs/privacy-th.html</loc>
-    <lastmod>2025-12-19</lastmod>
-  </url>
-  <url>
-    <loc>https://kotori-ai.com/docs/privacy-zh-tw.html</loc>
-    <lastmod>2025-12-19</lastmod>
-  </url>
-  <url>
-    <loc>https://kotori-ai.com/docs/terms-en.html</loc>
-    <lastmod>2025-12-19</lastmod>
-  </url>
-  <url>
-    <loc>https://kotori-ai.com/docs/terms-ja.html</loc>
-    <lastmod>2025-12-19</lastmod>
-  </url>
-  <url>
-    <loc>https://kotori-ai.com/docs/terms-th.html</loc>
-    <lastmod>2025-12-19</lastmod>
-  </url>
-  <url>
-    <loc>https://kotori-ai.com/docs/terms-zh-tw.html</loc>
-    <lastmod>2025-12-19</lastmod>
-  </url>
+
   <url>
     <loc>https://kotori-ai.com/pro.html</loc>
-    <lastmod>2025-12-19</lastmod>
+    <lastmod>2026-02-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/pro.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/pro.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/pro.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/pro.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/pro.html" />
   </url>
   <url>
     <loc>https://kotori-ai.com/en/pro.html</loc>
-    <lastmod>2025-12-19</lastmod>
+    <lastmod>2026-02-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/pro.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/pro.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/pro.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/pro.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/pro.html" />
   </url>
   <url>
     <loc>https://kotori-ai.com/zh-tw/pro.html</loc>
-    <lastmod>2025-12-19</lastmod>
+    <lastmod>2026-02-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/pro.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/pro.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/pro.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/pro.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/pro.html" />
   </url>
   <url>
     <loc>https://kotori-ai.com/th/pro.html</loc>
-    <lastmod>2025-12-19</lastmod>
+    <lastmod>2026-02-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/pro.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/pro.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/pro.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/pro.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/pro.html" />
+  </url>
+
+  <url>
+    <loc>https://kotori-ai.com/docs/terms-ja.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/docs/terms-ja.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/docs/terms-en.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/docs/terms-zh-tw.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/docs/terms-th.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/docs/terms-ja.html" />
+  </url>
+  <url>
+    <loc>https://kotori-ai.com/docs/terms-en.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/docs/terms-ja.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/docs/terms-en.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/docs/terms-zh-tw.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/docs/terms-th.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/docs/terms-ja.html" />
+  </url>
+  <url>
+    <loc>https://kotori-ai.com/docs/terms-zh-tw.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/docs/terms-ja.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/docs/terms-en.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/docs/terms-zh-tw.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/docs/terms-th.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/docs/terms-ja.html" />
+  </url>
+  <url>
+    <loc>https://kotori-ai.com/docs/terms-th.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/docs/terms-ja.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/docs/terms-en.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/docs/terms-zh-tw.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/docs/terms-th.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/docs/terms-ja.html" />
+  </url>
+
+  <url>
+    <loc>https://kotori-ai.com/docs/privacy-ja.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/docs/privacy-ja.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/docs/privacy-en.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/docs/privacy-zh-tw.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/docs/privacy-th.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/docs/privacy-ja.html" />
+  </url>
+  <url>
+    <loc>https://kotori-ai.com/docs/privacy-en.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/docs/privacy-ja.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/docs/privacy-en.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/docs/privacy-zh-tw.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/docs/privacy-th.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/docs/privacy-ja.html" />
+  </url>
+  <url>
+    <loc>https://kotori-ai.com/docs/privacy-zh-tw.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/docs/privacy-ja.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/docs/privacy-en.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/docs/privacy-zh-tw.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/docs/privacy-th.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/docs/privacy-ja.html" />
+  </url>
+  <url>
+    <loc>https://kotori-ai.com/docs/privacy-th.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/docs/privacy-ja.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/docs/privacy-en.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/docs/privacy-zh-tw.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/docs/privacy-th.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/docs/privacy-ja.html" />
+  </url>
+
+  <url>
+    <loc>https://kotori-ai.com/docs/consumer-ja.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/docs/consumer-ja.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/docs/consumer-en.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/docs/consumer-zh-tw.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/docs/consumer-th.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/docs/consumer-ja.html" />
+  </url>
+  <url>
+    <loc>https://kotori-ai.com/docs/consumer-en.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/docs/consumer-ja.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/docs/consumer-en.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/docs/consumer-zh-tw.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/docs/consumer-th.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/docs/consumer-ja.html" />
+  </url>
+  <url>
+    <loc>https://kotori-ai.com/docs/consumer-zh-tw.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/docs/consumer-ja.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/docs/consumer-en.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/docs/consumer-zh-tw.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/docs/consumer-th.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/docs/consumer-ja.html" />
+  </url>
+  <url>
+    <loc>https://kotori-ai.com/docs/consumer-th.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/docs/consumer-ja.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/docs/consumer-en.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/docs/consumer-zh-tw.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/docs/consumer-th.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/docs/consumer-ja.html" />
   </url>
 </urlset>
