@@ -1,6 +1,11 @@
 (() => {
+  const KOTORI_API_BASE = "https://h2xf6dwz5e.execute-api.ap-northeast-1.amazonaws.com/prod";
+
   const langSelect = document.getElementById("langSelect");
   if (!langSelect) return;
+  const totalUsersSection = document.getElementById("totalUsersSection");
+  const totalUsersValue = document.getElementById("totalUsersValue");
+  const params = new URLSearchParams(window.location.search);
 
   const langPaths = {
     ja: "/",
@@ -24,6 +29,7 @@
   let customTriggerEl;
   let customTriggerFlagEl;
   let customTriggerTextEl;
+  let currentLang = "ja";
 
   function getPathLang(pathname) {
     const segment = pathname.split("/").filter(Boolean)[0];
@@ -33,6 +39,98 @@
     if (value === "zh-tw" || value === "zh_tw") return "zh-TW";
     if (value === "th") return "th";
     return "ja";
+  }
+
+  function resolveApiBase() {
+    const override = params.get("api_base") || params.get("apiBase");
+    const base = (override || KOTORI_API_BASE || "").trim();
+    return base.replace(/\/+$/, "");
+  }
+
+  function buildApiUrl(path) {
+    const base = resolveApiBase();
+    if (!base) return "";
+    return `${base}${path}`;
+  }
+
+  async function fetchTotalUsers() {
+    const url = buildApiUrl("/stats/total-users");
+    if (!url) return null;
+    const response = await fetch(url, { method: "GET" });
+    if (!response.ok) return null;
+    const payload = await response.json();
+    const value = payload?.totalUsers;
+    if (typeof value !== "number" || !Number.isFinite(value) || value < 0) return null;
+    return Math.trunc(value);
+  }
+
+  function formatUserCount(value) {
+    const localeMap = {
+      ja: "ja-JP",
+      en: "en-US",
+      "zh-TW": "zh-TW",
+      th: "th-TH",
+    };
+    const locale = localeMap[currentLang] || "en-US";
+    return value.toLocaleString(locale);
+  }
+
+  function hideTotalUsers() {
+    if (!totalUsersSection) return;
+    totalUsersSection.hidden = true;
+  }
+
+  function animateCount(target) {
+    if (!totalUsersValue) return;
+    const duration = 1200;
+    const start = performance.now();
+    const from = 0;
+    function step(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(from + (target - from) * eased);
+      totalUsersValue.textContent = formatUserCount(current);
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function showTotalUsers(value) {
+    if (!totalUsersSection || !totalUsersValue) return;
+    totalUsersSection.hidden = false;
+
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              animateCount(value);
+              observer.disconnect();
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+      observer.observe(totalUsersSection);
+    } else {
+      animateCount(value);
+    }
+  }
+
+  function initTotalUsers() {
+    if (!totalUsersSection || !totalUsersValue) return;
+    fetchTotalUsers()
+      .then((totalUsers) => {
+        if (totalUsers === null) {
+          hideTotalUsers();
+          return;
+        }
+        showTotalUsers(totalUsers);
+      })
+      .catch(() => {
+        hideTotalUsers();
+      });
   }
 
   function navigateToLang(lang) {
@@ -144,5 +242,7 @@
 
   buildCustomSelect();
   langSelect.addEventListener("change", (e) => navigateToLang(e.target.value));
-  updateCustomSelected(getPathLang(window.location.pathname));
+  currentLang = getPathLang(window.location.pathname);
+  updateCustomSelected(currentLang);
+  initTotalUsers();
 })();
