@@ -80,42 +80,10 @@
     totalUsersSection.hidden = true;
   }
 
-  function animateCount(target) {
-    if (!totalUsersValue) return;
-    const duration = 1200;
-    const start = performance.now();
-    const from = 0;
-    function step(now) {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const current = Math.round(from + (target - from) * eased);
-      totalUsersValue.textContent = formatUserCount(current);
-      if (progress < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
   function showTotalUsers(value) {
     if (!totalUsersSection || !totalUsersValue) return;
     totalUsersSection.hidden = false;
-
-    if ("IntersectionObserver" in window) {
-      var observer = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              animateCount(value);
-              observer.disconnect();
-            }
-          });
-        },
-        { threshold: 0.3 }
-      );
-      observer.observe(totalUsersSection);
-    } else {
-      animateCount(value);
-    }
+    totalUsersValue.textContent = formatUserCount(value);
   }
 
   function initTotalUsers() {
