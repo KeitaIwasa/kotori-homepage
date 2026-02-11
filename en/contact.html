@@ -28,7 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
-<body>
+<body class="contact-page">
   <div class="top-bar-wrap">
     <nav class="top-bar" aria-label="Primary">
       <div class="brand">
@@ -48,21 +48,25 @@
   <div class="page-shell">
     <main>
       <section class="hero contact-hero">
-        <h1 class="hero-title">Contact</h1>
-        <p class="hero-lead">Send your questions or support requests about KOTORI using the form below.</p>
-        <p class="hero-lead">We usually reply within 1-2 business days.</p>
+        <div class="contact-hero-inner">
+          <h1 class="hero-title">Contact</h1>
+          <p class="hero-lead">Send your questions or support requests about KOTORI using the form below.</p>
+          <p class="hero-lead contact-hero-note">We usually reply within 1-2 business days.</p>
+        </div>
       </section>
 
       <section class="card contact-card">
         <form id="contactForm" class="contact-form" novalidate>
           <input type="hidden" id="contactLocale" name="locale" value="en" />
-          <div class="contact-field">
-            <label for="contactEmail">Email address</label>
-            <input id="contactEmail" name="email" type="email" autocomplete="email" required maxlength="254" />
-          </div>
-          <div class="contact-field">
-            <label for="contactMessage">Message</label>
-            <textarea id="contactMessage" name="message" required minlength="10" maxlength="2000" rows="8"></textarea>
+          <div class="contact-form-body">
+            <div class="contact-field">
+              <label for="contactEmail">Email address</label>
+              <input id="contactEmail" name="email" type="email" autocomplete="email" required maxlength="254" />
+            </div>
+            <div class="contact-field">
+              <label for="contactMessage">Message</label>
+              <textarea id="contactMessage" name="message" required minlength="10" maxlength="2000" rows="8"></textarea>
+            </div>
           </div>
           <div class="contact-honeypot" aria-hidden="true">
             <label for="contactWebsite">Website</label>
