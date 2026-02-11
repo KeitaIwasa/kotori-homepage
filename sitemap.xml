@@ -75,6 +75,43 @@
   </url>
 
   <url>
+    <loc>https://kotori-ai.com/contact.html</loc>
+    <lastmod>2026-02-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/contact.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/contact.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/contact.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/contact.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/contact.html" />
+  </url>
+  <url>
+    <loc>https://kotori-ai.com/en/contact.html</loc>
+    <lastmod>2026-02-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/contact.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/contact.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/contact.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/contact.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/contact.html" />
+  </url>
+  <url>
+    <loc>https://kotori-ai.com/zh-tw/contact.html</loc>
+    <lastmod>2026-02-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/contact.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/contact.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/contact.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/contact.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/contact.html" />
+  </url>
+  <url>
+    <loc>https://kotori-ai.com/th/contact.html</loc>
+    <lastmod>2026-02-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/contact.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/contact.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/contact.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/contact.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/contact.html" />
+  </url>
+
+  <url>
     <loc>https://kotori-ai.com/docs/terms-ja.html</loc>
     <lastmod>2026-02-10</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/docs/terms-ja.html" />

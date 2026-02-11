@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      var p = window.location.pathname;
+      if (/\/index\.html$/i.test(p)) {
+        var target = p.replace(/index\.html$/i, "");
+        if (!target.endsWith("/")) target += "/";
+        window.location.replace(target + window.location.search + window.location.hash);
+      }
+    })();
+  </script>
+  <title>お問い合わせ | KOTORI</title>
+  <meta name="description" content="KOTORIに関するお問い合わせフォームです。ご質問・ご相談はこちらからご連絡ください。" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://kotori-ai.com/contact.html" />
+  <link rel="alternate" hreflang="ja" href="https://kotori-ai.com/contact.html" />
+  <link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/contact.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/contact.html" />
+  <link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/contact.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/contact.html" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="top-bar-wrap">
+    <nav class="top-bar" aria-label="Primary">
+      <div class="brand">
+        <a class="brand-name" href="/">KOTORI</a>
+      </div>
+      <div class="lang-picker" aria-label="Language selector">
+        <select id="langSelect" class="lang-select">
+          <option value="ja">日本語</option>
+          <option value="en">English</option>
+          <option value="zh-TW">繁體中文</option>
+          <option value="th">ไทย</option>
+        </select>
+      </div>
+    </nav>
+  </div>
+
+  <div class="page-shell">
+    <main>
+      <section class="hero contact-hero">
+        <h1 class="hero-title">お問い合わせ</h1>
+        <p class="hero-lead">KOTORIへのご質問・ご相談は、以下フォームよりお送りください。</p>
+        <p class="hero-lead">通常1〜2営業日以内に返信いたします。</p>
+      </section>
+
+      <section class="card contact-card">
+        <form id="contactForm" class="contact-form" novalidate>
+          <input type="hidden" id="contactLocale" name="locale" value="ja" />
+          <div class="contact-field">
+            <label for="contactEmail">メールアドレス</label>
+            <input id="contactEmail" name="email" type="email" autocomplete="email" required maxlength="254" />
+          </div>
+          <div class="contact-field">
+            <label for="contactMessage">お問い合わせ内容</label>
+            <textarea id="contactMessage" name="message" required minlength="10" maxlength="2000" rows="8"></textarea>
+          </div>
+          <div class="contact-honeypot" aria-hidden="true">
+            <label for="contactWebsite">Website</label>
+            <input id="contactWebsite" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          <button id="contactSubmit" type="submit" class="primary-btn contact-submit">送信する</button>
+          <p id="contactStatus" class="contact-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <footer class="site-footer">
+        <div class="footer-links">
+          <a href="/">ホーム</a>
+          <a href="/pro.html">Pro利用について</a>
+          <a href="/docs/terms-ja.html">利用規約</a>
+          <a href="/docs/privacy-ja.html">プライバシーポリシー</a>
+          <a href="/docs/consumer-ja.html">特定商取引法に基づく表記</a>
+        </div>
+        <p class="footer-copy">© KOTORI</p>
+      </footer>
+    </main>
+  </div>
+
+  <script src="/contact.js"></script>
+</body>
+</html>

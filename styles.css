@@ -384,6 +384,10 @@ body {
   font-weight: 400;
 }
 
+.legal-sep {
+  color: var(--muted);
+}
+
 .legal-links a:hover {
   text-decoration: underline;
 }
@@ -636,6 +640,85 @@ th {
   text-align: center;
 }
 
+.contact-hero .hero-title {
+  margin-bottom: 10px;
+}
+
+.contact-card {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-form {
+  display: grid;
+  gap: 14px;
+}
+
+.contact-field {
+  display: grid;
+  gap: 8px;
+}
+
+.contact-field label {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.contact-field input,
+.contact-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text);
+  font-size: 15px;
+  font-family: inherit;
+  line-height: 1.6;
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus {
+  outline: none;
+  border-color: var(--accent-strong);
+  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.15);
+}
+
+.contact-field textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.contact-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.contact-submit {
+  width: min(280px, 100%);
+}
+
+.contact-status {
+  min-height: 1.2em;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.contact-status.success {
+  color: #117a2d;
+  font-weight: 600;
+}
+
+.contact-status.error {
+  color: #b42318;
+  font-weight: 600;
+}
+
 .footer-links {
   display: flex;
   flex-wrap: wrap;
@@ -695,5 +778,9 @@ th {
 
   .stats-value #totalUsersValue {
     font-size: clamp(36px, 10vw, 48px);
+  }
+
+  .contact-submit {
+    width: 100%;
   }
 }
