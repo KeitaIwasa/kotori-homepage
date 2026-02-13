@@ -1106,7 +1106,7 @@ body.pro-page {
   display: inline-block;
   font-size: 0.5em;
   font-weight: 700;
-  color: #7f2f00;
+  color: inherit;
   vertical-align: baseline;
 }
 
