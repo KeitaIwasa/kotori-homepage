@@ -1,10 +1,21 @@
 (() => {
-  const elements = {
-    ctaButton: document.getElementById("ctaButton"),
-    ctaButtonBottom: document.getElementById("ctaButtonBottom"),
-  };
-
   const langSelect = document.getElementById("langSelect");
+  const statusText = document.getElementById("statusText");
+  const scheduleText = document.getElementById("scheduleText");
+  const errorText = document.getElementById("errorText");
+  const currentPlanValue = document.getElementById("currentPlanValue");
+  const buyStandardBtn = document.getElementById("buyStandardBtn");
+  const buyProBtn = document.getElementById("buyProBtn");
+  const periodSelect = document.getElementById("periodSelect");
+  const intervalButtons = document.querySelectorAll("[data-interval]");
+  const contactLink = document.getElementById("contactLink");
+  const statusPanel = document.querySelector(".pro-status-panel");
+  const priceFields = document.querySelectorAll("[data-price-month][data-price-year]");
+  const planCards = document.querySelectorAll("[data-plan-card]");
+
+  const params = new URLSearchParams(window.location.search);
+  const st = (params.get("st") || "").trim();
+  const apiBaseParam = (params.get("api_base") || params.get("apiBase") || "").trim();
   const flagPaths = {
     ja: "/assets/flags/jp.svg",
     en: "/assets/flags/gb.svg",
@@ -13,96 +24,124 @@
   };
   const globeIconPath = "/assets/globe.svg";
   const triggerLabel = "LANGUAGE";
-  const langPaths = {
+
+  const LANG_PATHS = {
     ja: "/pro.html",
     en: "/en/pro.html",
     "zh-TW": "/zh-tw/pro.html",
     th: "/th/pro.html",
   };
 
-  const lineButtonAssets = {
+  const MESSAGES = {
     ja: {
-      src: "https://scdn.line-apps.com/n/line_add_friends/btn/ja.png",
-      alt: "友だち追加",
+      noToken: "LINEボットからアクセスしてください。グループ情報トークンが見つかりません。",
+      invalidToken: "トークンが無効または期限切れです。LINEボットの案内リンクを開き直してください。",
+      unknown: "状態の取得に失敗しました。時間をおいて再試行してください。",
+      changing: "処理中です...",
+      checkoutCreated: "決済ページへ移動します。",
+      changedImmediately: "プラン変更を反映しました。",
+      scheduled: "次回更新時のプラン変更を予約しました。",
+      alreadyCurrent: "このプランは既に適用されています。",
+      currentFree: "Free",
+      currentStandard: "Standard",
+      currentPro: "Pro",
+      statusPrefix: "現在のプラン:",
+      schedulePrefix: "予約中の変更:",
+      priorityContact: "お問い合わせ",
     },
     en: {
-      src: "https://scdn.line-apps.com/n/line_add_friends/btn/en.png",
-      alt: "Add friend",
+      noToken: "Open this page from the LINE bot. Group token is missing.",
+      invalidToken: "Token is invalid or expired. Please reopen the link from the LINE bot.",
+      unknown: "Failed to fetch subscription status. Please try again later.",
+      changing: "Processing...",
+      checkoutCreated: "Redirecting to checkout...",
+      changedImmediately: "Plan change applied.",
+      scheduled: "Plan change is scheduled for the next renewal.",
+      alreadyCurrent: "This plan is already active.",
+      currentFree: "Free",
+      currentStandard: "Standard",
+      currentPro: "Pro",
+      statusPrefix: "Current plan:",
+      schedulePrefix: "Scheduled change:",
+      priorityContact: "Contact",
     },
     "zh-TW": {
-      src: "https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png",
-      alt: "加入好友",
+      noToken: "請從 LINE 機器人的連結開啟此頁面，找不到群組憑證。",
+      invalidToken: "憑證無效或已過期，請重新從 LINE 機器人開啟連結。",
+      unknown: "無法取得訂閱狀態，請稍後再試。",
+      changing: "處理中...",
+      checkoutCreated: "正在前往結帳頁面...",
+      changedImmediately: "已套用方案變更。",
+      scheduled: "已預約於下次續約時變更方案。",
+      alreadyCurrent: "此方案已在使用中。",
+      currentFree: "Free",
+      currentStandard: "Standard",
+      currentPro: "Pro",
+      statusPrefix: "目前方案:",
+      schedulePrefix: "預約變更:",
+      priorityContact: "聯絡我們",
     },
     th: {
-      src: "https://scdn.line-apps.com/n/line_add_friends/btn/th.png",
-      alt: "เพิ่มเพื่อน",
+      noToken: "กรุณาเปิดหน้านี้จากลิงก์ใน LINE bot ไม่พบโทเค็นกลุ่ม",
+      invalidToken: "โทเค็นไม่ถูกต้องหรือหมดอายุ กรุณาเปิดลิงก์จาก LINE bot อีกครั้ง",
+      unknown: "ไม่สามารถดึงสถานะการสมัครได้ กรุณาลองใหม่อีกครั้ง",
+      changing: "กำลังดำเนินการ...",
+      checkoutCreated: "กำลังไปยังหน้าชำระเงิน...",
+      changedImmediately: "อัปเดตแพ็กเกจเรียบร้อยแล้ว",
+      scheduled: "ตั้งเวลาการเปลี่ยนแพ็กเกจในรอบถัดไปแล้ว",
+      alreadyCurrent: "แพ็กเกจนี้ถูกใช้งานอยู่แล้ว",
+      currentFree: "Free",
+      currentStandard: "Standard",
+      currentPro: "Pro",
+      statusPrefix: "แพ็กเกจปัจจุบัน:",
+      schedulePrefix: "การเปลี่ยนที่ตั้งเวลาไว้:",
+      priorityContact: "ติดต่อเรา",
     },
   };
 
+  let currentLang = getPathLang(window.location.pathname);
+  let currentStatus = null;
   let customSelectEl;
   let customOptionsEl;
   let customTriggerEl;
   let customTriggerFlagEl;
   let customTriggerTextEl;
-  let lineButtonTop;
-  let lineButtonBottom;
-  let currentLang = "ja";
 
-  const params = new URLSearchParams(window.location.search);
-  const checkoutId = params.get("session_id") || params.get("sessionId");
-  const checkoutUrlParam = params.get("checkout_url");
-  const apiBaseParam = params.get("api_base") || params.get("apiBase");
-
-  function buildApiUrl(path) {
-    if (!apiBaseParam) return path;
-    const normalized = apiBaseParam.replace(/\/+$/, "");
-    return `${normalized}${path}`;
-  }
-  const checkoutUrl =
-    checkoutUrlParam ||
-    (checkoutId
-      ? buildApiUrl(`/checkout?session_id=${encodeURIComponent(checkoutId)}`)
-      : null);
-
-  // 既存購読チェック用エンドポイント
-  const checkoutStatusUrl =
-    checkoutId && checkoutUrl
-      ? buildApiUrl(`/checkout?session_id=${encodeURIComponent(checkoutId)}&mode=status`)
-      : null;
-
-  async function fetchCheckoutStatus() {
-    if (!checkoutStatusUrl) return null;
-    try {
-      const res = await fetch(checkoutStatusUrl, { method: "GET" });
-      if (!res.ok) return null;
-      return await res.json();
-    } catch (err) {
-      console.warn("Failed to fetch checkout status", err);
-      return null;
-    }
-  }
-
-  function normalizeLang(raw) {
-    if (!raw) return null;
-    const value = raw.toLowerCase();
-    if (value.startsWith("ja")) return "ja";
-    if (value.startsWith("zh")) return "zh-TW";
-    if (value.startsWith("th")) return "th";
-    return "en";
+  function t(key) {
+    const table = MESSAGES[currentLang] || MESSAGES.ja;
+    return table[key] || MESSAGES.ja[key] || "";
   }
 
   function getPathLang(pathname) {
-    const segments = pathname.split("/").filter(Boolean);
-    const first = segments[0];
-    if (!first) return null;
-    const value = first.toLowerCase();
+    const segment = pathname.split("/").filter(Boolean)[0];
+    if (!segment) return "ja";
+    const value = segment.toLowerCase();
     if (value === "en") return "en";
     if (value === "zh-tw" || value === "zh_tw") return "zh-TW";
     if (value === "th") return "th";
-    return null;
+    return "ja";
   }
 
-  function toggleOptions(forceOpen) {
+  function buildApiUrl(path) {
+    const base = apiBaseParam.replace(/\/+$/, "");
+    if (!base) {
+      return path;
+    }
+    return `${base}${path}`;
+  }
+
+  function withSharedParams(path) {
+    const url = new URL(path, window.location.origin);
+    if (st) {
+      url.searchParams.set("st", st);
+    }
+    if (apiBaseParam) {
+      url.searchParams.set("api_base", apiBaseParam);
+    }
+    return url.toString();
+  }
+
+  function toggleLangOptions(forceOpen) {
     if (!customSelectEl || !customTriggerEl || !customOptionsEl) return;
     const willOpen =
       typeof forceOpen === "boolean"
@@ -112,26 +151,10 @@
     customTriggerEl.setAttribute("aria-expanded", String(willOpen));
   }
 
-  function getLineButtonAsset(lang) {
-    return lineButtonAssets[lang] || lineButtonAssets.ja;
-  }
-
-  function updateLineButtonAssets(lang) {
-    const asset = getLineButtonAsset(lang);
-    [lineButtonTop, lineButtonBottom].forEach((btn) => {
-      if (!btn) return;
-      const img = btn.querySelector("img");
-      if (!img) return;
-      img.src = asset.src;
-      img.alt = asset.alt;
-    });
-  }
-
-  function updateCustomSelected(lang) {
+  function updateCustomLangSelected(lang) {
     if (!customTriggerEl || !customTriggerFlagEl || !customTriggerTextEl) return;
     const selectedOption =
-      Array.from(langSelect?.options || []).find((opt) => opt.value === lang) ||
-      langSelect?.options?.[0];
+      Array.from(langSelect.options).find((opt) => opt.value === lang) || langSelect.options[0];
     customTriggerFlagEl.src = globeIconPath;
     customTriggerTextEl.textContent = triggerLabel;
 
@@ -142,11 +165,16 @@
         li.setAttribute("aria-selected", String(isActive));
       });
     }
+
+    if (!selectedOption) return;
+    langSelect.value = selectedOption.value;
+    const flagUrl = flagPaths[selectedOption.value] || flagPaths.ja;
+    const cssUrl = `url("${flagUrl}")`;
+    langSelect.style.setProperty("--flag-image", cssUrl);
   }
 
-  function buildCustomSelect() {
+  function buildLangCustomSelect() {
     if (!langSelect) return;
-
     langSelect.style.display = "none";
 
     customSelectEl = document.createElement("div");
@@ -194,8 +222,9 @@
 
       li.append(flagImg, text);
       li.addEventListener("click", () => {
-        navigateToLang(opt.value);
-        toggleOptions(false);
+        const path = LANG_PATHS[opt.value] || LANG_PATHS.ja;
+        window.location.href = withSharedParams(path);
+        toggleLangOptions(false);
       });
 
       customOptionsEl.appendChild(li);
@@ -204,138 +233,270 @@
     customSelectEl.append(customTriggerEl, customOptionsEl);
     langSelect.insertAdjacentElement("afterend", customSelectEl);
 
-    customTriggerEl.addEventListener("click", () => toggleOptions());
-    document.addEventListener("click", (e) => {
-      if (!customSelectEl.contains(e.target)) toggleOptions(false);
+    customTriggerEl.addEventListener("click", () => toggleLangOptions());
+    document.addEventListener("click", (event) => {
+      if (!customSelectEl.contains(event.target)) toggleLangOptions(false);
     });
   }
 
-  function navigateToLang(lang) {
-    const targetPath = langPaths[lang] || "/pro.html";
-    const currentPath = window.location.pathname;
-    if (currentPath !== targetPath) {
-      window.location.href = new URL(targetPath, window.location.origin).toString();
+  function setError(message) {
+    if (!errorText) return;
+    errorText.textContent = message || "";
+  }
+
+  function setStatus(message) {
+    if (!statusText) return;
+    statusText.textContent = message || "";
+  }
+
+  function setSchedule(message) {
+    if (!scheduleText) return;
+    scheduleText.textContent = message || "";
+  }
+
+  function setStatusPanelVisible(visible) {
+    if (!statusPanel) return;
+    statusPanel.hidden = !visible;
+    statusPanel.setAttribute("aria-hidden", String(!visible));
+  }
+
+  function setButtonsEnabled(enabled) {
+    [buyStandardBtn, buyProBtn].forEach((btn) => {
+      if (!btn) return;
+      btn.disabled = !enabled;
+      btn.setAttribute("aria-disabled", String(!enabled));
+    });
+  }
+
+  function normalizePlan(plan) {
+    const value = (plan || "").toLowerCase();
+    if (value === "standard") return "standard";
+    if (value === "pro") return "pro";
+    return "free";
+  }
+
+  function displayPlan(plan) {
+    const normalized = normalizePlan(plan);
+    if (normalized === "standard") return t("currentStandard");
+    if (normalized === "pro") return t("currentPro");
+    return t("currentFree");
+  }
+
+  function applyIntervalPrice() {
+    const interval = getCurrentInterval();
+    const key = interval === "year" ? "priceYear" : "priceMonth";
+    priceFields.forEach((node) => {
+      const value = node.dataset[key] || "";
+      renderPriceLabel(node, value);
+    });
+  }
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function renderPriceLabel(node, value) {
+    const text = (value || "").trim();
+    if (!text) {
+      node.textContent = "";
       return;
+    }
+    const slashIndex = text.lastIndexOf("/");
+    if (slashIndex <= 0 || slashIndex === text.length - 1) {
+      node.textContent = text;
+      return;
+    }
+    const main = text.slice(0, slashIndex).trimEnd();
+    const unit = text.slice(slashIndex).trimStart();
+    node.innerHTML = `<span class="plan-price-main">${escapeHtml(main)}</span> <span class="plan-price-unit">${escapeHtml(unit)}</span>`;
+  }
+
+  function getCurrentInterval() {
+    const active = document.querySelector("[data-interval].is-active");
+    if (active) {
+      return active.dataset.interval === "year" ? "year" : "month";
+    }
+    return periodSelect ? periodSelect.value : "month";
+  }
+
+  function setIntervalState(interval) {
+    const normalized = interval === "year" ? "year" : "month";
+    intervalButtons.forEach((btn) => {
+      const isActive = btn.dataset.interval === normalized;
+      btn.classList.toggle("is-active", isActive);
+      btn.setAttribute("aria-pressed", String(isActive));
+    });
+    if (periodSelect) {
+      periodSelect.value = normalized;
+    }
+    applyIntervalPrice();
+  }
+
+  function highlightCurrentPlan(plan) {
+    const current = normalizePlan(plan);
+    planCards.forEach((card) => {
+      if (!card) return;
+      const isCurrent = normalizePlan(card.dataset.plan || "") === current;
+      card.classList.toggle("is-current", isCurrent);
+    });
+  }
+
+  async function fetchStatus() {
+    if (!st) {
+      setStatusPanelVisible(false);
+      setError(t("noToken"));
+      setButtonsEnabled(false);
+      return null;
+    }
+    setStatusPanelVisible(true);
+    try {
+      const res = await fetch(buildApiUrl(`/checkout?mode=status&st=${encodeURIComponent(st)}`), {
+        method: "GET",
+      });
+      if (!res.ok) {
+        if (res.status === 401) {
+          setError(t("invalidToken"));
+        } else {
+          setError(t("unknown"));
+        }
+        setButtonsEnabled(false);
+        return null;
+      }
+      const data = await res.json();
+      setButtonsEnabled(true);
+      currentStatus = data;
+      renderStatus(data);
+      return data;
+    } catch (_err) {
+      setError(t("unknown"));
+      setButtonsEnabled(false);
+      return null;
     }
   }
 
-  function createLineAddButton(lang) {
-    const anchor = document.createElement("a");
-    anchor.href = "https://lin.ee/5roFh0n";
-    anchor.target = "_blank";
-    anchor.rel = "noopener";
-    anchor.className = "line-add-btn";
+  function renderStatus(data) {
+    const effectivePlan = normalizePlan(data?.effectivePlan || data?.entitlementPlan);
+    const scheduleId = data?.scheduledTargetPriceId || "";
+    const scheduleAt = data?.scheduledEffectiveAt || "";
 
-    const asset = getLineButtonAsset(lang);
-    const img = document.createElement("img");
-    img.src = asset.src;
-    img.alt = asset.alt;
-    img.height = 36;
-    img.border = 0;
+    if (currentPlanValue) {
+      currentPlanValue.textContent = displayPlan(effectivePlan);
+    }
+    setStatus(`${t("statusPrefix")} ${displayPlan(effectivePlan)}`);
 
-    anchor.appendChild(img);
-    return anchor;
-  }
-
-  function showLineButton(isCheckoutAvailable) {
-    const ctaTop = document.getElementById("cta");
-    const ctaBottom = document.getElementById("ctaBottom");
-
-    if (!isCheckoutAvailable) {
-      if (!lineButtonTop && ctaTop) {
-        lineButtonTop = createLineAddButton(currentLang);
-        ctaTop.insertBefore(lineButtonTop, ctaTop.firstChild);
-      }
-      if (!lineButtonBottom && ctaBottom) {
-        lineButtonBottom = createLineAddButton(currentLang);
-        ctaBottom.insertBefore(lineButtonBottom, ctaBottom.firstChild);
-      }
-      updateLineButtonAssets(currentLang);
+    if (scheduleId && scheduleAt) {
+      setSchedule(`${t("schedulePrefix")} ${scheduleId} (${scheduleAt})`);
     } else {
-      if (lineButtonTop?.parentNode) lineButtonTop.remove();
-      if (lineButtonBottom?.parentNode) lineButtonBottom.remove();
-      lineButtonTop = null;
-      lineButtonBottom = null;
+      setSchedule("");
     }
+
+    if (buyStandardBtn) {
+      buyStandardBtn.dataset.currentPlan = effectivePlan;
+    }
+    if (buyProBtn) {
+      buyProBtn.dataset.currentPlan = effectivePlan;
+    }
+    highlightCurrentPlan(effectivePlan);
   }
 
-  function initLanguage() {
-    const urlLang = normalizeLang(
-      params.get("lang") || params.get("language") || params.get("locale")
-    );
-    const pathLang = getPathLang(window.location.pathname);
-    const initial = pathLang || urlLang || "ja";
-    currentLang = initial;
-    if (langSelect) {
-      langSelect.value = initial;
-      const flagUrl = flagPaths[initial] || flagPaths.ja;
-      const cssUrl = `url("${flagUrl}")`;
-      langSelect.style.setProperty("--flag-image", cssUrl);
+  function selectedTarget(basePlan) {
+    const interval = getCurrentInterval();
+    if (basePlan === "standard") {
+      return interval === "year" ? "standard_yearly" : "standard_monthly";
     }
-    updateCustomSelected(initial);
-    updateLineButtonAssets(initial);
+    return interval === "year" ? "pro_yearly" : "pro_monthly";
   }
 
-  function initCta() {
-    if (!checkoutUrl) {
-      disableCta();
-      showLineButton(false);
+  async function startChange(target) {
+    if (!st) {
+      setError(t("noToken"));
       return;
     }
-
-    // デフォルトは有効化。購読済み確認後に上書き。
-    enableCta(checkoutUrl);
-    showLineButton(true);
-
-    fetchCheckoutStatus().then((status) => {
-      if (status?.proActive) {
-        disableCta(
-          currentLang === "ja"
-            ? "このグループは既にProプランに加入済みです"
-            : "This group is already on the Pro plan"
-        );
-        showLineButton(false);
+    setError("");
+    setStatus(t("changing"));
+    try {
+      const url = buildApiUrl(
+        `/checkout?mode=start&st=${encodeURIComponent(st)}&target=${encodeURIComponent(target)}`
+      );
+      const res = await fetch(url, { method: "GET" });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        if (res.status === 401) {
+          setError(t("invalidToken"));
+        } else {
+          setError(data.message || t("unknown"));
+        }
+        return;
       }
+
+      const result = data.result;
+      if (result === "checkout_created" && data.redirectUrl) {
+        setStatus(t("checkoutCreated"));
+        window.location.href = data.redirectUrl;
+        return;
+      }
+      if (result === "changed_immediately") {
+        setStatus(t("changedImmediately"));
+      } else if (result === "scheduled") {
+        setStatus(t("scheduled"));
+      } else if (result === "already_current") {
+        setStatus(t("alreadyCurrent"));
+      }
+      await fetchStatus();
+    } catch (_err) {
+      setError(t("unknown"));
+    }
+  }
+
+  function handleBuyClick(planKey) {
+    const target = selectedTarget(planKey);
+    startChange(target);
+  }
+
+  function initLangSelector() {
+    if (!langSelect) return;
+    buildLangCustomSelect();
+    langSelect.value = currentLang;
+    updateCustomLangSelected(currentLang);
+    langSelect.addEventListener("change", (event) => {
+      const selected = event.target.value;
+      const path = LANG_PATHS[selected] || LANG_PATHS.ja;
+      window.location.href = withSharedParams(path);
     });
   }
 
-  function enableCta(url) {
-    elements.ctaButton.href = url;
-    elements.ctaButton.removeAttribute("aria-disabled");
-    elements.ctaButton.style.display = "inline-flex";
-    if (elements.ctaButtonBottom) {
-      elements.ctaButtonBottom.href = url;
-      elements.ctaButtonBottom.removeAttribute("aria-disabled");
-      elements.ctaButtonBottom.style.display = "inline-flex";
-    }
+  function initContactLink() {
+    if (!contactLink) return;
+    const href = contactLink.getAttribute("href") || "/contact.html";
+    contactLink.setAttribute("href", withSharedParams(href));
+    contactLink.textContent = t("priorityContact");
   }
 
-  function disableCta(reasonText) {
-    elements.ctaButton.href = "#";
-    elements.ctaButton.setAttribute("aria-disabled", "true");
-    elements.ctaButton.style.display = "none";
-    if (elements.ctaButtonBottom) {
-      elements.ctaButtonBottom.href = "#";
-      elements.ctaButtonBottom.setAttribute("aria-disabled", "true");
-      elements.ctaButtonBottom.style.display = "none";
+  function initActions() {
+    if (buyStandardBtn) {
+      buyStandardBtn.addEventListener("click", () => handleBuyClick("standard"));
     }
-
-    if (reasonText) {
-      const notice = document.createElement("p");
-      notice.className = "cta-notice";
-      notice.textContent = reasonText;
-      const ctaTop = document.getElementById("cta");
-      if (ctaTop) {
-        ctaTop.appendChild(notice);
-      }
+    if (buyProBtn) {
+      buyProBtn.addEventListener("click", () => handleBuyClick("pro"));
     }
+    if (periodSelect) {
+      periodSelect.addEventListener("change", () => setIntervalState(periodSelect.value));
+    }
+    intervalButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        setIntervalState(btn.dataset.interval || "month");
+      });
+    });
   }
 
-  if (langSelect) {
-    buildCustomSelect();
-    langSelect.addEventListener("change", (e) => navigateToLang(e.target.value));
-  }
-
-  initLanguage();
-  initCta();
+  initLangSelector();
+  initContactLink();
+  initActions();
+  setIntervalState(getCurrentInterval());
+  fetchStatus();
 })();

@@ -3,84 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KOTORI | Pro Plan</title>
-  <meta
-    name="description"
-    content="KOTORI Pro is a paid multilingual translation plan for LINE groups. Get natural, context-aware translations for JPY 380 per month per group."
-  />
-  <meta name="robots" content="index, follow" />
+  <title>KOTORI | Plan Comparison</title>
+  <meta name="description" content="Compare KOTORI Free / Standard / Pro plans and manage your group's subscription." />
   <link rel="canonical" href="https://kotori-ai.com/en/pro.html" />
   <link rel="alternate" hreflang="ja" href="https://kotori-ai.com/pro.html" />
   <link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/pro.html" />
   <link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/pro.html" />
   <link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/pro.html" />
-  <link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/pro.html" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="KOTORI" />
-  <meta property="og:title" content="KOTORI | Pro Plan" />
-  <meta
-    property="og:description"
-    content="KOTORI Pro is a paid multilingual translation plan for LINE groups. Get natural, context-aware translations for JPY 380 per month per group."
-  />
-  <meta property="og:url" content="https://kotori-ai.com/en/pro.html" />
-  <meta property="og:image" content="https://kotori-ai.com/assets/ogp.png" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:locale:alternate" content="ja_JP" />
-  <meta property="og:locale:alternate" content="zh_TW" />
-  <meta property="og:locale:alternate" content="th_TH" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="KOTORI | Pro Plan" />
-  <meta
-    name="twitter:description"
-    content="KOTORI Pro is a paid multilingual translation plan for LINE groups. Get natural, context-aware translations for JPY 380 per month per group."
-  />
-  <meta name="twitter:image" content="https://kotori-ai.com/assets/ogp.png" />
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebPage",
-          "@id": "https://kotori-ai.com/en/pro.html#webpage",
-          "url": "https://kotori-ai.com/en/pro.html",
-          "name": "KOTORI | Pro Plan",
-          "description": "KOTORI Pro is a paid multilingual translation plan for LINE groups. Get natural, context-aware translations for JPY 380 per month per group.",
-          "inLanguage": "en"
-        },
-        {
-          "@type": "Product",
-          "@id": "https://kotori-ai.com/en/pro.html#product",
-          "name": "KOTORI Pro Plan",
-          "description": "Paid multilingual translation plan for LINE groups",
-          "brand": {
-            "@type": "Brand",
-            "name": "KOTORI"
-          },
-          "url": "https://kotori-ai.com/en/pro.html",
-          "image": "https://kotori-ai.com/assets/ogp.png",
-          "offers": {
-            "@type": "Offer",
-            "price": "380",
-            "priceCurrency": "JPY",
-            "availability": "https://schema.org/InStock",
-            "url": "https://kotori-ai.com/en/pro.html"
-          }
-        }
-      ]
-    }
-  </script>
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
-<body>
+<body class="pro-page">
   <div class="top-bar-wrap">
     <nav class="top-bar" aria-label="Primary">
-      <div class="brand">
-        <a class="brand-name" href="/en/">KOTORI</a>
-      </div>
+      <div class="brand"><a class="brand-name" href="/en/">KOTORI</a></div>
       <div class="lang-picker" aria-label="Language selector">
         <select id="langSelect" class="lang-select">
           <option value="ja">日本語</option>
@@ -94,137 +33,88 @@
 
   <div class="page-shell">
     <main>
-      <section class="hero">
-        <div class="hero-brand">
-          <img
-            src="/assets/kotori-logo.jpg"
-            alt="KOTORI logo"
-            class="hero-logo"
-            loading="eager" fetchpriority="high"
-          />
-          <p class="hero-wordmark">KOTORI</p>
-          <p class="hero-subtitle" data-i18n="heroTagline">Multilingual translation LINE bot</p>
-        </div>
-        <h1 class="hero-title" data-i18n="heroTitle">Run multilingual LINE groups stress-free with the KOTORI Pro plan.</h1>
-        <p class="hero-lead" data-i18n="heroLead">
-          The KOTORI Pro Plan is the paid plan for our LINE bot that auto-translates group messages with contextual awareness.
-          Use it confidently for work or personal chats without worrying about free-tier limits.
-        </p>
-
-        <div class="price-card">
-          <p class="price" data-i18n="price">
-            Price:
-            <span class="price-amount">
-              <span class="price-currency">JPY</span>
-              <span class="price-number">380</span>
-            </span>
-            / month (tax included) per group
-          </p>
-          <p class="audience" data-i18n="audience">Best for: business chats in multinational teams, international student or friend groups, and cross-cultural communities</p>
-        </div>
-
-        <div class="cta" id="cta">
-          <a id="ctaButton" class="primary-btn" href="#" data-i18n="ctaLabel" rel="noopener">Purchase Pro Plan</a>
-          <p class="terms" id="ctaTerms" data-i18n-html="ctaTerms">
-            By purchasing via the button below, you agree to the following terms.<br />
-            ・<a href="/docs/terms-en.html?from=pro&amp;lang=en">Terms of Service</a><br />
-            ・<a href="/docs/privacy-en.html?from=pro&amp;lang=en">Privacy Policy</a>
-          </p>
-        </div>
+      <section class="hero pro-hero">
+        <h1 class="hero-title">Make multilingual LINE group management stress-free with paid plans.</h1>
+        <p class="hero-lead">Switch between Free, Standard, and Pro anytime based on your LINE group traffic.</p>
       </section>
 
-      <section class="card">
-        <h2 data-i18n="featuresTitle">What you get with Pro</h2>
-        <ul class="list" id="featuresList">
-          <li>Instantly translate group messages into up to five registered languages</li>
-          <li>Context-aware, natural translations using recent conversation history</li>
-          <li>Higher rate limits than Free for virtually unlimited everyday use</li>
-          <li>Access to the wide language coverage provided by the underlying LLM</li>
-          <li>Works for global business teams and casual international groups alike</li>
+      <section class="card pro-status-panel status-panel" hidden aria-hidden="true">
+        <div class="status-line">
+          <p id="statusText">Current plan: loading...</p>
+          <p id="scheduleText"></p>
+        </div>
+        <p class="current-plan-label">Active Plan</p>
+        <p class="current-plan-value"><strong id="currentPlanValue">-</strong></p>
+        <p id="errorText" class="error-text"></p>
+      </section>
+
+      <section class="billing-toggle-wrap" aria-label="Billing cycle">
+        <div class="billing-toggle" role="group" aria-label="Billing cycle toggle">
+          <button class="billing-toggle-btn is-active" type="button" data-interval="month" aria-pressed="true">Monthly</button>
+          <button class="billing-toggle-btn" type="button" data-interval="year" aria-pressed="false">Yearly <span class="billing-toggle-badge">Save 17%</span></button>
+        </div>
+        <select id="periodSelect" class="period-select-hidden" aria-label="Billing cycle">
+          <option value="month" selected>Monthly</option>
+          <option value="year">Yearly</option>
+        </select>
+      </section>
+
+      <section class="pricing-grid" aria-label="Plans">
+        <article class="plan-card" data-plan-card data-plan="free">
+          <p class="plan-tag">Free</p>
+          <h2>Get Started</h2>
+          <p class="plan-sub">For light usage</p>
+          <p class="plan-price-value" data-price-month="JPY 0 / month" data-price-year="JPY 0 / year">JPY 0 / month</p>
+          <button class="plan-btn plan-btn-ghost" type="button" disabled aria-disabled="true">Keep Current Setup</button>
+          <ul class="plan-feature-list">
+            <li>Monthly translation limit: 50</li>
+            <li>Maximum language slots: 3</li>
+            <li>Basic support</li>
+          </ul>
+        </article>
+
+        <article class="plan-card" data-plan-card data-plan="standard">
+          <p class="plan-tag">Standard</p>
+          <h2>Built for Daily Use</h2>
+          <p class="plan-sub">For growing groups</p>
+          <p class="plan-price-value" data-price-month="JPY 480 / month" data-price-year="JPY 4,800 / year">JPY 480 / month</p>
+          <button id="buyStandardBtn" class="plan-btn" type="button">Choose Standard</button>
+          <ul class="plan-feature-list">
+            <li>Monthly translation limit: 4,000</li>
+            <li>Maximum language slots: 3</li>
+            <li>Immediate upgrade</li>
+          </ul>
+        </article>
+
+        <article class="plan-card plan-card-accent" data-plan-card data-plan="pro">
+          <p class="plan-tag">Pro</p>
+          <h2>For Heavy Workloads</h2>
+          <p class="plan-sub">For business-scale operations</p>
+          <p class="plan-price-value" data-price-month="JPY 4,800 / month" data-price-year="JPY 48,000 / year">JPY 4,800 / month</p>
+          <button id="buyProBtn" class="plan-btn" type="button">Choose Pro</button>
+          <ul class="plan-feature-list">
+            <li>Monthly translation limit: 40,000</li>
+            <li>Maximum language slots: 5</li>
+            <li>Encrypted message storage</li>
+            <li>Short data retention period (7 days) for stronger security</li>
+            <li>Priority support</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="pro-notes">
+        <h2>Notes</h2>
+        <ul class="list">
+          <li>Upgrades are applied and billed immediately; downgrades are applied and billed at the next renewal.</li>
+          <li>Monthly translation limits reset every month, even on yearly plans.</li>
+          <li>Plans are applied per LINE group.</li>
         </ul>
       </section>
-
-      <section class="card">
-        <h2 data-i18n="compareTitle">Free vs. Pro</h2>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th data-i18n="compareItem">Item</th>
-                <th data-i18n="compareFree">Free Plan</th>
-                <th data-i18n="comparePro">Pro Plan</th>
-              </tr>
-            </thead>
-            <tbody id="compareBody">
-              <tr>
-                <td>Price</td>
-                <td>Free</td>
-                <td>JPY 380 / month (tax included) per group</td>
-              </tr>
-              <tr>
-                <td>Translation volume</td>
-                <td>50 messages / month</td>
-                <td>8,000 messages / month</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="card">
-        <h2 data-i18n="pricingTitle">Pricing &amp; billing conditions</h2>
-        <ul class="list" id="pricingList">
-          <li>Plan name: KOTORI - AI Translation/การแปล Pro Plan</li>
-          <li>Price: JPY 380 / month (tax included) per group</li>
-          <li>Billing: paid online by one representative (auto-renew)</li>
-          <li>Charge timing: pay one month at checkout; auto-renews monthly thereafter</li>
-          <li>Cancellation: mention the bot in your group and send the cancel command anytime; Pro stays active until the paid period ends</li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <h2 data-i18n="flowTitle">How to get started</h2>
-        <ol class="steps" id="flowList">
-          <li>Invite the official KOTORI LINE bot to your target group.</li>
-          <li>Try translation behavior on the Free plan.</li>
-          <li>Click the “Purchase Pro Plan” button on this page to go to checkout and pay by credit card.</li>
-          <li>After payment, the group’s Pro Plan activates within a few minutes and remains active for the billing period.</li>
-          <li>To cancel, mention the bot in the group and send the cancel command; you can keep using Pro until the paid period ends.</li>
-        </ol>
-      </section>
-
-      <section class="card">
-        <h2 data-i18n="notesTitle">Notes and terms</h2>
-        <ul class="list" id="notesList">
-          <li>Pro is contracted per LINE group. Each group requires its own subscription.</li>
-          <li>If the bot is removed from a group, that group’s Pro plan is auto-canceled; no refunds for the remaining period.</li>
-          <li>No refunds when you cancel; Pro remains available until the end of the paid period.</li>
-          <li>Service details, pricing, and supported languages may change without notice.</li>
-          <li>Temporary outages may occur due to network issues or external services (LINE, LLM, Stripe).</li>
-          <li>For translation quality and context, recent group messages are stored and a portion may be sent to external AI models (Gemini).</li>
-        </ul>
-        <p class="terms" id="notesTerms" data-i18n-html="notesTerms">
-          See the full details below.<br />
-          ・<a href="/docs/terms-en.html?from=pro&amp;lang=en">Terms of Service</a><br />
-          ・<a href="/docs/privacy-en.html?from=pro&amp;lang=en">Privacy Policy</a>
-        </p>
-      </section>
-
-      <div class="bottom-cta">
-        <div class="cta" id="ctaBottom">
-          <a
-            id="ctaButtonBottom"
-            class="primary-btn"
-            href="#"
-            data-i18n="ctaLabel"
-            rel="noopener"
-            >Purchase Pro Plan</a
-          >
-        </div>
-      </div>
 
       <div class="legal-links">
-        <a id="consumerLink" data-i18n="consumerLink" href="/docs/consumer-en.html?from=pro&amp;lang=en" target="_blank" rel="noopener">Consumer Information</a>
+        <a href="/docs/terms-en.html">Terms</a>
+        <span class="legal-sep"> | </span>
+        <a href="/docs/privacy-en.html">Privacy</a>
         <span class="legal-sep"> | </span>
         <a id="contactLink" href="/en/contact.html">Contact</a>
       </div>

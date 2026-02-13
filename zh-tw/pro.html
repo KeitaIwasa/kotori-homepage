@@ -3,84 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KOTORI | Pro 方案</title>
-  <meta
-    name="description"
-    content="KOTORI Pro 是 LINE 群組的多語翻譯付費方案。每群每月 JPY 380，即可獲得自然且具脈絡的翻譯。"
-  />
-  <meta name="robots" content="index, follow" />
+  <title>KOTORI | 方案比較</title>
+  <meta name="description" content="比較 KOTORI Free / Standard / Pro 方案，並管理群組訂閱。" />
   <link rel="canonical" href="https://kotori-ai.com/zh-tw/pro.html" />
   <link rel="alternate" hreflang="ja" href="https://kotori-ai.com/pro.html" />
   <link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/pro.html" />
   <link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/pro.html" />
   <link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/pro.html" />
-  <link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/pro.html" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="KOTORI" />
-  <meta property="og:title" content="KOTORI | Pro 方案" />
-  <meta
-    property="og:description"
-    content="KOTORI Pro 是 LINE 群組的多語翻譯付費方案。每群每月 JPY 380，即可獲得自然且具脈絡的翻譯。"
-  />
-  <meta property="og:url" content="https://kotori-ai.com/zh-tw/pro.html" />
-  <meta property="og:image" content="https://kotori-ai.com/assets/ogp.png" />
-  <meta property="og:locale" content="zh_TW" />
-  <meta property="og:locale:alternate" content="en_US" />
-  <meta property="og:locale:alternate" content="ja_JP" />
-  <meta property="og:locale:alternate" content="th_TH" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="KOTORI | Pro 方案" />
-  <meta
-    name="twitter:description"
-    content="KOTORI Pro 是 LINE 群組的多語翻譯付費方案。每群每月 JPY 380，即可獲得自然且具脈絡的翻譯。"
-  />
-  <meta name="twitter:image" content="https://kotori-ai.com/assets/ogp.png" />
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebPage",
-          "@id": "https://kotori-ai.com/zh-tw/pro.html#webpage",
-          "url": "https://kotori-ai.com/zh-tw/pro.html",
-          "name": "KOTORI | Pro 方案",
-          "description": "KOTORI Pro 是 LINE 群組的多語翻譯付費方案。每群每月 JPY 380，即可獲得自然且具脈絡的翻譯。",
-          "inLanguage": "zh-TW"
-        },
-        {
-          "@type": "Product",
-          "@id": "https://kotori-ai.com/zh-tw/pro.html#product",
-          "name": "KOTORI Pro 方案",
-          "description": "適用於 LINE 群組的多語翻譯付費方案",
-          "brand": {
-            "@type": "Brand",
-            "name": "KOTORI"
-          },
-          "url": "https://kotori-ai.com/zh-tw/pro.html",
-          "image": "https://kotori-ai.com/assets/ogp.png",
-          "offers": {
-            "@type": "Offer",
-            "price": "380",
-            "priceCurrency": "JPY",
-            "availability": "https://schema.org/InStock",
-            "url": "https://kotori-ai.com/zh-tw/pro.html"
-          }
-        }
-      ]
-    }
-  </script>
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
-<body>
+<body class="pro-page">
   <div class="top-bar-wrap">
     <nav class="top-bar" aria-label="Primary">
-      <div class="brand">
-        <a class="brand-name" href="/zh-tw/">KOTORI</a>
-      </div>
+      <div class="brand"><a class="brand-name" href="/zh-tw/">KOTORI</a></div>
       <div class="lang-picker" aria-label="Language selector">
         <select id="langSelect" class="lang-select">
           <option value="ja">日本語</option>
@@ -94,137 +33,88 @@
 
   <div class="page-shell">
     <main>
-      <section class="hero">
-        <div class="hero-brand">
-          <img
-            src="/assets/kotori-logo.jpg"
-            alt="KOTORI 標誌"
-            class="hero-logo"
-            loading="eager" fetchpriority="high"
-          />
-          <p class="hero-wordmark">KOTORI</p>
-          <p class="hero-subtitle" data-i18n="heroTagline">多語翻譯 LINE 機器人</p>
-        </div>
-        <h1 class="hero-title" data-i18n="heroTitle">用 KOTORI Pro 方案，無壓力經營多語系 LINE 群組。</h1>
-        <p class="hero-lead" data-i18n="heroLead">
-          「KOTORI Pro 方案」是 LINE 機器人的付費方案，可依據脈絡自動翻譯群組訊息。
-          免擔心免費方案的限制，商務或私人聊天都能安心使用。
-        </p>
-
-        <div class="price-card">
-          <p class="price" data-i18n="price">
-            價格：
-            <span class="price-amount">
-              <span class="price-currency">JPY</span>
-              <span class="price-number">380</span>
-            </span>
-            （含稅）每組每月
-          </p>
-          <p class="audience" data-i18n="audience">適用：跨國商務團隊、留學生／朋友群組、國際交流社群等</p>
-        </div>
-
-        <div class="cta" id="cta">
-          <a id="ctaButton" class="primary-btn" href="#" data-i18n="ctaLabel" rel="noopener">購買 Pro 方案</a>
-          <p class="terms" id="ctaTerms" data-i18n-html="ctaTerms">
-            點擊下方按鈕購買即表示同意以下條款。<br />
-            ・<a href="/docs/terms-zh-tw.html?from=pro&amp;lang=zh-tw">服務條款</a><br />
-            ・<a href="/docs/privacy-zh-tw.html?from=pro&amp;lang=zh-tw">隱私權政策</a>
-          </p>
-        </div>
+      <section class="hero pro-hero">
+        <h1 class="hero-title">透過付費方案，讓多語 LINE 群組營運零壓力。</h1>
+        <p class="hero-lead">依照 LINE 群組使用量，隨時在 Free、Standard、Pro 之間切換。</p>
       </section>
 
-      <section class="card">
-        <h2 data-i18n="featuresTitle">Pro 方案提供的功能</h2>
-        <ul class="list" id="featuresList">
-          <li>將群組訊息即時翻譯成已註冊的最多 5 種語言</li>
-          <li>考量近期對話脈絡，提供自然易讀的翻譯</li>
-          <li>比 Free 方案更高的速率限制，日常幾乎可不限量使用</li>
-          <li>可使用底層 LLM 支援的廣泛語言</li>
-          <li>適用於跨國商務團隊，也適合國際朋友或社群</li>
+      <section class="card pro-status-panel status-panel" hidden aria-hidden="true">
+        <div class="status-line">
+          <p id="statusText">目前方案：讀取中...</p>
+          <p id="scheduleText"></p>
+        </div>
+        <p class="current-plan-label">目前啟用方案</p>
+        <p class="current-plan-value"><strong id="currentPlanValue">-</strong></p>
+        <p id="errorText" class="error-text"></p>
+      </section>
+
+      <section class="billing-toggle-wrap" aria-label="計費週期">
+        <div class="billing-toggle" role="group" aria-label="計費週期切換">
+          <button class="billing-toggle-btn is-active" type="button" data-interval="month" aria-pressed="true">月繳</button>
+          <button class="billing-toggle-btn" type="button" data-interval="year" aria-pressed="false">年繳 <span class="billing-toggle-badge">省 17%</span></button>
+        </div>
+        <select id="periodSelect" class="period-select-hidden" aria-label="計費週期">
+          <option value="month" selected>月繳</option>
+          <option value="year">年繳</option>
+        </select>
+      </section>
+
+      <section class="pricing-grid" aria-label="方案列表">
+        <article class="plan-card" data-plan-card data-plan="free">
+          <p class="plan-tag">Free</p>
+          <h2>免費開始</h2>
+          <p class="plan-sub">適合輕量使用</p>
+          <p class="plan-price-value" data-price-month="¥0 / 月" data-price-year="¥0 / 年">¥0 / 月</p>
+          <button class="plan-btn plan-btn-ghost" type="button" disabled aria-disabled="true">維持目前設定</button>
+          <ul class="plan-feature-list">
+            <li>每月翻譯上限 50</li>
+            <li>最大可註冊語言數 3</li>
+            <li>基本支援</li>
+          </ul>
+        </article>
+
+        <article class="plan-card" data-plan-card data-plan="standard">
+          <p class="plan-tag">Standard</p>
+          <h2>日常營運首選</h2>
+          <p class="plan-sub">適合成長中的群組</p>
+          <p class="plan-price-value" data-price-month="¥480 / 月" data-price-year="¥4,800 / 年">¥480 / 月</p>
+          <button id="buyStandardBtn" class="plan-btn" type="button">選擇 Standard</button>
+          <ul class="plan-feature-list">
+            <li>每月翻譯上限 4,000</li>
+            <li>最大可註冊語言數 3</li>
+            <li>升級立即生效</li>
+          </ul>
+        </article>
+
+        <article class="plan-card plan-card-accent" data-plan-card data-plan="pro">
+          <p class="plan-tag">Pro</p>
+          <h2>對應高流量需求</h2>
+          <p class="plan-sub">適合大型與商務運用</p>
+          <p class="plan-price-value" data-price-month="¥4,800 / 月" data-price-year="¥48,000 / 年">¥4,800 / 月</p>
+          <button id="buyProBtn" class="plan-btn" type="button">選擇 Pro</button>
+          <ul class="plan-feature-list">
+            <li>每月翻譯上限 40,000</li>
+            <li>最大可註冊語言數 5</li>
+            <li>訊息加密保存</li>
+            <li>較短資料保存期間（7天）以提升安全性</li>
+            <li>優先支援</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="pro-notes">
+        <h2>注意事項</h2>
+        <ul class="list">
+          <li>升級會立即生效並立即計費；降級則於下次續約時生效並計費。</li>
+          <li>即使是年繳方案，翻譯上限也會每月重置。</li>
+          <li>方案是以每個 LINE 群組為單位套用。</li>
         </ul>
       </section>
-
-      <section class="card">
-        <h2 data-i18n="compareTitle">Free 與 Pro 的差異</h2>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th data-i18n="compareItem">項目</th>
-                <th data-i18n="compareFree">Free 方案</th>
-                <th data-i18n="comparePro">Pro 方案</th>
-              </tr>
-            </thead>
-            <tbody id="compareBody">
-              <tr>
-                <td>價格</td>
-                <td>免費</td>
-                <td>每組每月 JPY 380（含稅）</td>
-              </tr>
-              <tr>
-                <td>翻譯量</td>
-                <td>每月 50 則訊息</td>
-                <td>每月 8,000 則訊息</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="card">
-        <h2 data-i18n="pricingTitle">價格與課費條件</h2>
-        <ul class="list" id="pricingList">
-          <li>方案名稱：KOTORI - AI 翻譯 Pro 方案</li>
-          <li>價格：每組每月 JPY 380（含稅）</li>
-          <li>付款方式：由一位代表線上刷卡付款（自動續訂）</li>
-          <li>收費時間：首次購買即收取一個月，其後每月自動續訂</li>
-          <li>解約：在群組標記機器人並傳送解約指令即可；已付費期間結束前仍可使用 Pro</li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <h2 data-i18n="flowTitle">開始使用的步驟</h2>
-        <ol class="steps" id="flowList">
-          <li>將官方的 KOTORI LINE 機器人邀請到目標群組。</li>
-          <li>先以 Free 方案試用翻譯行為。</li>
-          <li>在本頁點擊「購買 Pro 方案」按鈕前往結帳，並以信用卡付款。</li>
-          <li>付款完成後數分鐘內即啟用該群組的 Pro 方案，於計費期間可持續使用。</li>
-          <li>若要解約，在群組標記機器人並傳送解約指令；已付費期間結束前仍可使用 Pro。</li>
-        </ol>
-      </section>
-
-      <section class="card">
-        <h2 data-i18n="notesTitle">注意事項與條款</h2>
-        <ul class="list" id="notesList">
-          <li>Pro 為單一 LINE 群組訂閱。若有多個群組需各別訂閱。</li>
-          <li>若機器人被移出群組，該群組的 Pro 方案將自動取消，剩餘期間不予退費。</li>
-          <li>使用者主動解約亦不退費，已付費期間結束前仍可使用 Pro。</li>
-          <li>服務內容、價格與支援語言可能不經預告調整。</li>
-          <li>網路或外部服務（LINE、LLM、Stripe）故障時，翻譯可能暫時無法提供。</li>
-          <li>為提升翻譯品質與脈絡理解，群組訊息會被儲存，部分近期對話可能傳送至外部 AI 模型（Gemini）。</li>
-        </ul>
-        <p class="terms" id="notesTerms" data-i18n-html="notesTerms">
-          詳細條件請參閱以下頁面。<br />
-          ・<a href="/docs/terms-zh-tw.html?from=pro&amp;lang=zh-tw">服務條款</a><br />
-          ・<a href="/docs/privacy-zh-tw.html?from=pro&amp;lang=zh-tw">隱私權政策</a>
-        </p>
-      </section>
-
-      <div class="bottom-cta">
-        <div class="cta" id="ctaBottom">
-          <a
-            id="ctaButtonBottom"
-            class="primary-btn"
-            href="#"
-            data-i18n="ctaLabel"
-            rel="noopener"
-            >購買 Pro 方案</a
-          >
-        </div>
-      </div>
 
       <div class="legal-links">
-        <a id="consumerLink" data-i18n="consumerLink" href="/docs/consumer-zh-tw.html?from=pro&amp;lang=zh-tw" target="_blank" rel="noopener">消費者資訊</a>
+        <a href="/docs/terms-zh-tw.html">服務條款</a>
+        <span class="legal-sep"> | </span>
+        <a href="/docs/privacy-zh-tw.html">隱私權政策</a>
         <span class="legal-sep"> | </span>
         <a id="contactLink" href="/zh-tw/contact.html">聯絡我們</a>
       </div>
