@@ -866,8 +866,8 @@ th {
   --pro-border: var(--border);
   --pro-text: var(--text);
   --pro-muted: var(--muted);
-  --pro-accent: #00b5f5;
-  --pro-accent-strong: var(--accent-strong);
+  --pro-accent: var(--accent-strong);
+  --pro-accent-strong: #d85a00;
 }
 
 body.pro-page {
@@ -994,8 +994,8 @@ body.pro-page {
   font-size: 11px;
   font-weight: 700;
   line-height: 1.35;
-  color: #0f5b87;
-  background: rgba(0, 181, 245, 0.14);
+  color: #9a3f00;
+  background: rgba(246, 168, 60, 0.24);
   vertical-align: middle;
 }
 
@@ -1071,9 +1071,9 @@ body.pro-page {
   font-size: 12px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #0f5b87;
-  background: rgba(0, 181, 245, 0.12);
-  border: 1px solid rgba(0, 181, 245, 0.28);
+  color: #9a3f00;
+  background: rgba(246, 168, 60, 0.2);
+  border: 1px solid rgba(246, 168, 60, 0.36);
 }
 
 .pro-page .plan-card h2 {
