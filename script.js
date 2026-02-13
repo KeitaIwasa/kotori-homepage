@@ -47,7 +47,7 @@
       currentPro: "Pro",
       statusPrefix: "現在のプラン:",
       schedulePrefix: "予約中の変更:",
-      priorityContact: "お問い合わせ（Pro優先サポート）",
+      priorityContact: "お問い合わせ",
     },
     en: {
       noToken: "Open this page from the LINE bot. Group token is missing.",
@@ -63,7 +63,7 @@
       currentPro: "Pro",
       statusPrefix: "Current plan:",
       schedulePrefix: "Scheduled change:",
-      priorityContact: "Contact (Priority Support)",
+      priorityContact: "Contact",
     },
     "zh-TW": {
       noToken: "請從 LINE 機器人的連結開啟此頁面，找不到群組憑證。",
@@ -79,7 +79,7 @@
       currentPro: "Pro",
       statusPrefix: "目前方案:",
       schedulePrefix: "預約變更:",
-      priorityContact: "聯絡我們（Pro 優先支援）",
+      priorityContact: "聯絡我們",
     },
     th: {
       noToken: "กรุณาเปิดหน้านี้จากลิงก์ใน LINE bot ไม่พบโทเค็นกลุ่ม",
@@ -95,7 +95,7 @@
       currentPro: "Pro",
       statusPrefix: "แพ็กเกจปัจจุบัน:",
       schedulePrefix: "การเปลี่ยนที่ตั้งเวลาไว้:",
-      priorityContact: "ติดต่อเรา (รองรับแบบเร่งด่วน Pro)",
+      priorityContact: "ติดต่อเรา",
     },
   };
 
