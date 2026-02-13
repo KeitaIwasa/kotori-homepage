@@ -4,6 +4,7 @@
   const scheduleText = document.getElementById("scheduleText");
   const errorText = document.getElementById("errorText");
   const currentPlanValue = document.getElementById("currentPlanValue");
+  const translationCountValue = document.getElementById("translationCountValue");
   const buyStandardBtn = document.getElementById("buyStandardBtn");
   const buyProBtn = document.getElementById("buyProBtn");
   const periodSelect = document.getElementById("periodSelect");
@@ -45,7 +46,7 @@
       currentFree: "Free",
       currentStandard: "Standard",
       currentPro: "Pro",
-      statusPrefix: "現在のプラン:",
+      statusLoaded: "契約状態を取得しました。",
       schedulePrefix: "予約中の変更:",
       priorityContact: "お問い合わせ",
     },
@@ -61,7 +62,7 @@
       currentFree: "Free",
       currentStandard: "Standard",
       currentPro: "Pro",
-      statusPrefix: "Current plan:",
+      statusLoaded: "Subscription status loaded.",
       schedulePrefix: "Scheduled change:",
       priorityContact: "Contact",
     },
@@ -77,7 +78,7 @@
       currentFree: "Free",
       currentStandard: "Standard",
       currentPro: "Pro",
-      statusPrefix: "目前方案:",
+      statusLoaded: "已取得訂閱狀態。",
       schedulePrefix: "預約變更:",
       priorityContact: "聯絡我們",
     },
@@ -93,7 +94,7 @@
       currentFree: "Free",
       currentStandard: "Standard",
       currentPro: "Pro",
-      statusPrefix: "แพ็กเกจปัจจุบัน:",
+      statusLoaded: "โหลดสถานะการสมัครแล้ว",
       schedulePrefix: "การเปลี่ยนที่ตั้งเวลาไว้:",
       priorityContact: "ติดต่อเรา",
     },
@@ -282,6 +283,14 @@
     return t("currentFree");
   }
 
+  function formatCount(value) {
+    const numeric = Number(value);
+    if (!Number.isFinite(numeric) || numeric < 0) {
+      return "-";
+    }
+    return new Intl.NumberFormat(currentLang).format(Math.floor(numeric));
+  }
+
   function applyIntervalPrice() {
     const interval = getCurrentInterval();
     const key = interval === "year" ? "priceYear" : "priceMonth";
@@ -387,7 +396,10 @@
     if (currentPlanValue) {
       currentPlanValue.textContent = displayPlan(effectivePlan);
     }
-    setStatus(`${t("statusPrefix")} ${displayPlan(effectivePlan)}`);
+    if (translationCountValue) {
+      translationCountValue.textContent = formatCount(data?.translationCount);
+    }
+    setStatus(t("statusLoaded"));
 
     if (scheduleId && scheduleAt) {
       setSchedule(`${t("schedulePrefix")} ${scheduleId} (${scheduleAt})`);
