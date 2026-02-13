@@ -287,8 +287,33 @@
     const key = interval === "year" ? "priceYear" : "priceMonth";
     priceFields.forEach((node) => {
       const value = node.dataset[key] || "";
-      node.textContent = value;
+      renderPriceLabel(node, value);
     });
+  }
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function renderPriceLabel(node, value) {
+    const text = (value || "").trim();
+    if (!text) {
+      node.textContent = "";
+      return;
+    }
+    const slashIndex = text.lastIndexOf("/");
+    if (slashIndex <= 0 || slashIndex === text.length - 1) {
+      node.textContent = text;
+      return;
+    }
+    const main = text.slice(0, slashIndex).trimEnd();
+    const unit = text.slice(slashIndex).trimStart();
+    node.innerHTML = `<span class="plan-price-main">${escapeHtml(main)}</span> <span class="plan-price-unit">${escapeHtml(unit)}</span>`;
   }
 
   function getCurrentInterval() {
