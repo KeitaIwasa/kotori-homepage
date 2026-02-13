@@ -900,8 +900,14 @@ body.pro-page {
 }
 
 .pro-page .pro-hero {
-  padding: 28px 30px;
-  border-radius: 20px;
+  padding: 10px 4px 2px;
+  border-radius: 0;
+}
+
+.pro-page .hero.pro-hero {
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .pro-page .hero-title {
@@ -1043,8 +1049,13 @@ body.pro-page {
 }
 
 .pro-page .plan-card-accent {
-  border-color: rgba(0, 181, 245, 0.55);
-  box-shadow: 0 16px 34px rgba(0, 181, 245, 0.14);
+  border-color: rgba(246, 168, 60, 0.68);
+  box-shadow: 0 16px 34px rgba(255, 107, 0, 0.2);
+}
+
+.pro-page .plan-card-accent:hover {
+  border-color: rgba(255, 107, 0, 0.75);
+  box-shadow: 0 20px 38px rgba(255, 107, 0, 0.26);
 }
 
 .pro-page .plan-card.is-current {
@@ -1137,6 +1148,18 @@ body.pro-page {
   top: 0;
   color: var(--pro-accent);
   font-weight: 800;
+}
+
+.pro-page .pro-notes {
+  margin-top: 26px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.pro-page .pro-notes h2 {
+  margin: 0 0 12px;
 }
 
 .pro-page .error-text {
@@ -1235,7 +1258,7 @@ body.pro-page {
   }
 
   .pro-page .pro-hero {
-    padding: 24px 18px;
+    padding: 8px 2px 0;
   }
 
   .pro-page .hero-title {
