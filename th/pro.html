@@ -13,10 +13,10 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
-<body>
+<body class="pro-page">
   <div class="top-bar-wrap">
     <nav class="top-bar" aria-label="Primary">
       <div class="brand"><a class="brand-name" href="/th/">KOTORI</a></div>
@@ -33,59 +33,78 @@
 
   <div class="page-shell">
     <main>
-      <section class="hero">
-        <h1 class="hero-title">เปรียบเทียบแพ็กเกจ KOTORI</h1>
-        <p class="hero-lead">หน้านี้เชื่อมกับกลุ่ม LINE ของคุณ ใช้สำหรับดูสถานะปัจจุบันและเปลี่ยนเป็น Standard / Pro</p>
+      <section class="hero pro-hero">
+        <h1 class="hero-title">แพ็กเกจที่ขยายตามการเติบโตของทีมคุณ</h1>
+        <p class="hero-lead">สลับระหว่าง Free, Standard และ Pro ได้ทุกเมื่อ ตามการใช้งานของกลุ่ม LINE</p>
+      </section>
 
-        <div class="card status-panel">
+      <section class="card pro-status-panel status-panel" hidden aria-hidden="true">
+        <div class="status-line">
           <p id="statusText">แพ็กเกจปัจจุบัน: กำลังโหลด...</p>
-          <p><strong id="currentPlanValue">-</strong></p>
           <p id="scheduleText"></p>
-          <p id="errorText" class="error-text"></p>
         </div>
-
-        <div class="card">
-          <h2>รอบบิล</h2>
-          <select id="periodSelect" class="lang-select" style="max-width: 220px;">
-            <option value="month">รายเดือน</option>
-            <option value="year">รายปี</option>
-          </select>
-        </div>
+        <p class="current-plan-label">แพ็กเกจที่ใช้งานอยู่</p>
+        <p class="current-plan-value"><strong id="currentPlanValue">-</strong></p>
+        <p id="errorText" class="error-text"></p>
       </section>
 
-      <section class="card">
-        <h2>รายละเอียดแพ็กเกจ</h2>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr><th>รายการ</th><th>Free</th><th>Standard</th><th>Pro</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>จำนวนแปลสูงสุดต่อเดือน</td><td>50</td><td>4,000</td><td>40,000</td></tr>
-              <tr><td>จำนวนภาษาที่ตั้งได้</td><td>3</td><td>3</td><td>5</td></tr>
-              <tr><td>ราคาแบบรายเดือน</td><td>ฟรี</td><td>¥480</td><td>¥4,800</td></tr>
-              <tr><td>ราคาแบบรายปี</td><td>-</td><td>¥4,800</td><td>¥48,000</td></tr>
-              <tr><td>เข้ารหัสประวัติ / เก็บ 7 วัน</td><td>-</td><td>-</td><td>รองรับ</td></tr>
-              <tr><td>ซัพพอร์ตแบบเร่งด่วน</td><td>-</td><td>-</td><td>รองรับ</td></tr>
-            </tbody>
-          </table>
+      <section class="billing-toggle-wrap" aria-label="รอบบิล">
+        <div class="billing-toggle" role="group" aria-label="สลับรอบบิล">
+          <button class="billing-toggle-btn is-active" type="button" data-interval="month" aria-pressed="true">รายเดือน</button>
+          <button class="billing-toggle-btn" type="button" data-interval="year" aria-pressed="false">รายปี</button>
         </div>
+        <select id="periodSelect" class="period-select-hidden" aria-label="รอบบิล">
+          <option value="month" selected>รายเดือน</option>
+          <option value="year">รายปี</option>
+        </select>
       </section>
 
-      <section class="card">
-        <h2>เปลี่ยนแพ็กเกจ</h2>
-        <p>อัปเกรดมีผลทันที ส่วนดาวน์เกรดจะมีผลในรอบต่ออายุถัดไป</p>
-        <div class="plan-grid">
-          <button id="buyStandardBtn" class="primary-btn" type="button">เลือก Standard</button>
-          <button id="buyProBtn" class="primary-btn" type="button">เลือก Pro</button>
-        </div>
+      <section class="pricing-grid" aria-label="รายการแพ็กเกจ">
+        <article class="plan-card" data-plan-card data-plan="free">
+          <p class="plan-tag">Free</p>
+          <h2>เริ่มต้นฟรี</h2>
+          <p class="plan-sub">เหมาะกับการใช้งานเบา ๆ</p>
+          <p class="plan-price-value" data-price-month="¥0 / เดือน" data-price-year="¥0 / ปี">¥0 / เดือน</p>
+          <button class="plan-btn plan-btn-ghost" type="button" disabled aria-disabled="true">คงการตั้งค่าปัจจุบัน</button>
+          <ul class="plan-feature-list">
+            <li>โควตาแปลต่อเดือน 50</li>
+            <li>จำนวนภาษา 3</li>
+            <li>ซัพพอร์ตพื้นฐาน</li>
+          </ul>
+        </article>
+
+        <article class="plan-card" data-plan-card data-plan="standard">
+          <p class="plan-tag">Standard</p>
+          <h2>เหมาะกับการใช้งานประจำ</h2>
+          <p class="plan-sub">สำหรับกลุ่มที่กำลังเติบโต</p>
+          <p class="plan-price-value" data-price-month="¥480 / เดือน" data-price-year="¥4,800 / ปี">¥480 / เดือน</p>
+          <button id="buyStandardBtn" class="plan-btn" type="button">เลือก Standard</button>
+          <ul class="plan-feature-list">
+            <li>โควตาแปลต่อเดือน 4,000</li>
+            <li>จำนวนภาษา 3</li>
+            <li>อัปเกรดมีผลทันที</li>
+          </ul>
+        </article>
+
+        <article class="plan-card plan-card-accent" data-plan-card data-plan="pro">
+          <p class="plan-tag">Pro</p>
+          <h2>รองรับงานปริมาณสูง</h2>
+          <p class="plan-sub">สำหรับงานเชิงธุรกิจและทีมใหญ่</p>
+          <p class="plan-price-value" data-price-month="¥4,800 / เดือน" data-price-year="¥48,000 / ปี">¥4,800 / เดือน</p>
+          <button id="buyProBtn" class="plan-btn" type="button">เลือก Pro</button>
+          <ul class="plan-feature-list">
+            <li>โควตาแปลต่อเดือน 40,000</li>
+            <li>จำนวนภาษา 5</li>
+            <li>ซัพพอร์ตเร่งด่วนและเข้ารหัสประวัติ</li>
+          </ul>
+        </article>
       </section>
 
       <section class="card">
         <h2>หมายเหตุ</h2>
         <ul class="list">
-          <li>ผู้ใช้ Pro ราคาเดิม 380 เยน จะคงราคานี้ได้เฉพาะกรณีต่อเนื่องเท่านั้น</li>
-          <li>หากลดลงไป Standard แล้วกลับมา Pro จะคิดตามราคา Pro ใหม่</li>
+          <li>อัปเกรดมีผลทันที ส่วนดาวน์เกรดมีผลในรอบต่ออายุถัดไป</li>
+          <li>ผู้ใช้ราคาเก่า 380 เยน จะคงราคาเดิมได้เฉพาะเมื่อใช้งานต่อเนื่อง</li>
           <li>แพ็กเกจรายปีจะรีเซ็ตโควตารายเดือนตาม UTC และวัน anchor ของสัญญา</li>
         </ul>
       </section>

@@ -13,10 +13,10 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
-<body>
+<body class="pro-page">
   <div class="top-bar-wrap">
     <nav class="top-bar" aria-label="Primary">
       <div class="brand"><a class="brand-name" href="/zh-tw/">KOTORI</a></div>
@@ -33,60 +33,79 @@
 
   <div class="page-shell">
     <main>
-      <section class="hero">
-        <h1 class="hero-title">KOTORI 方案比較</h1>
-        <p class="hero-lead">此頁面已綁定你的 LINE 群組，可查看目前方案並切換至 Standard / Pro。</p>
+      <section class="hero pro-hero">
+        <h1 class="hero-title">可隨成長擴充的方案</h1>
+        <p class="hero-lead">依照 LINE 群組使用量，隨時在 Free、Standard、Pro 之間切換。</p>
+      </section>
 
-        <div class="card status-panel">
+      <section class="card pro-status-panel status-panel" hidden aria-hidden="true">
+        <div class="status-line">
           <p id="statusText">目前方案：讀取中...</p>
-          <p><strong id="currentPlanValue">-</strong></p>
           <p id="scheduleText"></p>
-          <p id="errorText" class="error-text"></p>
         </div>
-
-        <div class="card">
-          <h2>計費週期</h2>
-          <select id="periodSelect" class="lang-select" style="max-width: 220px;">
-            <option value="month">月繳</option>
-            <option value="year">年繳</option>
-          </select>
-        </div>
+        <p class="current-plan-label">目前啟用方案</p>
+        <p class="current-plan-value"><strong id="currentPlanValue">-</strong></p>
+        <p id="errorText" class="error-text"></p>
       </section>
 
-      <section class="card">
-        <h2>方案內容</h2>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr><th>項目</th><th>Free</th><th>Standard</th><th>Pro</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>每月翻譯上限</td><td>50</td><td>4,000</td><td>40,000</td></tr>
-              <tr><td>語言數</td><td>3</td><td>3</td><td>5</td></tr>
-              <tr><td>月繳價格</td><td>免費</td><td>¥480</td><td>¥4,800</td></tr>
-              <tr><td>年繳價格</td><td>-</td><td>¥4,800</td><td>¥48,000</td></tr>
-              <tr><td>歷史訊息加密 / 7天保存</td><td>-</td><td>-</td><td>支援</td></tr>
-              <tr><td>優先客服</td><td>-</td><td>-</td><td>支援</td></tr>
-            </tbody>
-          </table>
+      <section class="billing-toggle-wrap" aria-label="計費週期">
+        <div class="billing-toggle" role="group" aria-label="計費週期切換">
+          <button class="billing-toggle-btn is-active" type="button" data-interval="month" aria-pressed="true">月繳</button>
+          <button class="billing-toggle-btn" type="button" data-interval="year" aria-pressed="false">年繳</button>
         </div>
+        <select id="periodSelect" class="period-select-hidden" aria-label="計費週期">
+          <option value="month" selected>月繳</option>
+          <option value="year">年繳</option>
+        </select>
       </section>
 
-      <section class="card">
-        <h2>變更方案</h2>
-        <p>升級會立即生效；降級會在下一次續約生效。</p>
-        <div class="plan-grid">
-          <button id="buyStandardBtn" class="primary-btn" type="button">選擇 Standard</button>
-          <button id="buyProBtn" class="primary-btn" type="button">選擇 Pro</button>
-        </div>
+      <section class="pricing-grid" aria-label="方案列表">
+        <article class="plan-card" data-plan-card data-plan="free">
+          <p class="plan-tag">Free</p>
+          <h2>免費開始</h2>
+          <p class="plan-sub">適合輕量使用</p>
+          <p class="plan-price-value" data-price-month="¥0 / 月" data-price-year="¥0 / 年">¥0 / 月</p>
+          <button class="plan-btn plan-btn-ghost" type="button" disabled aria-disabled="true">維持目前設定</button>
+          <ul class="plan-feature-list">
+            <li>每月翻譯上限 50</li>
+            <li>語言數 3</li>
+            <li>基本支援</li>
+          </ul>
+        </article>
+
+        <article class="plan-card" data-plan-card data-plan="standard">
+          <p class="plan-tag">Standard</p>
+          <h2>日常營運首選</h2>
+          <p class="plan-sub">適合成長中的群組</p>
+          <p class="plan-price-value" data-price-month="¥480 / 月" data-price-year="¥4,800 / 年">¥480 / 月</p>
+          <button id="buyStandardBtn" class="plan-btn" type="button">選擇 Standard</button>
+          <ul class="plan-feature-list">
+            <li>每月翻譯上限 4,000</li>
+            <li>語言數 3</li>
+            <li>升級立即生效</li>
+          </ul>
+        </article>
+
+        <article class="plan-card plan-card-accent" data-plan-card data-plan="pro">
+          <p class="plan-tag">Pro</p>
+          <h2>對應高流量需求</h2>
+          <p class="plan-sub">適合大型與商務運用</p>
+          <p class="plan-price-value" data-price-month="¥4,800 / 月" data-price-year="¥48,000 / 年">¥4,800 / 月</p>
+          <button id="buyProBtn" class="plan-btn" type="button">選擇 Pro</button>
+          <ul class="plan-feature-list">
+            <li>每月翻譯上限 40,000</li>
+            <li>語言數 5</li>
+            <li>優先支援與歷史加密</li>
+          </ul>
+        </article>
       </section>
 
       <section class="card">
         <h2>注意事項</h2>
         <ul class="list">
-          <li>舊版 380 日圓 Pro 價格僅在不中斷續約時保留。</li>
-          <li>一旦降級到 Standard，再升回 Pro 會套用新版 Pro 價格。</li>
-          <li>年繳方案也會每月重置翻譯上限（UTC / 契約錨點日）。</li>
+          <li>升級立即生效；降級會於下次續約時生效。</li>
+          <li>舊版 380 日圓使用者僅在不中斷續約時保留舊價。</li>
+          <li>年繳也會每月重置翻譯上限（UTC / 契約 anchor 日）。</li>
         </ul>
       </section>
 

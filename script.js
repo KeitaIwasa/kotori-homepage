@@ -7,7 +7,9 @@
   const buyStandardBtn = document.getElementById("buyStandardBtn");
   const buyProBtn = document.getElementById("buyProBtn");
   const periodSelect = document.getElementById("periodSelect");
+  const intervalButtons = document.querySelectorAll("[data-interval]");
   const contactLink = document.getElementById("contactLink");
+  const statusPanel = document.querySelector(".pro-status-panel");
   const priceFields = document.querySelectorAll("[data-price-month][data-price-year]");
   const planCards = document.querySelectorAll("[data-plan-card]");
 
@@ -141,6 +143,12 @@
     scheduleText.textContent = message || "";
   }
 
+  function setStatusPanelVisible(visible) {
+    if (!statusPanel) return;
+    statusPanel.hidden = !visible;
+    statusPanel.setAttribute("aria-hidden", String(!visible));
+  }
+
   function setButtonsEnabled(enabled) {
     [buyStandardBtn, buyProBtn].forEach((btn) => {
       if (!btn) return;
@@ -164,12 +172,33 @@
   }
 
   function applyIntervalPrice() {
-    const interval = periodSelect ? periodSelect.value : "month";
+    const interval = getCurrentInterval();
     const key = interval === "year" ? "priceYear" : "priceMonth";
     priceFields.forEach((node) => {
       const value = node.dataset[key] || "";
       node.textContent = value;
     });
+  }
+
+  function getCurrentInterval() {
+    const active = document.querySelector("[data-interval].is-active");
+    if (active) {
+      return active.dataset.interval === "year" ? "year" : "month";
+    }
+    return periodSelect ? periodSelect.value : "month";
+  }
+
+  function setIntervalState(interval) {
+    const normalized = interval === "year" ? "year" : "month";
+    intervalButtons.forEach((btn) => {
+      const isActive = btn.dataset.interval === normalized;
+      btn.classList.toggle("is-active", isActive);
+      btn.setAttribute("aria-pressed", String(isActive));
+    });
+    if (periodSelect) {
+      periodSelect.value = normalized;
+    }
+    applyIntervalPrice();
   }
 
   function highlightCurrentPlan(plan) {
@@ -183,10 +212,12 @@
 
   async function fetchStatus() {
     if (!st) {
+      setStatusPanelVisible(false);
       setError(t("noToken"));
       setButtonsEnabled(false);
       return null;
     }
+    setStatusPanelVisible(true);
     try {
       const res = await fetch(buildApiUrl(`/checkout?mode=status&st=${encodeURIComponent(st)}`), {
         method: "GET",
@@ -238,7 +269,7 @@
   }
 
   function selectedTarget(basePlan) {
-    const interval = periodSelect ? periodSelect.value : "month";
+    const interval = getCurrentInterval();
     if (basePlan === "standard") {
       return interval === "year" ? "standard_yearly" : "standard_monthly";
     }
@@ -316,13 +347,18 @@
       buyProBtn.addEventListener("click", () => handleBuyClick("pro"));
     }
     if (periodSelect) {
-      periodSelect.addEventListener("change", applyIntervalPrice);
+      periodSelect.addEventListener("change", () => setIntervalState(periodSelect.value));
     }
+    intervalButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        setIntervalState(btn.dataset.interval || "month");
+      });
+    });
   }
 
   initLangSelector();
   initContactLink();
   initActions();
-  applyIntervalPrice();
+  setIntervalState(getCurrentInterval());
   fetchStatus();
 })();

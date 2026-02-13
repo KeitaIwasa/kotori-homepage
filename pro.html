@@ -38,7 +38,7 @@
         <p class="hero-lead">LINEグループの利用規模に合わせて、Free / Standard / Pro をいつでも切り替えできます。</p>
       </section>
 
-      <section class="card pro-status-panel status-panel">
+      <section class="card pro-status-panel status-panel" hidden aria-hidden="true">
         <div class="status-line">
           <p id="statusText">現在のプラン: 読み込み中...</p>
           <p id="scheduleText"></p>
@@ -48,10 +48,13 @@
         <p id="errorText" class="error-text"></p>
       </section>
 
-      <section class="card pro-interval-panel">
-        <h2>請求サイクル</h2>
-        <select id="periodSelect" class="lang-select period-select" aria-label="請求サイクル">
-          <option value="month">月額</option>
+      <section class="billing-toggle-wrap" aria-label="請求サイクル">
+        <div class="billing-toggle" role="group" aria-label="請求サイクル切替">
+          <button class="billing-toggle-btn is-active" type="button" data-interval="month" aria-pressed="true">月額</button>
+          <button class="billing-toggle-btn" type="button" data-interval="year" aria-pressed="false">年額</button>
+        </div>
+        <select id="periodSelect" class="period-select-hidden" aria-label="請求サイクル">
+          <option value="month" selected>月額</option>
           <option value="year">年額</option>
         </select>
       </section>

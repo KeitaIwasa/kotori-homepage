@@ -13,10 +13,10 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
-<body>
+<body class="pro-page">
   <div class="top-bar-wrap">
     <nav class="top-bar" aria-label="Primary">
       <div class="brand"><a class="brand-name" href="/en/">KOTORI</a></div>
@@ -33,60 +33,79 @@
 
   <div class="page-shell">
     <main>
-      <section class="hero">
-        <h1 class="hero-title">KOTORI Plan Comparison</h1>
-        <p class="hero-lead">This page is linked to your LINE group. Check current status and switch to Standard or Pro.</p>
+      <section class="hero pro-hero">
+        <h1 class="hero-title">Plans That Scale With Your Team</h1>
+        <p class="hero-lead">Switch between Free, Standard, and Pro anytime based on your LINE group traffic.</p>
+      </section>
 
-        <div class="card status-panel">
+      <section class="card pro-status-panel status-panel" hidden aria-hidden="true">
+        <div class="status-line">
           <p id="statusText">Current plan: loading...</p>
-          <p><strong id="currentPlanValue">-</strong></p>
           <p id="scheduleText"></p>
-          <p id="errorText" class="error-text"></p>
         </div>
-
-        <div class="card">
-          <h2>Billing Interval</h2>
-          <select id="periodSelect" class="lang-select" style="max-width: 220px;">
-            <option value="month">Monthly</option>
-            <option value="year">Yearly</option>
-          </select>
-        </div>
+        <p class="current-plan-label">Active Plan</p>
+        <p class="current-plan-value"><strong id="currentPlanValue">-</strong></p>
+        <p id="errorText" class="error-text"></p>
       </section>
 
-      <section class="card">
-        <h2>Plans</h2>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr><th>Item</th><th>Free</th><th>Standard</th><th>Pro</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Monthly translation limit</td><td>50</td><td>4,000</td><td>40,000</td></tr>
-              <tr><td>Language slots</td><td>3</td><td>3</td><td>5</td></tr>
-              <tr><td>Monthly price</td><td>Free</td><td>JPY 480</td><td>JPY 4,800</td></tr>
-              <tr><td>Yearly price</td><td>-</td><td>JPY 4,800</td><td>JPY 48,000</td></tr>
-              <tr><td>Encrypted history / 7-day retention</td><td>-</td><td>-</td><td>Yes</td></tr>
-              <tr><td>Priority support</td><td>-</td><td>-</td><td>Yes</td></tr>
-            </tbody>
-          </table>
+      <section class="billing-toggle-wrap" aria-label="Billing cycle">
+        <div class="billing-toggle" role="group" aria-label="Billing cycle toggle">
+          <button class="billing-toggle-btn is-active" type="button" data-interval="month" aria-pressed="true">Monthly</button>
+          <button class="billing-toggle-btn" type="button" data-interval="year" aria-pressed="false">Yearly</button>
         </div>
+        <select id="periodSelect" class="period-select-hidden" aria-label="Billing cycle">
+          <option value="month" selected>Monthly</option>
+          <option value="year">Yearly</option>
+        </select>
       </section>
 
-      <section class="card">
-        <h2>Change Plan</h2>
-        <p>Upgrades apply immediately. Downgrades are scheduled for your next renewal.</p>
-        <div class="plan-grid">
-          <button id="buyStandardBtn" class="primary-btn" type="button">Choose Standard</button>
-          <button id="buyProBtn" class="primary-btn" type="button">Choose Pro</button>
-        </div>
+      <section class="pricing-grid" aria-label="Plans">
+        <article class="plan-card" data-plan-card data-plan="free">
+          <p class="plan-tag">Free</p>
+          <h2>Get Started</h2>
+          <p class="plan-sub">For light usage</p>
+          <p class="plan-price-value" data-price-month="JPY 0 / month" data-price-year="JPY 0 / year">JPY 0 / month</p>
+          <button class="plan-btn plan-btn-ghost" type="button" disabled aria-disabled="true">Keep Current Setup</button>
+          <ul class="plan-feature-list">
+            <li>Monthly translation limit: 50</li>
+            <li>Language slots: 3</li>
+            <li>Basic support</li>
+          </ul>
+        </article>
+
+        <article class="plan-card" data-plan-card data-plan="standard">
+          <p class="plan-tag">Standard</p>
+          <h2>Built for Daily Use</h2>
+          <p class="plan-sub">For growing groups</p>
+          <p class="plan-price-value" data-price-month="JPY 480 / month" data-price-year="JPY 4,800 / year">JPY 480 / month</p>
+          <button id="buyStandardBtn" class="plan-btn" type="button">Choose Standard</button>
+          <ul class="plan-feature-list">
+            <li>Monthly translation limit: 4,000</li>
+            <li>Language slots: 3</li>
+            <li>Immediate upgrade</li>
+          </ul>
+        </article>
+
+        <article class="plan-card plan-card-accent" data-plan-card data-plan="pro">
+          <p class="plan-tag">Pro</p>
+          <h2>For Heavy Workloads</h2>
+          <p class="plan-sub">For business-scale operations</p>
+          <p class="plan-price-value" data-price-month="JPY 4,800 / month" data-price-year="JPY 48,000 / year">JPY 4,800 / month</p>
+          <button id="buyProBtn" class="plan-btn" type="button">Choose Pro</button>
+          <ul class="plan-feature-list">
+            <li>Monthly translation limit: 40,000</li>
+            <li>Language slots: 5</li>
+            <li>Priority support and encrypted history</li>
+          </ul>
+        </article>
       </section>
 
       <section class="card">
         <h2>Notes</h2>
         <ul class="list">
-          <li>Legacy JPY 380 Pro keeps the old price only while uninterrupted.</li>
-          <li>After switching down to Standard, returning to Pro uses the new Pro price.</li>
-          <li>Monthly limits reset in UTC based on subscription anchor day, even on yearly plans.</li>
+          <li>Upgrades apply immediately. Downgrades are scheduled for the next renewal.</li>
+          <li>Legacy JPY 380 users keep old pricing only while uninterrupted.</li>
+          <li>Monthly limits reset on UTC based on subscription anchor day, even on yearly plans.</li>
         </ul>
       </section>
 
