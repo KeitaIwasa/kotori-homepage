@@ -887,15 +887,6 @@ body.pro-page {
   color: inherit;
 }
 
-.pro-page .lang-select {
-  display: inline-flex;
-  width: 160px;
-  border-color: var(--border);
-  background: #ffffff;
-  color: var(--text);
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
-}
-
 .pro-page .page-shell {
   max-width: 1240px;
   padding-top: 26px;
@@ -989,10 +980,28 @@ body.pro-page {
   transition: background-color 0.16s ease, color 0.16s ease, box-shadow 0.16s ease;
 }
 
+.pro-page .billing-toggle-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #0f5b87;
+  background: rgba(0, 181, 245, 0.14);
+  vertical-align: middle;
+}
+
 .pro-page .billing-toggle-btn.is-active {
   background: linear-gradient(135deg, var(--accent), var(--accent-strong));
   color: #ffffff;
   box-shadow: 0 8px 16px rgba(255, 107, 0, 0.26);
+}
+
+.pro-page .billing-toggle-btn.is-active .billing-toggle-badge {
+  color: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.22);
 }
 
 .pro-page .period-select-hidden {
