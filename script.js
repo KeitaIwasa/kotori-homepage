@@ -7,12 +7,18 @@
   const translationCountValue = document.getElementById("translationCountValue");
   const buyStandardBtn = document.getElementById("buyStandardBtn");
   const buyProBtn = document.getElementById("buyProBtn");
+  const buyFreeBtn = document.querySelector('[data-plan-card][data-plan="free"] .plan-btn');
   const periodSelect = document.getElementById("periodSelect");
   const intervalButtons = document.querySelectorAll("[data-interval]");
   const contactLink = document.getElementById("contactLink");
   const statusPanel = document.querySelector(".pro-status-panel");
   const priceFields = document.querySelectorAll("[data-price-month][data-price-year]");
   const planCards = document.querySelectorAll("[data-plan-card]");
+  const planButtons = {
+    free: buyFreeBtn,
+    standard: buyStandardBtn,
+    pro: buyProBtn,
+  };
 
   const params = new URLSearchParams(window.location.search);
   const st = (params.get("st") || "").trim();
@@ -49,6 +55,13 @@
       statusLoaded: "契約状態を取得しました。",
       schedulePrefix: "予約中の変更:",
       priorityContact: "お問い合わせ",
+      continueCurrent: "現在の利用を継続",
+      selectStandard: "Standardを選択",
+      selectPro: "Proを選択",
+      downgradeToStandard: "Standardへダウングレード",
+      downgradeToFree: "Freeへダウングレード",
+      portalRedirecting: "ダウングレード手続きページへ移動します。",
+      portalUnavailable: "ダウングレード手続きページの作成に失敗しました。時間をおいて再試行してください。",
     },
     en: {
       noToken: "Open this page from the LINE bot. Group token is missing.",
@@ -65,6 +78,13 @@
       statusLoaded: "Subscription status loaded.",
       schedulePrefix: "Scheduled change:",
       priorityContact: "Contact",
+      continueCurrent: "Keep Current Setup",
+      selectStandard: "Choose Standard",
+      selectPro: "Choose Pro",
+      downgradeToStandard: "Downgrade to Standard",
+      downgradeToFree: "Downgrade to Free",
+      portalRedirecting: "Redirecting to downgrade flow...",
+      portalUnavailable: "Failed to open the downgrade flow. Please try again later.",
     },
     "zh-TW": {
       noToken: "請從 LINE 機器人的連結開啟此頁面，找不到群組憑證。",
@@ -81,6 +101,13 @@
       statusLoaded: "已取得訂閱狀態。",
       schedulePrefix: "預約變更:",
       priorityContact: "聯絡我們",
+      continueCurrent: "維持目前設定",
+      selectStandard: "選擇 Standard",
+      selectPro: "選擇 Pro",
+      downgradeToStandard: "降級至 Standard",
+      downgradeToFree: "降級至 Free",
+      portalRedirecting: "正在前往降級流程...",
+      portalUnavailable: "無法開啟降級流程，請稍後再試。",
     },
     th: {
       noToken: "กรุณาเปิดหน้านี้จากลิงก์ใน LINE bot ไม่พบโทเค็นกลุ่ม",
@@ -97,6 +124,13 @@
       statusLoaded: "โหลดสถานะการสมัครแล้ว",
       schedulePrefix: "การเปลี่ยนที่ตั้งเวลาไว้:",
       priorityContact: "ติดต่อเรา",
+      continueCurrent: "คงการตั้งค่าปัจจุบัน",
+      selectStandard: "เลือก Standard",
+      selectPro: "เลือก Pro",
+      downgradeToStandard: "ดาวน์เกรดเป็น Standard",
+      downgradeToFree: "ดาวน์เกรดเป็น Free",
+      portalRedirecting: "กำลังไปยังขั้นตอนดาวน์เกรด...",
+      portalUnavailable: "ไม่สามารถเปิดหน้าดาวน์เกรดได้ กรุณาลองใหม่ภายหลัง",
     },
   };
 
@@ -262,10 +296,18 @@
   }
 
   function setButtonsEnabled(enabled) {
-    [buyStandardBtn, buyProBtn].forEach((btn) => {
+    Object.values(planButtons).forEach((btn) => {
       if (!btn) return;
       btn.disabled = !enabled;
       btn.setAttribute("aria-disabled", String(!enabled));
+    });
+  }
+
+  function setButtonsVisible(visible) {
+    Object.values(planButtons).forEach((btn) => {
+      if (!btn) return;
+      btn.hidden = !visible;
+      btn.setAttribute("aria-hidden", String(!visible));
     });
   }
 
@@ -274,6 +316,13 @@
     if (value === "standard") return "standard";
     if (value === "pro") return "pro";
     return "free";
+  }
+
+  function planRank(plan) {
+    const normalized = normalizePlan(plan);
+    if (normalized === "standard") return 1;
+    if (normalized === "pro") return 2;
+    return 0;
   }
 
   function displayPlan(plan) {
@@ -357,11 +406,13 @@
 
   async function fetchStatus() {
     if (!st) {
+      setButtonsVisible(false);
       setStatusPanelVisible(false);
       setError(t("noToken"));
       setButtonsEnabled(false);
       return null;
     }
+    setButtonsVisible(true);
     setStatusPanelVisible(true);
     try {
       const res = await fetch(buildApiUrl(`/checkout?mode=status&st=${encodeURIComponent(st)}`), {
@@ -407,13 +458,51 @@
       setSchedule("");
     }
 
-    if (buyStandardBtn) {
-      buyStandardBtn.dataset.currentPlan = effectivePlan;
-    }
-    if (buyProBtn) {
-      buyProBtn.dataset.currentPlan = effectivePlan;
-    }
+    Object.values(planButtons).forEach((btn) => {
+      if (!btn) return;
+      btn.dataset.currentPlan = effectivePlan;
+    });
+    applyPlanButtonStates(effectivePlan);
     highlightCurrentPlan(effectivePlan);
+  }
+
+  function setPlanButtonState(planKey, state) {
+    const button = planButtons[planKey];
+    if (!button) return;
+    button.disabled = !!state.disabled;
+    button.setAttribute("aria-disabled", String(!!state.disabled));
+    button.textContent = state.label || "";
+    button.dataset.action = state.action || "none";
+  }
+
+  function applyPlanButtonStates(currentPlan) {
+    const current = normalizePlan(currentPlan);
+    const currentRank = planRank(current);
+    ["free", "standard", "pro"].forEach((planKey) => {
+      const rank = planRank(planKey);
+      if (rank === currentRank) {
+        setPlanButtonState(planKey, {
+          disabled: true,
+          label: t("continueCurrent"),
+          action: "none",
+        });
+        return;
+      }
+      if (rank < currentRank) {
+        const isFree = planKey === "free";
+        setPlanButtonState(planKey, {
+          disabled: false,
+          label: isFree ? t("downgradeToFree") : t("downgradeToStandard"),
+          action: isFree ? "portal" : "start",
+        });
+        return;
+      }
+      setPlanButtonState(planKey, {
+        disabled: false,
+        label: planKey === "standard" ? t("selectStandard") : t("selectPro"),
+        action: "start",
+      });
+    });
   }
 
   function selectedTarget(basePlan) {
@@ -465,9 +554,56 @@
     }
   }
 
+  async function startPortalFlow() {
+    if (!st) {
+      setError(t("noToken"));
+      return;
+    }
+    setError("");
+    setStatus(t("portalRedirecting"));
+    setButtonsEnabled(false);
+    try {
+      const url = buildApiUrl(`/checkout?mode=portal&st=${encodeURIComponent(st)}`);
+      const res = await fetch(url, { method: "GET" });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        if (res.status === 401) {
+          setError(t("invalidToken"));
+        } else {
+          setError(data.message || t("portalUnavailable"));
+        }
+        await fetchStatus();
+        return;
+      }
+      if (data.result === "portal_created" && data.redirectUrl) {
+        window.location.href = data.redirectUrl;
+        return;
+      }
+      setError(t("portalUnavailable"));
+      await fetchStatus();
+    } catch (_err) {
+      setError(t("portalUnavailable"));
+      await fetchStatus();
+    }
+  }
+
   function handleBuyClick(planKey) {
     const target = selectedTarget(planKey);
     startChange(target);
+  }
+
+  function handlePlanClick(planKey) {
+    const button = planButtons[planKey];
+    const action = button?.dataset.action || "none";
+    if (action === "none") {
+      setStatus(t("alreadyCurrent"));
+      return;
+    }
+    if (action === "portal") {
+      startPortalFlow();
+      return;
+    }
+    handleBuyClick(planKey);
   }
 
   function initLangSelector() {
@@ -490,11 +626,17 @@
   }
 
   function initActions() {
+    if (buyFreeBtn) {
+      buyFreeBtn.dataset.action = "none";
+    }
+    if (buyFreeBtn) {
+      buyFreeBtn.addEventListener("click", () => handlePlanClick("free"));
+    }
     if (buyStandardBtn) {
-      buyStandardBtn.addEventListener("click", () => handleBuyClick("standard"));
+      buyStandardBtn.addEventListener("click", () => handlePlanClick("standard"));
     }
     if (buyProBtn) {
-      buyProBtn.addEventListener("click", () => handleBuyClick("pro"));
+      buyProBtn.addEventListener("click", () => handlePlanClick("pro"));
     }
     if (periodSelect) {
       periodSelect.addEventListener("change", () => setIntervalState(periodSelect.value));
