@@ -37,6 +37,12 @@
       submitSending: "送信中...",
       success: "お問い合わせを送信しました。通常1〜2営業日以内にご返信します。",
       invalid: "入力内容をご確認ください。",
+      emailRequired: "メールアドレスを入力してください。",
+      emailInvalid: "メールアドレスの形式が正しくありません。",
+      emailTooLong: "メールアドレスは254文字以内で入力してください。",
+      messageRequired: "お問い合わせ内容を入力してください。",
+      messageTooShort: "お問い合わせ内容は5文字以上で入力してください。",
+      messageTooLong: "お問い合わせ内容は2000文字以内で入力してください。",
       tooMany: "短時間に送信が集中しています。しばらく待ってから再度お試しください。",
       serverError: "送信に失敗しました。時間をおいて再度お試しください。",
     },
@@ -45,6 +51,12 @@
       submitSending: "Sending...",
       success: "Your inquiry has been sent. We usually reply within 1-2 business days.",
       invalid: "Please check your input.",
+      emailRequired: "Please enter your email address.",
+      emailInvalid: "Please enter a valid email address.",
+      emailTooLong: "Email address must be 254 characters or fewer.",
+      messageRequired: "Please enter your message.",
+      messageTooShort: "Message must be at least 5 characters.",
+      messageTooLong: "Message must be 2000 characters or fewer.",
       tooMany: "Too many requests in a short time. Please try again later.",
       serverError: "Failed to send your inquiry. Please try again later.",
     },
@@ -53,6 +65,12 @@
       submitSending: "傳送中...",
       success: "您的詢問已送出。我們通常會在 1-2 個工作天內回覆。",
       invalid: "請確認輸入內容。",
+      emailRequired: "請輸入電子郵件。",
+      emailInvalid: "電子郵件格式不正確。",
+      emailTooLong: "電子郵件請在 254 個字元以內。",
+      messageRequired: "請輸入詢問內容。",
+      messageTooShort: "詢問內容至少需 5 個字元。",
+      messageTooLong: "詢問內容請在 2000 個字元以內。",
       tooMany: "短時間內送出過於頻繁，請稍後再試。",
       serverError: "送出失敗，請稍後再試。",
     },
@@ -61,6 +79,12 @@
       submitSending: "กำลังส่ง...",
       success: "ส่งคำถามเรียบร้อยแล้ว โดยปกติเราจะตอบกลับภายใน 1-2 วันทำการ",
       invalid: "กรุณาตรวจสอบข้อมูลที่กรอก",
+      emailRequired: "กรุณากรอกอีเมล",
+      emailInvalid: "รูปแบบอีเมลไม่ถูกต้อง",
+      emailTooLong: "อีเมลต้องมีความยาวไม่เกิน 254 ตัวอักษร",
+      messageRequired: "กรุณากรอกรายละเอียด",
+      messageTooShort: "รายละเอียดต้องมีอย่างน้อย 5 ตัวอักษร",
+      messageTooLong: "รายละเอียดต้องมีความยาวไม่เกิน 2000 ตัวอักษร",
       tooMany: "มีการส่งถี่เกินไปในช่วงสั้น ๆ กรุณาลองใหม่อีกครั้งภายหลัง",
       serverError: "ส่งไม่สำเร็จ กรุณาลองใหม่อีกครั้งภายหลัง",
     },
@@ -108,6 +132,40 @@
     const localeText = getLocaleText(currentLang);
     submitButton.disabled = submitting;
     submitButton.textContent = submitting ? localeText.submitSending : localeText.submitDefault;
+  }
+
+  function isValidEmailForApi(email) {
+    const atIndex = email.lastIndexOf("@");
+    if (atIndex <= 0 || atIndex !== email.indexOf("@")) return false;
+    const local = email.slice(0, atIndex);
+    const domain = email.slice(atIndex + 1);
+    if (!local || !domain) return false;
+    if (domain.startsWith(".") || domain.endsWith(".")) return false;
+    if (!domain.includes(".")) return false;
+    if (/\s/.test(email)) return false;
+    return true;
+  }
+
+  function validateContactInput(email, message, localeText) {
+    if (!email) {
+      return localeText.emailRequired;
+    }
+    if (email.length > 254) {
+      return localeText.emailTooLong;
+    }
+    if (!isValidEmailForApi(email)) {
+      return localeText.emailInvalid;
+    }
+    if (!message) {
+      return localeText.messageRequired;
+    }
+    if (message.length < 5) {
+      return localeText.messageTooShort;
+    }
+    if (message.length > 2000) {
+      return localeText.messageTooLong;
+    }
+    return null;
   }
 
   function navigateToLang(lang) {
@@ -216,8 +274,9 @@
     const message = messageInput.value.trim();
     const website = honeypotInput ? honeypotInput.value : "";
 
-    if (!email || !message) {
-      setStatus("error", localeText.invalid);
+    const validationError = validateContactInput(email, message, localeText);
+    if (validationError) {
+      setStatus("error", validationError);
       return;
     }
 
