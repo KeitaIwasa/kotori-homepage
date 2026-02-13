@@ -15,6 +15,8 @@
   }
 
   const params = new URLSearchParams(window.location.search);
+  const supportToken = (params.get("st") || "").trim();
+  const apiBaseParam = (params.get("api_base") || params.get("apiBase") || "").trim();
   const flagPaths = {
     ja: "/assets/flags/jp.svg",
     en: "/assets/flags/gb.svg",
@@ -108,8 +110,7 @@
   }
 
   function resolveApiBase() {
-    const override = params.get("api_base") || params.get("apiBase");
-    const base = (override || KOTORI_API_BASE || "").trim();
+    const base = (apiBaseParam || KOTORI_API_BASE || "").trim();
     return base.replace(/\/+$/, "");
   }
 
@@ -171,7 +172,14 @@
   function navigateToLang(lang) {
     const targetPath = langPaths[lang] || "/contact.html";
     if (window.location.pathname !== targetPath) {
-      window.location.href = new URL(targetPath, window.location.origin).toString();
+      const target = new URL(targetPath, window.location.origin);
+      if (supportToken) {
+        target.searchParams.set("st", supportToken);
+      }
+      if (apiBaseParam) {
+        target.searchParams.set("api_base", apiBaseParam);
+      }
+      window.location.href = target.toString();
     }
   }
 
@@ -294,6 +302,7 @@
           message,
           locale: currentLang,
           website,
+          st: supportToken,
         }),
       });
 
