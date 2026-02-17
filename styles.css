@@ -1556,40 +1556,84 @@ body.pro-page {
   border-bottom-color: rgba(246, 168, 60, 0.4) !important;
 }
 
-.blog-article-cta {
-  margin-top: 32px;
-  padding: 22px 24px;
+.blog-inline-cta {
+  margin-top: 24px;
+  padding: 18px 20px;
   background: var(--panel-strong);
-  border-radius: 14px;
   border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.blog-inline-cta a,
+.blog-inline-cta a:hover {
+  border-bottom: none;
+}
+
+.blog-inline-cta-note {
+  margin: 0 !important;
+  font-size: 14px !important;
+  color: var(--muted) !important;
+}
+
+.blog-article-cta {
+  margin-top: 36px;
+  padding: 32px 24px 28px;
+  background: linear-gradient(135deg, rgba(246, 168, 60, 0.08), rgba(255, 107, 0, 0.05));
+  border-radius: 16px;
+  border: 1px solid rgba(246, 168, 60, 0.25);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.blog-article-cta a,
+.blog-article-cta a:hover {
+  border-bottom: none;
+}
+
+.blog-cta-heading {
+  margin: 0 0 2px !important;
+  font-size: 19px !important;
+  font-weight: 800 !important;
+  color: var(--text) !important;
+}
+
+.blog-cta-sub {
+  margin: 0 0 14px !important;
+  font-size: 14px !important;
+  color: var(--muted) !important;
+}
+
+.blog-article .blog-back-link {
+  margin: 32px 0 0;
   text-align: center;
 }
 
-.blog-article-cta .cta-note {
-  margin-top: 10px;
-}
-
-.blog-back-link {
-  margin: 28px 0 0;
-  text-align: center;
+.blog-back-link a,
+.blog-back-link a:hover {
+  border-bottom: none;
 }
 
 .blog-back-link a {
-  color: var(--accent-strong);
+  color: var(--muted);
   text-decoration: none;
-  font-weight: 700;
-  border-bottom: none;
-  padding: 8px 20px;
-  border-radius: 8px;
-  background: var(--panel-strong);
-  border: 1px solid var(--border);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 0;
+  background: none;
+  border: none;
   display: inline-block;
-  transition: background 0.15s ease;
+  transition: color 0.15s ease;
 }
 
 .blog-back-link a:hover {
-  text-decoration: none;
-  background: rgba(246, 168, 60, 0.08);
+  color: var(--accent-strong);
 }
 
 @media (max-width: 640px) {
