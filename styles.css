@@ -922,12 +922,9 @@ body.pro-page {
   max-width: 760px;
 }
 
-.blog-page .blog-hero {
+.blog-page .hero {
   padding: 10px 4px 2px;
   border-radius: 0;
-}
-
-.blog-page .hero.blog-hero {
   background: transparent;
   border: none;
   box-shadow: none;
