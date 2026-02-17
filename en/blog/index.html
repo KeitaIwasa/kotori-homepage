@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      var p = window.location.pathname;
+      if (/\/index\.html$/i.test(p)) {
+        var target = p.replace(/index\.html$/i, "");
+        if (!target.endsWith("/")) target += "/";
+        window.location.replace(target + window.location.search + window.location.hash);
+      }
+    })();
+  </script>
+  <title>Blog | KOTORI</title>
+  <meta name="description" content="Official KOTORI blog with practical tips for LINE group translation and multilingual communication." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://kotori-ai.com/en/blog/" />
+  <link rel="alternate" hreflang="ja" href="https://kotori-ai.com/blog/" />
+  <link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/blog/" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/blog/" />
+  <link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/blog/" />
+  <link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/blog/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="KOTORI" />
+  <meta property="og:title" content="Blog | KOTORI" />
+  <meta property="og:description" content="Official KOTORI blog with practical tips for LINE group translation and multilingual communication." />
+  <meta property="og:url" content="https://kotori-ai.com/en/blog/" />
+  <meta property="og:image" content="https://kotori-ai.com/assets/ogp.png" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="ja_JP" />
+  <meta property="og:locale:alternate" content="zh_TW" />
+  <meta property="og:locale:alternate" content="th_TH" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blog | KOTORI" />
+  <meta name="twitter:description" content="Official KOTORI blog with practical tips for LINE group translation and multilingual communication." />
+  <meta name="twitter:image" content="https://kotori-ai.com/assets/ogp.png" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "CollectionPage",
+          "@id": "https://kotori-ai.com/en/blog/#collection",
+          "url": "https://kotori-ai.com/en/blog/",
+          "name": "KOTORI Blog",
+          "description": "Official KOTORI blog",
+          "inLanguage": "en",
+          "hasPart": [
+            {
+              "@id": "https://kotori-ai.com/en/blog/line-group-translation-guide.html#article"
+            }
+          ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://kotori-ai.com/en/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://kotori-ai.com/en/blog/"
+            }
+          ]
+        }
+      ]
+    }
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="top-bar-wrap">
+    <nav class="top-bar" aria-label="Primary">
+      <div class="brand">
+        <a class="brand-name" href="/en/">KOTORI</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="page-shell">
+    <main>
+      <section class="hero">
+        <h1 class="hero-title">KOTORI Blog</h1>
+        <p class="hero-lead">Practical guides for running multilingual communication in LINE groups with KOTORI.</p>
+      </section>
+
+      <section class="card">
+        <div class="blog-list-grid">
+          <article class="blog-card">
+            <p class="blog-card-category">Guide</p>
+            <h2><a href="/en/blog/line-group-translation-guide.html">How to Start LINE Group Translation (Coming Soon)</a></h2>
+            <p class="blog-card-excerpt">This is a placeholder page before the full article is published.</p>
+            <dl class="blog-meta-list">
+              <div><dt>Published</dt><dd>2026-02-17</dd></div>
+              <div><dt>Updated</dt><dd>2026-02-17</dd></div>
+              <div><dt>Author</dt><dd>KOTORI Editorial Team</dd></div>
+            </dl>
+            <a class="primary-btn blog-readmore" href="/en/blog/line-group-translation-guide.html">Read article</a>
+          </article>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <div class="footer-links">
+          <a href="/en/">Home</a>
+          <a href="/en/pro.html">Plan comparison</a>
+          <a href="/docs/terms-en.html">Terms of Service</a>
+          <a href="/docs/privacy-en.html">Privacy Policy</a>
+          <a href="/en/contact.html">Contact</a>
+        </div>
+        <p class="footer-copy">© KOTORI</p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

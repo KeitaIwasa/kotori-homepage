@@ -221,4 +221,85 @@
     <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/docs/consumer-th.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/docs/consumer-ja.html" />
   </url>
+
+  <url>
+    <loc>https://kotori-ai.com/blog/</loc>
+    <lastmod>2026-02-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/blog/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/blog/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/blog/" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/blog/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/blog/" />
+  </url>
+  <url>
+    <loc>https://kotori-ai.com/en/blog/</loc>
+    <lastmod>2026-02-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/blog/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/blog/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/blog/" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/blog/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/blog/" />
+  </url>
+  <url>
+    <loc>https://kotori-ai.com/zh-tw/blog/</loc>
+    <lastmod>2026-02-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/blog/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/blog/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/blog/" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/blog/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/blog/" />
+  </url>
+  <url>
+    <loc>https://kotori-ai.com/th/blog/</loc>
+    <lastmod>2026-02-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/blog/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/blog/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/blog/" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/blog/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/blog/" />
+  </url>
+
+  <url>
+    <loc>https://kotori-ai.com/blog/line-group-translation-guide.html</loc>
+    <lastmod>2026-02-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/blog/line-group-translation-guide.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/blog/line-group-translation-guide.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/blog/line-group-translation-guide.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/blog/line-group-translation-guide.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/blog/line-group-translation-guide.html" />
+  </url>
+  <url>
+    <loc>https://kotori-ai.com/en/blog/line-group-translation-guide.html</loc>
+    <lastmod>2026-02-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/blog/line-group-translation-guide.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/blog/line-group-translation-guide.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/blog/line-group-translation-guide.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/blog/line-group-translation-guide.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/blog/line-group-translation-guide.html" />
+  </url>
+  <url>
+    <loc>https://kotori-ai.com/zh-tw/blog/line-group-translation-guide.html</loc>
+    <lastmod>2026-02-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/blog/line-group-translation-guide.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/blog/line-group-translation-guide.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/blog/line-group-translation-guide.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/blog/line-group-translation-guide.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/blog/line-group-translation-guide.html" />
+  </url>
+  <url>
+    <loc>https://kotori-ai.com/th/blog/line-group-translation-guide.html</loc>
+    <lastmod>2026-02-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/blog/line-group-translation-guide.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/blog/line-group-translation-guide.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/blog/line-group-translation-guide.html" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/blog/line-group-translation-guide.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/blog/line-group-translation-guide.html" />
+  </url>
+
+  <url>
+    <loc>https://kotori-ai.com/blog/line-group-translation.html</loc>
+    <lastmod>2026-02-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/blog/line-group-translation.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/blog/line-group-translation.html" />
+  </url>
 </urlset>
