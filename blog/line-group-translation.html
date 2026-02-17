@@ -10,6 +10,7 @@
   <link rel="alternate" hreflang="ja" href="https://kotori-ai.com/blog/line-group-translation.html" />
   <link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/blog/line-group-translation.html" />
   <link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/blog/line-group-translation.html" />
+  <link rel="alternate" hreflang="th" href="https://kotori-ai.com/th/blog/line-group-translation.html" />
   <link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/blog/line-group-translation.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="KOTORI" />
@@ -20,6 +21,7 @@
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:locale:alternate" content="en_US" />
   <meta property="og:locale:alternate" content="zh_TW" />
+  <meta property="og:locale:alternate" content="th_TH" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="LINEグループ翻訳のやり方｜LINE通訳と多言語ボット比較" />
   <meta name="twitter:description" content="LINEグループを自動翻訳する方法を解説。無料のLINE通訳の使い方・注意点、公式アカウントの同時参加制限、多言語グループ向け翻訳ボット（KOTORI）の導入手順と料金プランをまとめました。" />
@@ -62,6 +64,14 @@
     <nav class="top-bar" aria-label="Primary">
       <div class="brand">
         <a class="brand-name" href="/">KOTORI</a>
+      </div>
+      <div class="lang-picker" aria-label="Language selector">
+        <select id="langSelect" class="lang-select">
+          <option value="ja">日本語</option>
+          <option value="en">English</option>
+          <option value="zh-TW">繁體中文</option>
+          <option value="th">ไทย</option>
+        </select>
       </div>
     </nav>
   </div>
@@ -295,5 +305,6 @@
       </footer>
     </main>
   </div>
+  <script src="/blog.js"></script>
 </body>
 </html>
