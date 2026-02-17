@@ -922,6 +922,29 @@ body.pro-page {
   max-width: 760px;
 }
 
+.blog-page .blog-hero {
+  padding: 10px 4px 2px;
+  border-radius: 0;
+}
+
+.blog-page .hero.blog-hero {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.blog-page .hero-title {
+  margin-bottom: 10px;
+  color: var(--text);
+  font-size: clamp(24px, 4vw, 40px);
+  letter-spacing: 0.02em;
+}
+
+.blog-page .hero-lead {
+  color: var(--muted);
+  max-width: 760px;
+}
+
 .pro-page .pro-status-panel {
   display: grid;
   gap: 10px;
@@ -1277,6 +1300,10 @@ body.pro-page {
   }
 
   .pro-page .hero-title {
+    font-size: 34px;
+  }
+
+  .blog-page .hero-title {
     font-size: 34px;
   }
 
