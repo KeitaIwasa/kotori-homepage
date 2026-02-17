@@ -301,6 +301,7 @@
     <lastmod>2026-02-17</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/blog/line-group-translation.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/blog/line-group-translation.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/blog/line-group-translation.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/blog/line-group-translation.html" />
   </url>
   <url>
@@ -308,6 +309,15 @@
     <lastmod>2026-02-17</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/blog/line-group-translation.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/blog/line-group-translation.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/blog/line-group-translation.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/blog/line-group-translation.html" />
+  </url>
+  <url>
+    <loc>https://kotori-ai.com/zh-tw/blog/line-group-translation.html</loc>
+    <lastmod>2026-02-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kotori-ai.com/blog/line-group-translation.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kotori-ai.com/en/blog/line-group-translation.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kotori-ai.com/zh-tw/blog/line-group-translation.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kotori-ai.com/blog/line-group-translation.html" />
   </url>
 </urlset>
