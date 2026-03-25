@@ -165,8 +165,8 @@
   let customTriggerEl;
   let customTriggerFlagEl;
   let customTriggerTextEl;
-  const START_WARMUP_TTL_MS = 15000;
-  const startWarmupCache = new Map();
+  const PREPARE_WARMUP_TTL_MS = 15000;
+  const prepareWarmupCache = new Map();
 
   function t(key) {
     const table = MESSAGES[currentLang] || MESSAGES.ja;
@@ -230,6 +230,16 @@
     addHintLink("preconnect", "https://billing.stripe.com");
   }
 
+  function createPrepareRequest(target) {
+    const url = buildApiUrl(
+      `/checkout?mode=prepare&st=${encodeURIComponent(st)}&cs=${encodeURIComponent(cs)}&target=${encodeURIComponent(target)}`
+    );
+    return fetch(url, { method: "GET" }).then(async (res) => {
+      const data = await res.json().catch(() => ({}));
+      return { res, data };
+    }).catch(() => null);
+  }
+
   function createStartRequest(target) {
     const url = buildApiUrl(
       `/checkout?mode=start&st=${encodeURIComponent(st)}&cs=${encodeURIComponent(cs)}&target=${encodeURIComponent(target)}`
@@ -240,7 +250,7 @@
     });
   }
 
-  function maybeWarmupStart(planKey) {
+  function maybeWarmupPrepare(planKey) {
     if (!st || !cs) return;
     const button = planButtons[planKey];
     if (!button) return;
@@ -248,20 +258,18 @@
 
     const target = selectedTarget(planKey);
     const now = Date.now();
-    const cached = startWarmupCache.get(target);
-    if (cached && now - cached.startedAt < START_WARMUP_TTL_MS) {
+    const cached = prepareWarmupCache.get(target);
+    if (cached && now - cached.startedAt < PREPARE_WARMUP_TTL_MS) {
       return;
     }
-    startWarmupCache.set(target, { startedAt: now, promise: createStartRequest(target) });
+    prepareWarmupCache.set(target, { startedAt: now, promise: createPrepareRequest(target) });
   }
 
-  function consumeStartRequest(target) {
-    const cached = startWarmupCache.get(target);
-    if (cached && Date.now() - cached.startedAt < START_WARMUP_TTL_MS) {
-      startWarmupCache.delete(target);
-      return cached.promise;
+  function consumePrepareRequest(target) {
+    const cached = prepareWarmupCache.get(target);
+    if (cached && Date.now() - cached.startedAt < PREPARE_WARMUP_TTL_MS) {
+      prepareWarmupCache.delete(target);
     }
-    return createStartRequest(target);
   }
 
   function toggleLangOptions(forceOpen) {
@@ -651,7 +659,8 @@
     setError("");
     setStatus(t("changing"));
     try {
-      const { res, data } = await consumeStartRequest(target);
+      consumePrepareRequest(target);
+      const { res, data } = await createStartRequest(target);
       if (!res.ok) {
         setOperationLoading(false);
         if (res.status === 401) {
@@ -672,11 +681,7 @@
         window.location.href = data.redirectUrl;
         return;
       }
-      if (result === "changed_immediately") {
-        setStatus(t("changedImmediately"));
-      } else if (result === "scheduled") {
-        setStatus(t("scheduled"));
-      } else if (result === "already_current") {
+      if (result === "already_current") {
         setStatus(t("alreadyCurrent"));
       }
       await fetchStatus();
@@ -789,15 +794,15 @@
     }
     if (buyStandardBtn) {
       buyStandardBtn.addEventListener("click", () => handlePlanClick("standard"));
-      buyStandardBtn.addEventListener("pointerenter", () => maybeWarmupStart("standard"), { passive: true });
-      buyStandardBtn.addEventListener("focus", () => maybeWarmupStart("standard"), { passive: true });
-      buyStandardBtn.addEventListener("touchstart", () => maybeWarmupStart("standard"), { passive: true });
+      buyStandardBtn.addEventListener("pointerenter", () => maybeWarmupPrepare("standard"), { passive: true });
+      buyStandardBtn.addEventListener("focus", () => maybeWarmupPrepare("standard"), { passive: true });
+      buyStandardBtn.addEventListener("touchstart", () => maybeWarmupPrepare("standard"), { passive: true });
     }
     if (buyProBtn) {
       buyProBtn.addEventListener("click", () => handlePlanClick("pro"));
-      buyProBtn.addEventListener("pointerenter", () => maybeWarmupStart("pro"), { passive: true });
-      buyProBtn.addEventListener("focus", () => maybeWarmupStart("pro"), { passive: true });
-      buyProBtn.addEventListener("touchstart", () => maybeWarmupStart("pro"), { passive: true });
+      buyProBtn.addEventListener("pointerenter", () => maybeWarmupPrepare("pro"), { passive: true });
+      buyProBtn.addEventListener("focus", () => maybeWarmupPrepare("pro"), { passive: true });
+      buyProBtn.addEventListener("touchstart", () => maybeWarmupPrepare("pro"), { passive: true });
     }
     if (periodSelect) {
       periodSelect.addEventListener("change", () => setIntervalState(periodSelect.value));
