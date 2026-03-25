@@ -22,7 +22,9 @@
 
   const params = new URLSearchParams(window.location.search);
   const st = (params.get("st") || "").trim();
+  const cs = (params.get("cs") || "").trim();
   const apiBaseParam = (params.get("api_base") || params.get("apiBase") || "").trim();
+  const pageError = (params.get("error") || "").trim();
   const flagPaths = {
     ja: "/assets/flags/jp.svg",
     en: "/assets/flags/gb.svg",
@@ -43,6 +45,9 @@
     ja: {
       noToken: "LINEボットからアクセスしてください。グループ情報トークンが見つかりません。",
       invalidToken: "トークンが無効または期限切れです。LINEボットの案内リンクを開き直してください。",
+      loginRequired: "LINEログインで本人確認しています。",
+      ownerOnly: "このサブスクリプションは支払い者本人のみ変更できます。",
+      notMember: "このLINEグループのメンバーのみアクセスできます。",
       unknown: "状態の取得に失敗しました。時間をおいて再試行してください。",
       changing: "処理中です...",
       checkoutCreated: "決済ページへ移動します。",
@@ -62,10 +67,14 @@
       downgradeToFree: "Freeへダウングレード",
       portalRedirecting: "ダウングレード手続きページへ移動します。",
       portalUnavailable: "ダウングレード手続きページの作成に失敗しました。時間をおいて再試行してください。",
+      authHint: "プラン変更の前にLINEログインで本人確認します。",
     },
     en: {
       noToken: "Open this page from the LINE bot. Group token is missing.",
       invalidToken: "Token is invalid or expired. Please reopen the link from the LINE bot.",
+      loginRequired: "Verifying your identity with LINE Login.",
+      ownerOnly: "Only the billing owner can manage this subscription.",
+      notMember: "Only members of this LINE group can access this page.",
       unknown: "Failed to fetch subscription status. Please try again later.",
       changing: "Processing...",
       checkoutCreated: "Redirecting to checkout...",
@@ -85,10 +94,14 @@
       downgradeToFree: "Downgrade to Free",
       portalRedirecting: "Redirecting to downgrade flow...",
       portalUnavailable: "Failed to open the downgrade flow. Please try again later.",
+      authHint: "You will sign in with LINE before changing this plan.",
     },
     "zh-TW": {
       noToken: "請從 LINE 機器人的連結開啟此頁面，找不到群組憑證。",
       invalidToken: "憑證無效或已過期，請重新從 LINE 機器人開啟連結。",
+      loginRequired: "正在使用 LINE Login 驗證身分。",
+      ownerOnly: "只有付款人本人可以管理此訂閱。",
+      notMember: "只有此 LINE 群組的成員可以開啟此頁面。",
       unknown: "無法取得訂閱狀態，請稍後再試。",
       changing: "處理中...",
       checkoutCreated: "正在前往結帳頁面...",
@@ -108,10 +121,14 @@
       downgradeToFree: "降級至 Free",
       portalRedirecting: "正在前往降級流程...",
       portalUnavailable: "無法開啟降級流程，請稍後再試。",
+      authHint: "變更方案前會先使用 LINE Login 驗證身分。",
     },
     th: {
       noToken: "กรุณาเปิดหน้านี้จากลิงก์ใน LINE bot ไม่พบโทเค็นกลุ่ม",
       invalidToken: "โทเค็นไม่ถูกต้องหรือหมดอายุ กรุณาเปิดลิงก์จาก LINE bot อีกครั้ง",
+      loginRequired: "กำลังยืนยันตัวตนด้วย LINE Login",
+      ownerOnly: "มีเพียงผู้ชำระเงินเท่านั้นที่จัดการการสมัครนี้ได้",
+      notMember: "เฉพาะสมาชิกของกลุ่ม LINE นี้เท่านั้นที่เข้าถึงหน้านี้ได้",
       unknown: "ไม่สามารถดึงสถานะการสมัครได้ กรุณาลองใหม่อีกครั้ง",
       changing: "กำลังดำเนินการ...",
       checkoutCreated: "กำลังไปยังหน้าชำระเงิน...",
@@ -131,6 +148,7 @@
       downgradeToFree: "ดาวน์เกรดเป็น Free",
       portalRedirecting: "กำลังไปยังขั้นตอนดาวน์เกรด...",
       portalUnavailable: "ไม่สามารถเปิดหน้าดาวน์เกรดได้ กรุณาลองใหม่ภายหลัง",
+      authHint: "ระบบจะให้คุณเข้าสู่ระบบ LINE ก่อนเปลี่ยนแพ็กเกจ",
     },
   };
 
@@ -169,6 +187,9 @@
     const url = new URL(path, window.location.origin);
     if (st) {
       url.searchParams.set("st", st);
+    }
+    if (cs) {
+      url.searchParams.set("cs", cs);
     }
     if (apiBaseParam) {
       url.searchParams.set("api_base", apiBaseParam);
@@ -412,15 +433,33 @@
       setButtonsEnabled(false);
       return null;
     }
+    if (!cs) {
+      if (pageError === "not_member") {
+        setButtonsVisible(false);
+        setStatusPanelVisible(false);
+        setError(t("notMember"));
+        setButtonsEnabled(false);
+        return null;
+      }
+      setButtonsVisible(false);
+      setStatusPanelVisible(false);
+      setError(t("authHint"));
+      startAuth();
+      return null;
+    }
     setButtonsVisible(true);
     setStatusPanelVisible(true);
     try {
-      const res = await fetch(buildApiUrl(`/checkout?mode=status&st=${encodeURIComponent(st)}`), {
+      const res = await fetch(buildApiUrl(`/checkout?mode=status&st=${encodeURIComponent(st)}&cs=${encodeURIComponent(cs)}`), {
         method: "GET",
       });
       if (!res.ok) {
         if (res.status === 401) {
-          setError(t("invalidToken"));
+          setError(t("loginRequired"));
+          startAuth();
+        } else if (res.status === 403) {
+          const data = await res.json().catch(() => ({}));
+          setError(data.reason === "not_member" ? t("notMember") : t("ownerOnly"));
         } else {
           setError(t("unknown"));
         }
@@ -518,17 +557,25 @@
       setError(t("noToken"));
       return;
     }
+    if (!cs) {
+      setError(t("loginRequired"));
+      startAuth();
+      return;
+    }
     setError("");
     setStatus(t("changing"));
     try {
       const url = buildApiUrl(
-        `/checkout?mode=start&st=${encodeURIComponent(st)}&target=${encodeURIComponent(target)}`
+        `/checkout?mode=start&st=${encodeURIComponent(st)}&cs=${encodeURIComponent(cs)}&target=${encodeURIComponent(target)}`
       );
       const res = await fetch(url, { method: "GET" });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
         if (res.status === 401) {
-          setError(t("invalidToken"));
+          setError(t("loginRequired"));
+          startAuth();
+        } else if (res.status === 403) {
+          setError(data.reason === "not_member" ? t("notMember") : t("ownerOnly"));
         } else {
           setError(data.message || t("unknown"));
         }
@@ -559,16 +606,24 @@
       setError(t("noToken"));
       return;
     }
+    if (!cs) {
+      setError(t("loginRequired"));
+      startAuth();
+      return;
+    }
     setError("");
     setStatus(t("portalRedirecting"));
     setButtonsEnabled(false);
     try {
-      const url = buildApiUrl(`/checkout?mode=portal&st=${encodeURIComponent(st)}`);
+      const url = buildApiUrl(`/checkout?mode=portal&st=${encodeURIComponent(st)}&cs=${encodeURIComponent(cs)}`);
       const res = await fetch(url, { method: "GET" });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
         if (res.status === 401) {
-          setError(t("invalidToken"));
+          setError(t("loginRequired"));
+          startAuth();
+        } else if (res.status === 403) {
+          setError(data.reason === "not_member" ? t("notMember") : t("ownerOnly"));
         } else {
           setError(data.message || t("portalUnavailable"));
         }
@@ -604,6 +659,14 @@
       return;
     }
     handleBuyClick(planKey);
+  }
+
+  function startAuth() {
+    if (!st) return;
+    const url = buildApiUrl(
+      `/checkout?mode=auth_start&st=${encodeURIComponent(st)}&return_to=${encodeURIComponent(window.location.pathname)}&api_base=${encodeURIComponent(apiBaseParam)}`
+    );
+    window.location.href = url;
   }
 
   function initLangSelector() {
