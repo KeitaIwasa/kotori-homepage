@@ -1,11 +1,8 @@
 (() => {
-  const KOTORI_API_BASE = "https://h2xf6dwz5e.execute-api.ap-northeast-1.amazonaws.com/prod";
-
   const langSelect = document.getElementById("langSelect");
   if (!langSelect) return;
   const totalUsersSection = document.getElementById("totalUsersSection");
   const totalUsersValue = document.getElementById("totalUsersValue");
-  const params = new URLSearchParams(window.location.search);
 
   const langPaths = {
     ja: "/",
@@ -41,21 +38,12 @@
     return "ja";
   }
 
-  function resolveApiBase() {
-    const override = params.get("api_base") || params.get("apiBase");
-    const base = (override || KOTORI_API_BASE || "").trim();
-    return base.replace(/\/+$/, "");
-  }
-
   function buildApiUrl(path) {
-    const base = resolveApiBase();
-    if (!base) return "";
-    return `${base}${path}`;
+    return `/api${path}`;
   }
 
   async function fetchTotalUsers() {
     const url = buildApiUrl("/stats/total-users");
-    if (!url) return null;
     const response = await fetch(url, { method: "GET" });
     if (!response.ok) return null;
     const payload = await response.json();

@@ -25,7 +25,6 @@
   const params = new URLSearchParams(window.location.search);
   const st = (params.get("st") || "").trim();
   const cs = (params.get("cs") || "").trim();
-  const apiBaseParam = (params.get("api_base") || params.get("apiBase") || "").trim();
   const pageError = (params.get("error") || "").trim();
   const flagPaths = {
     ja: "/assets/flags/jp.svg",
@@ -184,11 +183,7 @@
   }
 
   function buildApiUrl(path) {
-    const base = apiBaseParam.replace(/\/+$/, "");
-    if (!base) {
-      return path;
-    }
-    return `${base}${path}`;
+    return `/api${path}`;
   }
 
   function withSharedParams(path) {
@@ -198,9 +193,6 @@
     }
     if (cs) {
       url.searchParams.set("cs", cs);
-    }
-    if (apiBaseParam) {
-      url.searchParams.set("api_base", apiBaseParam);
     }
     return url.toString();
   }
@@ -761,7 +753,7 @@
   function startAuth() {
     if (!st) return;
     const url = buildApiUrl(
-      `/checkout?mode=auth_start&st=${encodeURIComponent(st)}&return_to=${encodeURIComponent(window.location.pathname)}&api_base=${encodeURIComponent(apiBaseParam)}`
+      `/checkout?mode=auth_start&st=${encodeURIComponent(st)}&return_to=${encodeURIComponent(window.location.pathname)}`
     );
     window.location.href = url;
   }
