@@ -29,5 +29,21 @@ aws cloudfront create-invalidation \
   --profile line-translate-bot
 ```
 
+## staging 配信
+- 想定URL: `https://stg.kotori-ai.com`
+- フロント配信: staging CloudFront → staging S3 website origin
+- API配信: staging CloudFront `/api/*` → API Gateway `/stg`
+- 静的ファイルは `scripts/build_staging_site.py` で `dist-stg/` に生成し、全 HTML に `noindex, nofollow` を入れる
+
+```bash
+# staging 向け静的ファイルを生成して同期
+AWS_PROFILE=line-translate-bot ./scripts/deploy_staging.sh
+
+# CloudFront distribution 作成後は ID を渡すと invalidation も実行
+AWS_PROFILE=line-translate-bot \
+STG_CLOUDFRONT_DISTRIBUTION_ID=<distribution-id> \
+./scripts/deploy_staging.sh
+```
+
 ## 国旗SVGについて
 https://flagicons.lipis.dev/から1:1のアスペクト比でダウンロードしたSVGを使用しています。
