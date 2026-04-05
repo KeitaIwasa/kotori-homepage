@@ -14,6 +14,8 @@
   const statusPanel = document.querySelector(".pro-status-panel");
   const priceFields = document.querySelectorAll("[data-price-month][data-price-year]");
   const planCards = document.querySelectorAll("[data-plan-card]");
+  const operationOverlay = document.getElementById("operationOverlay");
+  const operationOverlayText = document.getElementById("operationOverlayText");
   const planButtons = {
     free: buyFreeBtn,
     standard: buyStandardBtn,
@@ -23,7 +25,6 @@
   const params = new URLSearchParams(window.location.search);
   const st = (params.get("st") || "").trim();
   const cs = (params.get("cs") || "").trim();
-  const apiBaseParam = (params.get("api_base") || params.get("apiBase") || "").trim();
   const pageError = (params.get("error") || "").trim();
   const flagPaths = {
     ja: "/assets/flags/jp.svg",
@@ -46,7 +47,7 @@
       noToken: "LINEボットからアクセスしてください。グループ情報トークンが見つかりません。",
       invalidToken: "トークンが無効または期限切れです。LINEボットの案内リンクを開き直してください。",
       loginRequired: "LINEログインで本人確認しています。",
-      ownerOnly: "このサブスクリプションは支払い者本人のみ変更できます。",
+      ownerOnly: "決済者以外は請求管理を開けません。",
       notMember: "このLINEグループのメンバーのみアクセスできます。",
       unknown: "状態の取得に失敗しました。時間をおいて再試行してください。",
       changing: "処理中です...",
@@ -61,6 +62,7 @@
       schedulePrefix: "予約中の変更:",
       priorityContact: "お問い合わせ",
       continueCurrent: "現在の利用を継続",
+      manageBilling: "請求を管理",
       selectStandard: "Standardを選択",
       selectPro: "Proを選択",
       downgradeToStandard: "Standardへダウングレード",
@@ -73,7 +75,7 @@
       noToken: "Open this page from the LINE bot. Group token is missing.",
       invalidToken: "Token is invalid or expired. Please reopen the link from the LINE bot.",
       loginRequired: "Verifying your identity with LINE Login.",
-      ownerOnly: "Only the billing owner can manage this subscription.",
+      ownerOnly: "Only the billing owner can open billing management.",
       notMember: "Only members of this LINE group can access this page.",
       unknown: "Failed to fetch subscription status. Please try again later.",
       changing: "Processing...",
@@ -88,6 +90,7 @@
       schedulePrefix: "Scheduled change:",
       priorityContact: "Contact",
       continueCurrent: "Keep Current Setup",
+      manageBilling: "Manage Billing",
       selectStandard: "Choose Standard",
       selectPro: "Choose Pro",
       downgradeToStandard: "Downgrade to Standard",
@@ -100,7 +103,7 @@
       noToken: "請從 LINE 機器人的連結開啟此頁面，找不到群組憑證。",
       invalidToken: "憑證無效或已過期，請重新從 LINE 機器人開啟連結。",
       loginRequired: "正在使用 LINE Login 驗證身分。",
-      ownerOnly: "只有付款人本人可以管理此訂閱。",
+      ownerOnly: "只有付款人本人可以開啟帳單管理。",
       notMember: "只有此 LINE 群組的成員可以開啟此頁面。",
       unknown: "無法取得訂閱狀態，請稍後再試。",
       changing: "處理中...",
@@ -115,6 +118,7 @@
       schedulePrefix: "預約變更:",
       priorityContact: "聯絡我們",
       continueCurrent: "維持目前設定",
+      manageBilling: "管理帳單",
       selectStandard: "選擇 Standard",
       selectPro: "選擇 Pro",
       downgradeToStandard: "降級至 Standard",
@@ -127,7 +131,7 @@
       noToken: "กรุณาเปิดหน้านี้จากลิงก์ใน LINE bot ไม่พบโทเค็นกลุ่ม",
       invalidToken: "โทเค็นไม่ถูกต้องหรือหมดอายุ กรุณาเปิดลิงก์จาก LINE bot อีกครั้ง",
       loginRequired: "กำลังยืนยันตัวตนด้วย LINE Login",
-      ownerOnly: "มีเพียงผู้ชำระเงินเท่านั้นที่จัดการการสมัครนี้ได้",
+      ownerOnly: "มีเพียงผู้ชำระเงินเท่านั้นที่เปิดหน้าจัดการการเรียกเก็บเงินได้",
       notMember: "เฉพาะสมาชิกของกลุ่ม LINE นี้เท่านั้นที่เข้าถึงหน้านี้ได้",
       unknown: "ไม่สามารถดึงสถานะการสมัครได้ กรุณาลองใหม่อีกครั้ง",
       changing: "กำลังดำเนินการ...",
@@ -142,6 +146,7 @@
       schedulePrefix: "การเปลี่ยนที่ตั้งเวลาไว้:",
       priorityContact: "ติดต่อเรา",
       continueCurrent: "คงการตั้งค่าปัจจุบัน",
+      manageBilling: "จัดการการเรียกเก็บเงิน",
       selectStandard: "เลือก Standard",
       selectPro: "เลือก Pro",
       downgradeToStandard: "ดาวน์เกรดเป็น Standard",
@@ -159,6 +164,8 @@
   let customTriggerEl;
   let customTriggerFlagEl;
   let customTriggerTextEl;
+  const PREPARE_WARMUP_TTL_MS = 15000;
+  const prepareWarmupCache = new Map();
 
   function t(key) {
     const table = MESSAGES[currentLang] || MESSAGES.ja;
@@ -176,11 +183,7 @@
   }
 
   function buildApiUrl(path) {
-    const base = apiBaseParam.replace(/\/+$/, "");
-    if (!base) {
-      return path;
-    }
-    return `${base}${path}`;
+    return `/api${path}`;
   }
 
   function withSharedParams(path) {
@@ -191,10 +194,74 @@
     if (cs) {
       url.searchParams.set("cs", cs);
     }
-    if (apiBaseParam) {
-      url.searchParams.set("api_base", apiBaseParam);
-    }
     return url.toString();
+  }
+
+  function addHintLink(rel, href) {
+    if (!href) return;
+    const link = document.createElement("link");
+    link.rel = rel;
+    link.href = href;
+    if (rel === "preconnect") {
+      link.crossOrigin = "anonymous";
+    }
+    document.head.appendChild(link);
+  }
+
+  function warmConnections() {
+    try {
+      const apiOrigin = new URL(buildApiUrl("/checkout"), window.location.origin).origin;
+      addHintLink("dns-prefetch", apiOrigin);
+      addHintLink("preconnect", apiOrigin);
+    } catch (_err) {
+      // noop
+    }
+    addHintLink("dns-prefetch", "https://checkout.stripe.com");
+    addHintLink("preconnect", "https://checkout.stripe.com");
+    addHintLink("dns-prefetch", "https://billing.stripe.com");
+    addHintLink("preconnect", "https://billing.stripe.com");
+  }
+
+  function createPrepareRequest(target) {
+    const url = buildApiUrl(
+      `/checkout?mode=prepare&st=${encodeURIComponent(st)}&cs=${encodeURIComponent(cs)}&target=${encodeURIComponent(target)}`
+    );
+    return fetch(url, { method: "GET" }).then(async (res) => {
+      const data = await res.json().catch(() => ({}));
+      return { res, data };
+    }).catch(() => null);
+  }
+
+  function createStartRequest(target) {
+    const url = buildApiUrl(
+      `/checkout?mode=start&st=${encodeURIComponent(st)}&cs=${encodeURIComponent(cs)}&target=${encodeURIComponent(target)}`
+    );
+    return fetch(url, { method: "GET" }).then(async (res) => {
+      const data = await res.json().catch(() => ({}));
+      return { res, data };
+    });
+  }
+
+  function maybeWarmupPrepare(planKey) {
+    if (!st || !cs) return;
+    const button = planButtons[planKey];
+    if (!button) return;
+    if ((button.dataset.action || "none") !== "start") return;
+
+    const target = selectedTarget(planKey);
+    const now = Date.now();
+    const cached = prepareWarmupCache.get(target);
+    if (cached && now - cached.startedAt < PREPARE_WARMUP_TTL_MS) {
+      return;
+    }
+    prepareWarmupCache.set(target, { startedAt: now, promise: createPrepareRequest(target) });
+  }
+
+  function consumePrepareRequest(target) {
+    const cached = prepareWarmupCache.get(target);
+    if (cached && Date.now() - cached.startedAt < PREPARE_WARMUP_TTL_MS) {
+      prepareWarmupCache.delete(target);
+    }
   }
 
   function toggleLangOptions(forceOpen) {
@@ -330,6 +397,15 @@
       btn.hidden = !visible;
       btn.setAttribute("aria-hidden", String(!visible));
     });
+  }
+
+  function setOperationLoading(active, message) {
+    if (!operationOverlay) return;
+    operationOverlay.hidden = !active;
+    operationOverlay.setAttribute("aria-hidden", String(!active));
+    if (operationOverlayText && message) {
+      operationOverlayText.textContent = message;
+    }
   }
 
   function normalizePlan(plan) {
@@ -520,6 +596,14 @@
     ["free", "standard", "pro"].forEach((planKey) => {
       const rank = planRank(planKey);
       if (rank === currentRank) {
+        if (currentRank > 0) {
+          setPlanButtonState(planKey, {
+            disabled: false,
+            label: t("manageBilling"),
+            action: "portal",
+          });
+          return;
+        }
         setPlanButtonState(planKey, {
           disabled: true,
           label: t("continueCurrent"),
@@ -553,8 +637,10 @@
   }
 
   async function startChange(target) {
+    setOperationLoading(true, t("changing"));
     if (!st) {
       setError(t("noToken"));
+      setOperationLoading(false);
       return;
     }
     if (!cs) {
@@ -565,12 +651,10 @@
     setError("");
     setStatus(t("changing"));
     try {
-      const url = buildApiUrl(
-        `/checkout?mode=start&st=${encodeURIComponent(st)}&cs=${encodeURIComponent(cs)}&target=${encodeURIComponent(target)}`
-      );
-      const res = await fetch(url, { method: "GET" });
-      const data = await res.json().catch(() => ({}));
+      consumePrepareRequest(target);
+      const { res, data } = await createStartRequest(target);
       if (!res.ok) {
+        setOperationLoading(false);
         if (res.status === 401) {
           setError(t("loginRequired"));
           startAuth();
@@ -585,25 +669,26 @@
       const result = data.result;
       if (result === "checkout_created" && data.redirectUrl) {
         setStatus(t("checkoutCreated"));
+        setOperationLoading(true, t("checkoutCreated"));
         window.location.href = data.redirectUrl;
         return;
       }
-      if (result === "changed_immediately") {
-        setStatus(t("changedImmediately"));
-      } else if (result === "scheduled") {
-        setStatus(t("scheduled"));
-      } else if (result === "already_current") {
+      if (result === "already_current") {
         setStatus(t("alreadyCurrent"));
       }
       await fetchStatus();
+      setOperationLoading(false);
     } catch (_err) {
       setError(t("unknown"));
+      setOperationLoading(false);
     }
   }
 
   async function startPortalFlow() {
+    setOperationLoading(true, t("portalRedirecting"));
     if (!st) {
       setError(t("noToken"));
+      setOperationLoading(false);
       return;
     }
     if (!cs) {
@@ -619,6 +704,7 @@
       const res = await fetch(url, { method: "GET" });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
+        setOperationLoading(false);
         if (res.status === 401) {
           setError(t("loginRequired"));
           startAuth();
@@ -631,14 +717,17 @@
         return;
       }
       if (data.result === "portal_created" && data.redirectUrl) {
+        setOperationLoading(true, t("portalRedirecting"));
         window.location.href = data.redirectUrl;
         return;
       }
       setError(t("portalUnavailable"));
       await fetchStatus();
+      setOperationLoading(false);
     } catch (_err) {
       setError(t("portalUnavailable"));
       await fetchStatus();
+      setOperationLoading(false);
     }
   }
 
@@ -664,7 +753,7 @@
   function startAuth() {
     if (!st) return;
     const url = buildApiUrl(
-      `/checkout?mode=auth_start&st=${encodeURIComponent(st)}&return_to=${encodeURIComponent(window.location.pathname)}&api_base=${encodeURIComponent(apiBaseParam)}`
+      `/checkout?mode=auth_start&st=${encodeURIComponent(st)}&return_to=${encodeURIComponent(window.location.pathname)}`
     );
     window.location.href = url;
   }
@@ -697,9 +786,15 @@
     }
     if (buyStandardBtn) {
       buyStandardBtn.addEventListener("click", () => handlePlanClick("standard"));
+      buyStandardBtn.addEventListener("pointerenter", () => maybeWarmupPrepare("standard"), { passive: true });
+      buyStandardBtn.addEventListener("focus", () => maybeWarmupPrepare("standard"), { passive: true });
+      buyStandardBtn.addEventListener("touchstart", () => maybeWarmupPrepare("standard"), { passive: true });
     }
     if (buyProBtn) {
       buyProBtn.addEventListener("click", () => handlePlanClick("pro"));
+      buyProBtn.addEventListener("pointerenter", () => maybeWarmupPrepare("pro"), { passive: true });
+      buyProBtn.addEventListener("focus", () => maybeWarmupPrepare("pro"), { passive: true });
+      buyProBtn.addEventListener("touchstart", () => maybeWarmupPrepare("pro"), { passive: true });
     }
     if (periodSelect) {
       periodSelect.addEventListener("change", () => setIntervalState(periodSelect.value));
@@ -713,6 +808,7 @@
 
   initLangSelector();
   initContactLink();
+  warmConnections();
   initActions();
   setIntervalState(getCurrentInterval());
   fetchStatus();

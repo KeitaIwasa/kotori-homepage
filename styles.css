@@ -1160,6 +1160,55 @@ body.pro-page {
   color: #374151;
 }
 
+.pro-page .operation-overlay[hidden] {
+  display: none !important;
+}
+
+.pro-page .operation-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: grid;
+  place-items: center;
+  background: rgba(15, 23, 42, 0.42);
+  backdrop-filter: blur(2px);
+}
+
+.pro-page .operation-overlay-inner {
+  min-width: 220px;
+  max-width: calc(100vw - 32px);
+  border-radius: 14px;
+  padding: 18px 20px;
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.2);
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+}
+
+.pro-page .operation-spinner {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 107, 0, 0.24);
+  border-top-color: var(--accent-strong);
+  animation: pro-spin 0.82s linear infinite;
+}
+
+.pro-page .operation-overlay-text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+@keyframes pro-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .pro-page .plan-feature-list {
   list-style: none;
   margin: 4px 0 0;
