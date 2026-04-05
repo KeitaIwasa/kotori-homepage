@@ -49,6 +49,10 @@
       loginRequired: "LINEログインで本人確認しています。",
       ownerOnly: "決済者以外は請求管理を開けません。",
       billingOwnerPending: "別のメンバーが決済手続きを開始しています。しばらく待ってから再度お試しください。",
+      ownerLeft: "決済オーナーがグループを退会しました。継続するには新しいカードの登録が必要です。",
+      renewalReserved: "別のメンバーが次回更新分の継続予約を完了しています。",
+      reserveRenewal: "次回更新分を予約",
+      renewalReservedCurrent: "継続予約済み",
       notMember: "このLINEグループのメンバーのみアクセスできます。",
       unknown: "状態の取得に失敗しました。時間をおいて再試行してください。",
       changing: "処理中です...",
@@ -78,6 +82,10 @@
       loginRequired: "Verifying your identity with LINE Login.",
       ownerOnly: "Only the billing owner can open billing management.",
       billingOwnerPending: "Another member is already opening billing management. Please try again shortly.",
+      ownerLeft: "The billing owner has left the group. Register a new card to continue after the current billing period.",
+      renewalReserved: "Another member has already reserved the next billing cycle.",
+      reserveRenewal: "Reserve Next Cycle",
+      renewalReservedCurrent: "Renewal Reserved",
       notMember: "Only members of this LINE group can access this page.",
       unknown: "Failed to fetch subscription status. Please try again later.",
       changing: "Processing...",
@@ -107,6 +115,10 @@
       loginRequired: "正在使用 LINE Login 驗證身分。",
       ownerOnly: "只有付款人本人可以開啟帳單管理。",
       billingOwnerPending: "已有其他成員開始付款流程，請稍後再試。",
+      ownerLeft: "付款人已退出群組。如需在目前週期後繼續使用，請重新登錄新的信用卡。",
+      renewalReserved: "已有其他成員預約下一個帳單週期。",
+      reserveRenewal: "預約下個週期",
+      renewalReservedCurrent: "已預約續用",
       notMember: "只有此 LINE 群組的成員可以開啟此頁面。",
       unknown: "無法取得訂閱狀態，請稍後再試。",
       changing: "處理中...",
@@ -136,6 +148,10 @@
       loginRequired: "กำลังยืนยันตัวตนด้วย LINE Login",
       ownerOnly: "มีเพียงผู้ชำระเงินเท่านั้นที่เปิดหน้าจัดการการเรียกเก็บเงินได้",
       billingOwnerPending: "มีสมาชิกคนอื่นเริ่มขั้นตอนชำระเงินแล้ว กรุณารอสักครู่แล้วลองใหม่อีกครั้ง",
+      ownerLeft: "เจ้าของการชำระเงินออกจากกลุ่มแล้ว หากต้องการใช้งานต่อหลังรอบปัจจุบัน กรุณาลงทะเบียนบัตรใหม่",
+      renewalReserved: "สมาชิกคนอื่นได้จองรอบบิลถัดไปไว้แล้ว",
+      reserveRenewal: "จองรอบถัดไป",
+      renewalReservedCurrent: "จองต่ออายุแล้ว",
       notMember: "เฉพาะสมาชิกของกลุ่ม LINE นี้เท่านั้นที่เข้าถึงหน้านี้ได้",
       unknown: "ไม่สามารถดึงสถานะการสมัครได้ กรุณาลองใหม่อีกครั้ง",
       changing: "กำลังดำเนินการ...",
@@ -398,6 +414,9 @@
   function responseErrorMessage(data) {
     if (data?.reason === "not_member") return t("notMember");
     if (data?.reason === "billing_owner_pending") return t("billingOwnerPending");
+    if (data?.reason === "owner_left") return t("ownerLeft");
+    if (data?.reason === "renewal_already_reserved") return t("renewalReserved");
+    if (data?.reason === "owner_left_requires_paid_plan") return t("ownerLeft");
     return t("ownerOnly");
   }
 
@@ -558,7 +577,10 @@
       const data = await res.json();
       currentStatus = data;
       renderStatus(data);
-      if (data?.billingOwnerPending && !data?.billingOwnerPendingByCurrentUser) {
+      if (data?.billingOwnerLost) {
+        setButtonsEnabled(true);
+        setError(data?.renewalReservationExists && !data?.renewalReservedByCurrentUser ? t("renewalReserved") : t("ownerLeft"));
+      } else if (data?.billingOwnerPending && !data?.billingOwnerPendingByCurrentUser) {
         setButtonsEnabled(false);
         setError(t("billingOwnerPending"));
       } else {
@@ -610,6 +632,34 @@
   }
 
   function applyPlanButtonStates(currentPlan) {
+    if (currentStatus?.billingOwnerLost) {
+      const reservedPlan = normalizePlan(currentStatus?.renewalPlan);
+      setPlanButtonState("free", {
+        disabled: true,
+        label: t("continueCurrent"),
+        action: "none",
+      });
+      ["standard", "pro"].forEach((planKey) => {
+        if (currentStatus?.renewalReservationExists) {
+          setPlanButtonState(planKey, {
+            disabled: true,
+            label:
+              currentStatus?.renewalReservedByCurrentUser && planKey === reservedPlan
+                ? t("renewalReservedCurrent")
+                : t("renewalReserved"),
+            action: "none",
+          });
+          return;
+        }
+        setPlanButtonState(planKey, {
+          disabled: false,
+          label: t("reserveRenewal"),
+          action: "start",
+        });
+      });
+      return;
+    }
+
     const current = normalizePlan(currentPlan);
     const currentRank = planRank(current);
     ["free", "standard", "pro"].forEach((planKey) => {
