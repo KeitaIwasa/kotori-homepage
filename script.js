@@ -48,6 +48,7 @@
       invalidToken: "トークンが無効または期限切れです。LINEボットの案内リンクを開き直してください。",
       loginRequired: "LINEログインで本人確認しています。",
       ownerOnly: "決済者以外は請求管理を開けません。",
+      billingOwnerPending: "別のメンバーが決済手続きを開始しています。しばらく待ってから再度お試しください。",
       notMember: "このLINEグループのメンバーのみアクセスできます。",
       unknown: "状態の取得に失敗しました。時間をおいて再試行してください。",
       changing: "処理中です...",
@@ -76,6 +77,7 @@
       invalidToken: "Token is invalid or expired. Please reopen the link from the LINE bot.",
       loginRequired: "Verifying your identity with LINE Login.",
       ownerOnly: "Only the billing owner can open billing management.",
+      billingOwnerPending: "Another member is already opening billing management. Please try again shortly.",
       notMember: "Only members of this LINE group can access this page.",
       unknown: "Failed to fetch subscription status. Please try again later.",
       changing: "Processing...",
@@ -104,6 +106,7 @@
       invalidToken: "憑證無效或已過期，請重新從 LINE 機器人開啟連結。",
       loginRequired: "正在使用 LINE Login 驗證身分。",
       ownerOnly: "只有付款人本人可以開啟帳單管理。",
+      billingOwnerPending: "已有其他成員開始付款流程，請稍後再試。",
       notMember: "只有此 LINE 群組的成員可以開啟此頁面。",
       unknown: "無法取得訂閱狀態，請稍後再試。",
       changing: "處理中...",
@@ -132,6 +135,7 @@
       invalidToken: "โทเค็นไม่ถูกต้องหรือหมดอายุ กรุณาเปิดลิงก์จาก LINE bot อีกครั้ง",
       loginRequired: "กำลังยืนยันตัวตนด้วย LINE Login",
       ownerOnly: "มีเพียงผู้ชำระเงินเท่านั้นที่เปิดหน้าจัดการการเรียกเก็บเงินได้",
+      billingOwnerPending: "มีสมาชิกคนอื่นเริ่มขั้นตอนชำระเงินแล้ว กรุณารอสักครู่แล้วลองใหม่อีกครั้ง",
       notMember: "เฉพาะสมาชิกของกลุ่ม LINE นี้เท่านั้นที่เข้าถึงหน้านี้ได้",
       unknown: "ไม่สามารถดึงสถานะการสมัครได้ กรุณาลองใหม่อีกครั้ง",
       changing: "กำลังดำเนินการ...",
@@ -391,6 +395,12 @@
     });
   }
 
+  function responseErrorMessage(data) {
+    if (data?.reason === "not_member") return t("notMember");
+    if (data?.reason === "billing_owner_pending") return t("billingOwnerPending");
+    return t("ownerOnly");
+  }
+
   function setButtonsVisible(visible) {
     Object.values(planButtons).forEach((btn) => {
       if (!btn) return;
@@ -535,7 +545,10 @@
           startAuth();
         } else if (res.status === 403) {
           const data = await res.json().catch(() => ({}));
-          setError(data.reason === "not_member" ? t("notMember") : t("ownerOnly"));
+          setError(responseErrorMessage(data));
+        } else if (res.status === 409) {
+          const data = await res.json().catch(() => ({}));
+          setError(responseErrorMessage(data));
         } else {
           setError(t("unknown"));
         }
@@ -543,9 +556,15 @@
         return null;
       }
       const data = await res.json();
-      setButtonsEnabled(true);
       currentStatus = data;
       renderStatus(data);
+      if (data?.billingOwnerPending && !data?.billingOwnerPendingByCurrentUser) {
+        setButtonsEnabled(false);
+        setError(t("billingOwnerPending"));
+      } else {
+        setButtonsEnabled(true);
+        setError("");
+      }
       return data;
     } catch (_err) {
       setError(t("unknown"));
@@ -658,8 +677,8 @@
         if (res.status === 401) {
           setError(t("loginRequired"));
           startAuth();
-        } else if (res.status === 403) {
-          setError(data.reason === "not_member" ? t("notMember") : t("ownerOnly"));
+        } else if (res.status === 403 || res.status === 409) {
+          setError(responseErrorMessage(data));
         } else {
           setError(data.message || t("unknown"));
         }
@@ -708,8 +727,8 @@
         if (res.status === 401) {
           setError(t("loginRequired"));
           startAuth();
-        } else if (res.status === 403) {
-          setError(data.reason === "not_member" ? t("notMember") : t("ownerOnly"));
+        } else if (res.status === 403 || res.status === 409) {
+          setError(responseErrorMessage(data));
         } else {
           setError(data.message || t("portalUnavailable"));
         }
