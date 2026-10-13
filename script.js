@@ -44,7 +44,7 @@
 
   const MESSAGES = {
     ja: {
-      noToken: "LINEボットからアクセスしてください。グループ情報トークンが見つかりません。",
+      noToken: "グループ用リンクが見つかりません。対象のLINEグループでKOTORIが送ったプランのリンクから開き直してください。",
       invalidToken: "トークンが無効または期限切れです。LINEボットの案内リンクを開き直してください。",
       loginRequired: "LINEログインで本人確認しています。",
       ownerOnly: "決済者以外は請求管理を開けません。",
@@ -53,7 +53,7 @@
       renewalReserved: "別のメンバーが次回更新分の継続予約を完了しています。",
       reserveRenewal: "次回更新分を予約",
       renewalReservedCurrent: "継続予約済み",
-      notMember: "このLINEグループのメンバーのみアクセスできます。",
+      notMember: "このLINEグループのメンバーのみアクセスできます。メンバーなのに開けない場合は、ページ下部の「お問い合わせ」からご連絡ください。",
       unknown: "状態の取得に失敗しました。時間をおいて再試行してください。",
       changing: "処理中です...",
       checkoutCreated: "決済ページへ移動します。",
@@ -77,7 +77,7 @@
       authHint: "プラン変更の前にLINEログインで本人確認します。",
     },
     en: {
-      noToken: "Open this page from the LINE bot. Group token is missing.",
+      noToken: "The group link is missing. Reopen the plan link sent by KOTORI in the intended LINE group.",
       invalidToken: "Token is invalid or expired. Please reopen the link from the LINE bot.",
       loginRequired: "Verifying your identity with LINE Login.",
       ownerOnly: "Only the billing owner can open billing management.",
@@ -86,7 +86,7 @@
       renewalReserved: "Another member has already reserved the next billing cycle.",
       reserveRenewal: "Reserve Next Cycle",
       renewalReservedCurrent: "Renewal Reserved",
-      notMember: "Only members of this LINE group can access this page.",
+      notMember: "Only members of this LINE group can access this page. If you are a member and cannot open it, use Contact at the bottom of this page.",
       unknown: "Failed to fetch subscription status. Please try again later.",
       changing: "Processing...",
       checkoutCreated: "Redirecting to checkout...",
@@ -110,7 +110,7 @@
       authHint: "You will sign in with LINE before changing this plan.",
     },
     "zh-TW": {
-      noToken: "請從 LINE 機器人的連結開啟此頁面，找不到群組憑證。",
+      noToken: "找不到群組連結。請從 KOTORI 在目標 LINE 群組中傳送的方案連結重新開啟。",
       invalidToken: "憑證無效或已過期，請重新從 LINE 機器人開啟連結。",
       loginRequired: "正在使用 LINE Login 驗證身分。",
       ownerOnly: "只有付款人本人可以開啟帳單管理。",
@@ -119,7 +119,7 @@
       renewalReserved: "已有其他成員預約下一個帳單週期。",
       reserveRenewal: "預約下個週期",
       renewalReservedCurrent: "已預約續用",
-      notMember: "只有此 LINE 群組的成員可以開啟此頁面。",
+      notMember: "只有此 LINE 群組的成員可以開啟此頁面。如果您是成員卻無法開啟，請使用頁面底部的「聯絡我們」。",
       unknown: "無法取得訂閱狀態，請稍後再試。",
       changing: "處理中...",
       checkoutCreated: "正在前往結帳頁面...",
@@ -143,7 +143,7 @@
       authHint: "變更方案前會先使用 LINE Login 驗證身分。",
     },
     th: {
-      noToken: "กรุณาเปิดหน้านี้จากลิงก์ใน LINE bot ไม่พบโทเค็นกลุ่ม",
+      noToken: "ไม่พบลิงก์ของกลุ่ม กรุณาเปิดอีกครั้งจากลิงก์แพ็กเกจที่ KOTORI ส่งในกลุ่ม LINE ที่ต้องการ",
       invalidToken: "โทเค็นไม่ถูกต้องหรือหมดอายุ กรุณาเปิดลิงก์จาก LINE bot อีกครั้ง",
       loginRequired: "กำลังยืนยันตัวตนด้วย LINE Login",
       ownerOnly: "มีเพียงผู้ชำระเงินเท่านั้นที่เปิดหน้าจัดการการเรียกเก็บเงินได้",
@@ -152,7 +152,7 @@
       renewalReserved: "สมาชิกคนอื่นได้จองรอบบิลถัดไปไว้แล้ว",
       reserveRenewal: "จองรอบถัดไป",
       renewalReservedCurrent: "จองต่ออายุแล้ว",
-      notMember: "เฉพาะสมาชิกของกลุ่ม LINE นี้เท่านั้นที่เข้าถึงหน้านี้ได้",
+      notMember: "เฉพาะสมาชิกของกลุ่ม LINE นี้เท่านั้นที่เข้าถึงหน้านี้ได้ หากคุณเป็นสมาชิกแต่เปิดไม่ได้ กรุณาใช้ลิงก์ติดต่อที่ด้านล่างของหน้านี้",
       unknown: "ไม่สามารถดึงสถานะการสมัครได้ กรุณาลองใหม่อีกครั้ง",
       changing: "กำลังดำเนินการ...",
       checkoutCreated: "กำลังไปยังหน้าชำระเงิน...",
@@ -385,6 +385,7 @@
   function setError(message) {
     if (!errorText) return;
     errorText.textContent = message || "";
+    errorText.hidden = !message;
   }
 
   function setStatus(message) {
